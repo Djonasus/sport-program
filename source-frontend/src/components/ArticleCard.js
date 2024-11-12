@@ -1,5 +1,6 @@
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import ApiConfig from "../ApiConfig";
 
 const ArticleCard = (props) => {
 
@@ -7,7 +8,7 @@ const ArticleCard = (props) => {
 
     return (
         <Card style={{width:"18em"}}>
-            <Card.Img style={{maxWidth:"18em", maxHeight:"10em", objectFit:"cover"}} variant="top" src={props.preview_image} />
+            <Card.Img style={{maxWidth:"18em", maxHeight:"10em", objectFit:"cover"}} variant="top" src={ApiConfig.remoteAddress+props.preview_image} />
             <Card.Body>
                 <Card.Title>{props.title}</Card.Title>
                 <Card.Text>
