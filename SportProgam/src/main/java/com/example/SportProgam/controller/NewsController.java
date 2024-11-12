@@ -17,8 +17,9 @@ public class NewsController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/all")
-    public ResponseEntity<AllArticlesResponseDto> getAllWithLimit(@RequestParam(required = false) Long  limit) {
-        return ResponseEntity.ok(newsService.getAllWithLimit(limit));
+    public ResponseEntity<AllArticlesResponseDto> getAllWithLimit(@RequestParam(required = false) Long  limit,
+                                                                  @RequestParam(required = false) Boolean shuffle) {
+        return ResponseEntity.ok(newsService.getAllWithLimit(limit, shuffle));
     }
 
 

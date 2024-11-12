@@ -22,12 +22,20 @@ public class NewsServiceImpl implements NewsService {
     private final ProductConverter converter;
 
     @Override
-    public AllArticlesResponseDto getAllWithLimit(Long limit) {
+    public AllArticlesResponseDto getAllWithLimit(Long limit, Boolean shuffle) {
         List<NewsModel> newsModelList;
         if (limit != null) {
-            newsModelList = newsRepository.findAllWithLimitAndNoSorted(limit);
-        }else {
-            newsModelList = newsRepository.findAll();
+            if (shuffle) {
+                newsModelList = newsRepository.findAllWithLimitAndNoSorted(limit);
+            } else {
+                newsModelList = newsRepository.findAllWithLimitAndSorted(limit);
+            }
+        } else {
+            if (shuffle) {
+                newsModelList = newsRepository.findAllWithoutLimitAndNoSorted();
+            } else {
+                newsModelList = newsRepository.findAll();
+            }
         }
         List<ChildrenResponseDto> childrenResponseDtoList = new ArrayList<>();
         for (NewsModel newsModel : newsModelList) {
