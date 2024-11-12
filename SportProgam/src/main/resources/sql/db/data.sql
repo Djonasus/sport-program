@@ -1,0 +1,2 @@
+INSERT INTO public.role(role_id,role_name) VALUES (1, 'USER') ON CONFLICT (role_id,role_name) DO NOTHING;
+INSERT INTO public.role(role_id,role_name) VALUES (2, 'ADMIN') ON CONFLICT (role_id,role_nam) DO NOTHING;
