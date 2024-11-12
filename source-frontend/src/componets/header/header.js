@@ -5,17 +5,28 @@ import Navbar from 'react-bootstrap/Navbar';
 function Header() {
   return (
     <>
-      <Navbar bg="light" data-bs-theme="light">
+      <Navbar bg="primary" data-bs-theme="dark" className='justify-content-between'>
         <Container>
-          <Navbar.Brand>Logo</Navbar.Brand>
+          <Navbar.Brand> РосСпортКомпет</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link>Example1</Nav.Link>
-            <Nav.Link>Example2</Nav.Link>
-            <Nav.Link>Example3</Nav.Link>
-            <Nav.Link>Example4</Nav.Link>
-            <Nav.Link>Авторизация</Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link>Войти</Nav.Link>
           </Nav>
         </Container>
+      </Navbar>
+      <Navbar expand="lg" sticky="bottom" bg="light" data-bs-theme="light" >
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+          <Container>
+            <Nav>
+              <Nav.Link>Статьи</Nav.Link>
+              <Nav.Link>Карта активности</Nav.Link>
+              <Nav.Link>Команды</Nav.Link>
+              {/* <Nav.Link>Example4</Nav.Link> */}
+            </Nav>
+          </Container>
+        </Navbar.Collapse>
       </Navbar>
     </>
   );
