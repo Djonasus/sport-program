@@ -7,6 +7,7 @@ import com.example.SportProgam.Authentication.dto.UserSingInRequestDto;
 import com.example.SportProgam.Authentication.dto.UserSingUpRequestDto;
 import com.example.SportProgam.Authentication.exception.BadRequestSingInCustomer;
 import com.example.SportProgam.Authentication.exception.Validate;
+import com.example.SportProgam.Authentication.service.JustUserService;
 import com.example.SportProgam.Authentication.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,12 +24,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
+    private final JustUserService justUserService;
 
 
 
     @Override
     public void signUp(UserSingUpRequestDto singUpDto) {
-        userService.save(singUpDto);
+        justUserService.save(singUpDto);
     }
 
 

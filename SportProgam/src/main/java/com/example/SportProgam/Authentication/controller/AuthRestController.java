@@ -4,7 +4,6 @@ package com.example.SportProgam.Authentication.controller;
 import com.example.SportProgam.Authentication.dto.UserDetailInformationResponseDto;
 import com.example.SportProgam.Authentication.dto.UserSingInRequestDto;
 import com.example.SportProgam.Authentication.dto.UserSingUpRequestDto;
-import com.example.SportProgam.Authentication.model.User;
 import com.example.SportProgam.Authentication.security.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,8 +40,8 @@ public class AuthRestController {
     }
 
 
-    @PostMapping("/SignIn")
-    public ResponseEntity<?> signIn(@RequestBody UserSingInRequestDto singInDot) {
+    @PostMapping("/SingIn")
+    public ResponseEntity<?> singIn(@RequestBody UserSingInRequestDto singInDot) {
         log.info("данные для аунтефикации: {}", singInDot);
         UserDetailInformationResponseDto userDetailInformationResponseDto =  authenticationService.signIn(singInDot);
         log.info("аунитфикация прошла успено");
