@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ArticlesPage from './screens/ArticlesPage';
+import ArticleDetailPage from './screens/ArticleDetailPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,7 +15,10 @@ root.render(
     <Router>
       <Routes>
         <Route path='/' element={<MainPage/>}/>
-        <Route path='/articles' element={<ArticlesPage/>}/>
+        <Route path='/article' >
+          <Route index element={<ArticlesPage />} />
+          <Route path=':id' element={<ArticleDetailPage/>}/>
+        </Route>
       </Routes>
     </Router>
   </React.StrictMode>
