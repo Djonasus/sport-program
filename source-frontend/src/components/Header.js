@@ -16,6 +16,8 @@ function Header() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+function Header() {
   return (
     <>
       <Navbar bg="primary" data-bs-theme="dark" className='justify-content-between'>
@@ -50,6 +52,7 @@ function Header() {
       </Offcanvas>
     </>
     
+    </>
   );
 }
 
