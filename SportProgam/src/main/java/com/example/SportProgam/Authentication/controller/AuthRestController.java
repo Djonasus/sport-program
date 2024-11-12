@@ -23,7 +23,7 @@ public class AuthRestController {
 
     private final AuthenticationService authenticationService;
 
-    @PostMapping("/SignUp")
+    @PostMapping("/SingUp")
     public ResponseEntity<?> singUp(@RequestBody UserSingUpRequestDto singUpGuestUserDto,
                                     BindingResult bindingResult) throws BindException {
         log.info("данные для регестрации: {}", singUpGuestUserDto);

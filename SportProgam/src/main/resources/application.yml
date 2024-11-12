@@ -1,24 +1,18 @@
 spring:
 #  application:
 #    name: pizza
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
 
-    datasource:
+  datasource:
         url: jdbc:postgresql://localhost:5433/sport_teh
         username: postgres
         password: 123
 
-    jpa:
-        hibernate:
-            ddl-auto: update
 
-    sql:
-        init:
-            data-locations: classpath:sql/db/data.sql
-            mode: always
+  sql:
+    init:
+      data-locations: classpath:sql/db/data.sql
+      schema-locations: classpath:sql/db/schema.sql
+      mode: always
 
 server:
   port: 8082
