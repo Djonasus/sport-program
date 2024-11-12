@@ -5,7 +5,7 @@ import com.example.SportProgam.dto.ArticleDetailDto;
 
 public interface NewsService {
 
-    AllArticlesResponseDto getAllWithLimit(Long limit);
+    AllArticlesResponseDto getAllWithLimit(Long limit, Boolean shuffle);
 
     ArticleDetailDto getById(Long id);
 }
