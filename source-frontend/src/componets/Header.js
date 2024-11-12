@@ -8,7 +8,7 @@ function Header() {
     <>
       <Navbar bg="primary" data-bs-theme="dark" className='justify-content-between'>
         <Container>
-          <Navbar.Brand> РосСпортКомпет</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">РосСпортКомпет</Navbar.Brand>
           <Nav className="me-auto">
           </Nav>
           <Nav>
@@ -22,7 +22,7 @@ function Header() {
           <Container>
             <Nav>
               <Nav.Link as={Link} to="/articles">Статьи</Nav.Link>
-              <Nav.Link>Карта активности</Nav.Link>
+              <Nav.Link>Карта активностей</Nav.Link>
               <Nav.Link>Команды</Nav.Link>
             </Nav>
           </Container>
