@@ -1,5 +1,5 @@
 import { Breadcrumb, Container, Image } from "react-bootstrap";
-import Header from "../componets/Header";
+import Header from "../components/Header";
 
 import { Link, useParams } from "react-router-dom";
 import Markdown from "react-markdown";

@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import ArticleCard from "../components/ArticleCard";
-import Header from "../componets/Header";
-import PFooter from "../component/PFooter";
+import Header from "../components/Header";
+import PFooter from "../components/PFooter";
 
 const ArticlesPage = () => {
     return (

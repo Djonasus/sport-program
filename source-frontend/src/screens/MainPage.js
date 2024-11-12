@@ -1,8 +1,8 @@
 
-import MCarousel from "../component/MainCarusel";
-import PFooter from "../component/PFooter";
+import MCarousel from "../components/MainCarusel";
+import PFooter from "../components/PFooter";
 
-import Header from "../componets/Header";
+import Header from "../components/Header";
 
 import { Container } from "react-bootstrap";
 import Articles from "../components/Articles";
