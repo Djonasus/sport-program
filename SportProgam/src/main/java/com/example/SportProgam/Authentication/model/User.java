@@ -1,82 +1,82 @@
-package com.example.SportProgam.Authentication.model;
-
-
-import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
-@Entity
-@Table(name = "users")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class User implements UserDetails {
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Long id;
-
-    @Column(name = "last_name")
-    private String lastName;
-
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "username")
-    private String username;
-
-
-    @Column(name = "password")
-    private String password;
-
-
-
-    @ManyToOne()
-    @JoinColumn(name = "role_id")
-    private Role role;
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return role == null ? List.of() : Collections.singleton(new SimpleGrantedAuthority(role.getRoleName()));
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return UserDetails.super.isAccountNonExpired();
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return UserDetails.super.isAccountNonLocked();
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return UserDetails.super.isCredentialsNonExpired();
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
-    }
-
-    public String toString() {
-        return "User(id=" + this.getId() + ", lastName=" + this.getLastName() + ", firstName=" + this.getFirstName() + ", username=" + this.getUsername() + ", password=" + this.getPassword() + ", roles=";
-    }
-}
+//package com.example.SportProgam.Authentication.model;
+//
+//
+//import jakarta.persistence.*;
+//import lombok.*;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
+//
+//import java.util.Collection;
+//import java.util.Collections;
+//import java.util.List;
+//
+//@Entity
+//@Table(name = "users")
+//@Getter
+//@Setter
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Builder
+//public class User implements UserDetails {
+//
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "user_id")
+//    private Long id;
+//
+//    @Column(name = "last_name")
+//    private String lastName;
+//
+//    @Column(name = "first_name")
+//    private String firstName;
+//
+//    @Column(name = "username")
+//    private String username;
+//
+//
+//    @Column(name = "password")
+//    private String password;
+//
+//
+//
+//    @ManyToOne()
+//    @JoinColumn(name = "role_id")
+//    private Role role;
+//
+//
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return role == null ? List.of() : Collections.singleton(new SimpleGrantedAuthority(role.getRoleName()));
+//    }
+//
+//    @Override
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return UserDetails.super.isAccountNonExpired();
+//    }
+//
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return UserDetails.super.isAccountNonLocked();
+//    }
+//
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return UserDetails.super.isCredentialsNonExpired();
+//    }
+//
+//    @Override
+//    public boolean isEnabled() {
+//        return UserDetails.super.isEnabled();
+//    }
+//
+//    public String toString() {
+//        return "User(id=" + this.getId() + ", lastName=" + this.getLastName() + ", firstName=" + this.getFirstName() + ", username=" + this.getUsername() + ", password=" + this.getPassword() + ", roles=";
+//    }
+//}
