@@ -11,8 +11,8 @@ const MainPage = () => {
     return (
         <>
           <Header />
+          <MCarousel/>
           <Container>
-            <MCarousel/>
             <Articles />
           </Container>
 

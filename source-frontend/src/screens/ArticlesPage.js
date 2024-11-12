@@ -1,6 +1,7 @@
 import { Container } from "react-bootstrap";
 import ArticleCard from "../components/ArticleCard";
 import Header from "../componets/Header";
+import PFooter from "../component/PFooter";
 
 const ArticlesPage = () => {
     return (
@@ -19,6 +20,7 @@ const ArticlesPage = () => {
                 <ArticleCard title="Топ 10 вещей, которые могут рассказать о вашей ориентации" preview_image="assets/articles/fags.jpg" create_at="1.08.2025" />
             </div>
         </Container>
+        <PFooter />
         </>
     )
 }
