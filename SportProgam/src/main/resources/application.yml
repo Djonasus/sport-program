@@ -12,6 +12,12 @@ spring:
     password: 123
 
 
+  sql:
+    init:
+      data-locations: classpath:sql/db/data.sql
+      schema-locations: classpath:sql/db/schema.sql
+      mode: always
+
 server:
   port: 8082
 
