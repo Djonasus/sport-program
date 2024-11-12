@@ -1,0 +1,9 @@
+.listIteam:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.listIteam:active {
+    background-color: #063275;
+    color: white;
+}
