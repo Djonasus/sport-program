@@ -1,0 +1,42 @@
+.PFooter {
+    width: 100%;
+    display: flex;
+    text-align: justify;
+    background-color: #3b3b3b;
+    color: white;
+    padding-top: 20px;
+    margin-top: 50px;
+}
+
+.about, .contact, .support, .link {
+    text-align: right;
+}
+
+.contact {
+    
+}
+
+.accordion.accordions {
+    color: white;
+    --bs-accordion-color: white;
+    --bs-accordion-bg: #3b3b3b;
+    --bs-accordion-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
+    --bs-accordion-border-color: #3b3b3b;
+    --bs-accordion-border-width: 0px;
+    --bs-accordion-border-radius: 0px;
+    --bs-accordion-inner-border-radius: calc(var(--bs-border-radius) -(var(--bs-border-width)));
+    --bs-accordion-btn-padding-x: 1.25rem;
+    --bs-accordion-btn-padding-y: 1rem;
+    --bs-accordion-btn-color: white;
+    --bs-accordion-btn-bg: var(--bs-accordion-bg);
+    --bs-accordion-btn-icon: none;
+    --bs-accordion-btn-icon-width: 1.25rem;
+    --bs-accordion-btn-icon-transform: rotate(-180deg);
+    --bs-accordion-btn-icon-transition: transform 0.2s ease-in-out;
+    --bs-accordion-btn-active-icon: none;
+    --bs-accordion-btn-focus-box-shadow: #3b3b3b;
+    --bs-accordion-body-padding-x: 1.25rem;
+    --bs-accordion-body-padding-y: 1rem;
+    --bs-accordion-active-color: white;
+    --bs-accordion-active-bg: #3b3b3b;
+}

@@ -1,4 +1,4 @@
-import { Carousel, Container, Image } from "react-bootstrap";
+import { Carousel, Image } from "react-bootstrap";
 import "./MainCarusel.css"
 
 const MCarousel = () => {
