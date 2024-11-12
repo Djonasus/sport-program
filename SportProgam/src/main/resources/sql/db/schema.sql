@@ -23,3 +23,12 @@ CREATE TABLE IF NOT EXISTS public.news (
     body TEXT NOT NULL,
     author VARCHAR(255) NOT NULL
 );
+
+
+CREATE TABLE IF NOT EXISTS public.coordinate (
+    coordinate_id SERIAL PRIMARY KEY,
+    x double precision  NOT NULL,
+    y double precision  NOT NULL,
+    description VARCHAR(255),
+    type VARCHAR(50)
+);

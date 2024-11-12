@@ -1,4 +1,4 @@
-package com.example.SportProgam.Coordinates.model;
+package com.example.SportProgam.Coordinates.coordinates.model;
 
 
 import jakarta.persistence.*;
@@ -11,7 +11,7 @@ import lombok.*;
 @Builder
 @Setter
 @Getter
-public class Coordinates {
+public class Coordinate {
 
 
     @Id
@@ -25,8 +25,6 @@ public class Coordinates {
 
     private String description;
 
-    @ManyToOne()
-    @JoinColumn(name = "coordinate_id")
-    private Type type;
+    private String type;
 
 }
