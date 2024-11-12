@@ -21,7 +21,7 @@ function Header() {
       <Navbar.Collapse id="responsive-navbar-nav">
           <Container>
             <Nav>
-              <Nav.Link as={Link} to="/articles">Статьи</Nav.Link>
+              <Nav.Link as={Link} to="/article">Статьи</Nav.Link>
               <Nav.Link>Карта активностей</Nav.Link>
               <Nav.Link>Команды</Nav.Link>
             </Nav>

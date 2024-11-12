@@ -5,7 +5,6 @@ import MainPage from './screens/MainPage';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import ArticlesPage from './screens/ArticlesPage';
 import ArticleDetailPage from './screens/ArticleDetailPage';
 
