@@ -23,13 +23,18 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public AllArticlesResponseDto getAllWithLimit(Long limit) {
-        List<NewsModel> newsModelList = newsRepository.findAllWithLimitAndNoSorted(limit);
+        List<NewsModel> newsModelList;
+        if (limit != null) {
+            newsModelList = newsRepository.findAllWithLimitAndNoSorted(limit);
+        }else {
+            newsModelList = newsRepository.findAll();
+        }
         List<ChildrenResponseDto> childrenResponseDtoList = new ArrayList<>();
         for (NewsModel newsModel : newsModelList) {
             childrenResponseDtoList.add(converter.convertToChildren(newsModel));
         }
         return new AllArticlesResponseDto(
-            childrenResponseDtoList
+                childrenResponseDtoList
         );
     }
 
