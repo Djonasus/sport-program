@@ -1,13 +1,11 @@
 package com.example.SportProgam.controller;
 
 import com.example.SportProgam.dto.AllArticlesResponseDto;
+import com.example.SportProgam.dto.ArticleDetailDto;
 import com.example.SportProgam.service.NewsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,6 +16,11 @@ public class NewsController {
     @GetMapping("/all")
     public ResponseEntity<AllArticlesResponseDto> getAllWithLimit(@RequestParam Long  limit) {
         return ResponseEntity.ok(newsService.getAllWithLimit(limit));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ArticleDetailDto> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(newsService.getById(id));
     }
 
 }

@@ -2,20 +2,20 @@ package com.example.SportProgam.service;
 
 import com.example.SportProgam.convert.ProductConverter;
 import com.example.SportProgam.dto.AllArticlesResponseDto;
+import com.example.SportProgam.dto.ArticleDetailDto;
 import com.example.SportProgam.dto.ChildrenResponseDto;
 import com.example.SportProgam.model.NewsModel;
 import com.example.SportProgam.repository.NewsRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class NewsServiceImpl implements NewsService {
 
     private final NewsRepository newsRepository;
@@ -23,9 +23,7 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public AllArticlesResponseDto getAllWithLimit(Long limit) {
-        List<NewsModel> newsModelList = newsRepository.findAll().stream()
-                .limit(limit)
-                .toList();
+        List<NewsModel> newsModelList = newsRepository.findAllWithLimitAndNoSorted(limit);
         List<ChildrenResponseDto> childrenResponseDtoList = new ArrayList<>();
         for (NewsModel newsModel : newsModelList) {
             childrenResponseDtoList.add(converter.convertToChildren(newsModel));
@@ -33,5 +31,17 @@ public class NewsServiceImpl implements NewsService {
         return new AllArticlesResponseDto(
             childrenResponseDtoList
         );
+    }
+
+    @Override
+    public ArticleDetailDto getById(Long id) {
+
+        if (newsRepository.findById(id).isPresent()) {
+            NewsModel newsModel = newsRepository.findById(id).get();
+            return converter.converterToDetailDto(newsModel);
+        } else {
+            log.info("optional error");
+        }
+        return null;
     }
 }

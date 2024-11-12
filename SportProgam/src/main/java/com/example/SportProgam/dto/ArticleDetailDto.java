@@ -5,11 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class ChildrenResponseDto {
+@NoArgsConstructor
+public class ArticleDetailDto {
     private Long id;
     private String title;
     private String date;
+    private String body;
     private String preview;
+    private String author;
 }

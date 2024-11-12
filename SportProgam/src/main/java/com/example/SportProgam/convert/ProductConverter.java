@@ -1,5 +1,6 @@
 package com.example.SportProgam.convert;
 
+import com.example.SportProgam.dto.ArticleDetailDto;
 import com.example.SportProgam.dto.ChildrenResponseDto;
 import com.example.SportProgam.model.NewsModel;
 import org.springframework.stereotype.Service;
@@ -17,4 +18,15 @@ public class ProductConverter {
         );
     }
 
+
+    public ArticleDetailDto converterToDetailDto(NewsModel newsModel) {
+        return new ArticleDetailDto(
+                newsModel.getId(),
+                newsModel.getTitle(),
+                newsModel.getDate(),
+                newsModel.getBody(),
+                newsModel.getUrl(),
+                newsModel.getAuthor()
+        );
+    }
 }
