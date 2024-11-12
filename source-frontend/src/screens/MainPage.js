@@ -1,3 +1,7 @@
+
+import MCarousel from "../component/MainCarusel";
+import PFooter from "../component/PFooter";
+
 import Header from "../componets/Header";
 
 import { Container } from "react-bootstrap";
@@ -8,8 +12,11 @@ const MainPage = () => {
         <>
           <Header />
           <Container>
+            <MCarousel/>
             <Articles />
           </Container>
+
+            <PFooter/>
         </>
     )
 }
