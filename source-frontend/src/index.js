@@ -6,6 +6,7 @@ import MainPage from './screens/MainPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ArticlesPage from './screens/ArticlesPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +14,7 @@ root.render(
     <Router>
       <Routes>
         <Route path='/' element={<MainPage/>}/>
+        <Route path='/articles' element={<ArticlesPage/>}/>
       </Routes>
     </Router>
   </React.StrictMode>
