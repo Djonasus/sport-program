@@ -14,6 +14,9 @@ const MainPage = () => {
           <Header />
           <MCarousel/>
           <Container>
+            <h1 style={{marginBlockStart:"50px"}}>Ближайщие спортивные площадки</h1>
+            <PMap />
+            <h1 style={{marginBlockStart:"50px"}}>Смотртите также</h1>
             <Articles shuffle={false} limit={4}/>
           </Container>
 
