@@ -1,8 +1,8 @@
-package com.example.SportProgam.Coordinates.coordinates.convert;
+package com.example.SportProgam.Coordinates.convert;
 
 
-import com.example.SportProgam.Coordinates.coordinates.dto.CoordinateResponseDto;
-import com.example.SportProgam.Coordinates.coordinates.model.Coordinate;
+import com.example.SportProgam.Coordinates.dto.CoordinateResponseDto;
+import com.example.SportProgam.Coordinates.model.Coordinate;
 import org.mapstruct.Mapper;
 
 import java.util.List;

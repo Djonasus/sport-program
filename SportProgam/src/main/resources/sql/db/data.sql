@@ -2,7 +2,6 @@
 INSERT INTO public.role(role_name) VALUES ('USER') ON CONFLICT (role_name) DO NOTHING;
 INSERT INTO public.role(role_name) VALUES ('ADMIN') ON CONFLICT (role_name) DO NOTHING;
 
--- Вставка данных в таблицу news
 --INSERT INTO public.news (title, date, url, body, author)
 --VALUES
 --  ('Заголовок новости 1', '2023-10-26', 'https://example.com/news1', 'Текст новости 1', 'Автор 1'),

@@ -1,9 +1,9 @@
-package com.example.SportProgam.Coordinates.coordinates.conroller;
+package com.example.SportProgam.Coordinates.conroller;
 
 
-import com.example.SportProgam.Coordinates.coordinates.dto.CoordinateAllResponseDto;
-import com.example.SportProgam.Coordinates.coordinates.dto.CoordinateRequestDto;
-import com.example.SportProgam.Coordinates.coordinates.service.CoordinateService;
+import com.example.SportProgam.Coordinates.dto.CoordinateAllResponseDto;
+import com.example.SportProgam.Coordinates.dto.CoordinateRequestDto;
+import com.example.SportProgam.Coordinates.service.CoordinateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

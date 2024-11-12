@@ -1,4 +1,4 @@
-package com.example.SportProgam.Coordinates.coordinates.model;
+package com.example.SportProgam.Coordinates.model;
 
 
 import jakarta.persistence.*;

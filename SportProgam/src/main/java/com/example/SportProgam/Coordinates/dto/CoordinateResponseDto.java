@@ -1,4 +1,4 @@
-package com.example.SportProgam.Coordinates.coordinates.dto;
+package com.example.SportProgam.Coordinates.dto;
 
 public record CoordinateResponseDto(
         Double x,

@@ -1,9 +1,9 @@
-package com.example.SportProgam.Coordinates.coordinates.service;
+package com.example.SportProgam.Coordinates.service;
 
-import com.example.SportProgam.Coordinates.coordinates.convert.CoordinateMapperManager;
-import com.example.SportProgam.Coordinates.coordinates.dto.CoordinateRequestDto;
-import com.example.SportProgam.Coordinates.coordinates.dto.CoordinateResponseDto;
-import com.example.SportProgam.Coordinates.coordinates.repository.CoordinateRepository;
+import com.example.SportProgam.Coordinates.convert.CoordinateMapperManager;
+import com.example.SportProgam.Coordinates.dto.CoordinateRequestDto;
+import com.example.SportProgam.Coordinates.dto.CoordinateResponseDto;
+import com.example.SportProgam.Coordinates.repository.CoordinateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
