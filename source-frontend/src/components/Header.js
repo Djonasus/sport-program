@@ -12,12 +12,10 @@ import PForm from './PForm';
 function Header() {
 
   const [show, setShow] = useState(false);
-    
-  const handleClose = () => setShow(false);
+
   const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
-
-function Header() {
   return (
     <>
       <Navbar bg="primary" data-bs-theme="dark" className='justify-content-between'>
@@ -52,7 +50,6 @@ function Header() {
       </Offcanvas>
     </>
     
-    </>
   );
 }
 
