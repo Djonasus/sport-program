@@ -1,7 +1,9 @@
-package com.example.SportProgam.controller;
+package com.example.SportProgam.Authentication.controller;
 
 
-import com.example.SportProgam.Authentication.dto.UserSingIRequestDto;
+import com.example.SportProgam.Authentication.dto.UserDetailInformationResponseDto;
+import com.example.SportProgam.Authentication.dto.UserSingInRequestDto;
+import com.example.SportProgam.Authentication.dto.UserSingUpRequestDto;
 import com.example.SportProgam.Authentication.model.User;
 import com.example.SportProgam.Authentication.security.AuthenticationService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +25,7 @@ public class AuthRestController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/SignUp")
-    public ResponseEntity<?> singUp(@RequestBody User singUpGuestUserDto,
+    public ResponseEntity<?> singUp(@RequestBody UserSingUpRequestDto singUpGuestUserDto,
                                     BindingResult bindingResult) throws BindException {
         log.info("данные для регестрации: {}", singUpGuestUserDto);
         if (bindingResult.hasErrors()) {
@@ -32,7 +34,7 @@ public class AuthRestController {
             } else throw new BindException(bindingResult);
         } else {
 
-            //authenticationService.signUp(singUpGuestUserDto);
+            authenticationService.signUp(singUpGuestUserDto);
             log.info("аккаунт зарегестрирован");
             return ResponseEntity.noContent().build();
         }
@@ -40,11 +42,13 @@ public class AuthRestController {
 
 
     @PostMapping("/SignIn")
-    public ResponseEntity<?> signIn(@RequestBody UserSingIRequestDto singInDot) {
+    public ResponseEntity<?> signIn(@RequestBody UserSingInRequestDto singInDot) {
         log.info("данные для аунтефикации: {}", singInDot);
-        authenticationService.signIn(singInDot);
+        UserDetailInformationResponseDto userDetailInformationResponseDto =  authenticationService.signIn(singInDot);
         log.info("аунитфикация прошла успено");
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(
+                userDetailInformationResponseDto
+        );
     }
 }
 

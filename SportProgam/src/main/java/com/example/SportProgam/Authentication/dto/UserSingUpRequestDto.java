@@ -1,6 +1,6 @@
 package com.example.SportProgam.Authentication.dto;
 
-public record UserSingIRequestDto(
+public record UserSingUpRequestDto(
         String email,
         String password
 ) {

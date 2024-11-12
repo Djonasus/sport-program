@@ -2,8 +2,11 @@ package com.example.SportProgam.Authentication.service;
 
 
 
+import com.example.SportProgam.Authentication.dto.UserDetailInformationResponseDto;
+import com.example.SportProgam.Authentication.dto.UserSingUpRequestDto;
 import com.example.SportProgam.Authentication.exception.UsernameAlreadyExistsException;
 import com.example.SportProgam.Authentication.exception.Validate;
+import com.example.SportProgam.Authentication.mapper.UserMapperManager;
 import com.example.SportProgam.Authentication.model.User;
 import com.example.SportProgam.Authentication.repostiroy.UserRepository;
 import jakarta.transaction.Transactional;
@@ -14,6 +17,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+
 
 @Service
 @RequiredArgsConstructor
@@ -23,10 +28,12 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserMapperManager userMapper;
 
     @Override
     @Transactional
-    public User save(User user) {
+    public User save(UserSingUpRequestDto dto) {
+        User user = userMapper.toDModel(dto);
         try {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             return userRepository.save(user);
@@ -41,6 +48,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Пользователь с почтой::%s не найден".formatted(email)));
 
+    }
+
+    @Override
+    public UserDetailInformationResponseDto findUserInfByEmail(String email) {
+        return userMapper.toDtoUserInfo(userRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("Пользователь с почтой::%s не наaйден".formatted(email))));
     }
 
     @Override

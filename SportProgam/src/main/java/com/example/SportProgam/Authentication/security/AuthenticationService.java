@@ -1,12 +1,14 @@
 package com.example.SportProgam.Authentication.security;
 
 
-import com.example.SportProgam.Authentication.dto.UserSingIRequestDto;
+import com.example.SportProgam.Authentication.dto.UserDetailInformationResponseDto;
+import com.example.SportProgam.Authentication.dto.UserSingInRequestDto;
+import com.example.SportProgam.Authentication.dto.UserSingUpRequestDto;
 
 public interface AuthenticationService {
 
-    // void signUp(RequestSingInGuestUserDto singUpDto);
+    void signUp(UserSingUpRequestDto singUpDto);
 
-    void signIn(UserSingIRequestDto singInDto);
+    UserDetailInformationResponseDto signIn(UserSingInRequestDto singInDto);
 
 }

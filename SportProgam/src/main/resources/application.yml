@@ -1,0 +1,15 @@
+spring:
+    application:
+        name: SportProgam
+
+    datasource:
+        url: jdbc:postgresql://localhost:5433/sport_teh
+        username: postgres
+        password: 123
+
+    jpa:
+        hibernate:
+            ddl-auto: update
+
+server:
+    port: 8082
