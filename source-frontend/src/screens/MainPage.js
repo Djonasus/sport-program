@@ -1,4 +1,4 @@
-import Header from "../componets/header/Header";
+import Header from "../componets/Header";
 
 import { Container } from "react-bootstrap";
 import Articles from "../components/Articles";
@@ -6,7 +6,7 @@ import Articles from "../components/Articles";
 const MainPage = () => {
     return (
         <>
-          <Header/>
+          <Header />
           <Container>
             <Articles />
           </Container>
