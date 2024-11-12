@@ -8,15 +8,16 @@
     margin-top: 50px;
 }
 
-.about, .contact, .support, .link {
+.link, .support {
     text-align: right;
 }
-
-.contact {
-    
+.contact,  .about {
+    text-align: left;
 }
 
+
 .accordion.accordions {
+    margin-top: 50px;
     color: white;
     --bs-accordion-color: white;
     --bs-accordion-bg: #3b3b3b;
