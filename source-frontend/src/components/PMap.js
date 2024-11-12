@@ -3,8 +3,10 @@ import { Container, ListGroup } from 'react-bootstrap';
 import { Accordion } from 'react-bootstrap';
 import { useRef, useState } from 'react';
 
+import "./PMap.css"
+
 const points = [
-    { id: 1, coords: [55.751574, 37.573856], name: "Москва", description: "adffaffasfweefffffffffffffffffffffffffffffffffffffffdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffffffffffff"},
+    { id: 1, coords: [55.751574, 37.573856], name: "Москва", description: "ddddddddddddddddddffffffffffff"},
     { id: 2, coords: [59.934280, 30.335099], name: "Санкт-Петербург", description: "dqafsafas"},
     { id: 3, coords: [56.326894, 44.005986], name: "Нижний Новгород", description: "ffwefewefw"},
 ];
@@ -44,7 +46,7 @@ const PMap = () => {
             </YMaps>
             <ListGroup>
                 {points.map((point) => (
-                    <ListGroup.Item key={point.id} onClick={() => moveToPoint(point.coords)}>
+                    <ListGroup.Item key={point.id} onClick={() => moveToPoint(point.coords)} className='listIteam'> 
                         {point.name}
                     </ListGroup.Item>
                 ))}
