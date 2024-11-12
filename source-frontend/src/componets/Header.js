@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { Link } from 'react-router-dom';
 
 function Header() {
   return (
@@ -15,15 +16,14 @@ function Header() {
           </Nav>
         </Container>
       </Navbar>
-      <Navbar expand="lg" sticky="bottom" bg="light" data-bs-theme="light" >
+      <Navbar expand="lg" fixed="top" sticky="bottom" bg="light" data-bs-theme="light" >
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
           <Container>
             <Nav>
-              <Nav.Link>Статьи</Nav.Link>
+              <Nav.Link as={Link} to="/articles">Статьи</Nav.Link>
               <Nav.Link>Карта активности</Nav.Link>
               <Nav.Link>Команды</Nav.Link>
-              {/* <Nav.Link>Example4</Nav.Link> */}
             </Nav>
           </Container>
         </Navbar.Collapse>
