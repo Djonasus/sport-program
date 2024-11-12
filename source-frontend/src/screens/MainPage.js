@@ -1,8 +1,10 @@
-import Header from './Componets/Header/header';
+import Header from "../componets/header/header";
 
 
 const MainPage = () => {
-    <Header/>
+    return (
+        <Header/>
+    )
 }
 
 export default MainPage;
