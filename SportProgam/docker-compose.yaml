@@ -10,11 +10,12 @@ services:
       POSTGRES_PASSWORD: 123
       POSTGRES_DB: sport_teh
 
-  pizza-microservice:
-    restart: unless-stopped
+  sport-progam:
+    image: sport-progam
+    container_name: sport-progam
     build:
-      context: ./pizza
       dockerfile: Dockerfile
+    hostname: sport-progam
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/sport_teh
       SPRING_DATASOURCE_USERNAME: postgres

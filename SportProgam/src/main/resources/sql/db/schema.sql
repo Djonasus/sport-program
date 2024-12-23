@@ -18,9 +18,9 @@ CREATE TABLE IF NOT EXISTS public.users (
 CREATE TABLE IF NOT EXISTS public.news (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
-    date DATE NOT NULL,  -- Изменено на DATE
-    url TEXT NOT NULL,
-    body TEXT NOT NULL,
+    date VARCHAR(255) NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    body VARCHAR(255) NOT NULL,
     author VARCHAR(255) NOT NULL
 );
 
