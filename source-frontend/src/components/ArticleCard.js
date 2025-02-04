@@ -1,4 +1,4 @@
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ApiConfig from "../ApiConfig";
 
@@ -14,7 +14,7 @@ const ArticleCard = (props) => {
                 <Card.Text>
                     {props.create_at}
                 </Card.Text>
-                <Button as={Link} to={follow_link}>Подробнее</Button>
+                <Card.Link as={Link} to={follow_link}>Подробнее</Card.Link>
             </Card.Body>
         </Card>
     )

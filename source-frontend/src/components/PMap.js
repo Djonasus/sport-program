@@ -1,5 +1,5 @@
 import { YMaps, Map, Placemark, Clusterer} from '@pbe/react-yandex-maps';
-import { Container, ListGroup } from 'react-bootstrap';
+import { Button, Container, Image, ListGroup } from 'react-bootstrap';
 import { Accordion } from 'react-bootstrap';
 import { useRef, useState } from 'react';
 
@@ -51,12 +51,22 @@ const PMap = () => {
                     </Clusterer>
                 </Map>
             </YMaps>
-            <ListGroup>
-                {points.map((point) => (
-                    <ListGroup.Item key={point.id} onClick={() => moveToPoint(point.coords)} className='listIteam'> 
-                        {point.name}
-                    </ListGroup.Item>
-                ))}
+            <ListGroup style={{width: "100%", height: "500px", overflow: "auto"}}>
+                <Accordion>
+                    {points.map((point, key) => (
+                        <ListGroup.Item key={point.id} onClick={() => moveToPoint(point.coords)} className='listIteam p-0 rounded'> 
+                                <Accordion.Item eventKey={key}>
+                                    <Accordion.Header>{point.name}</Accordion.Header>
+                                    <Accordion.Body className='p-0 text-center'>
+                                        <Image src="/assets/T1.jpg" className="w-100"/>
+                                        <p style={{marginTop: "10px"}}>{point.description}</p>
+                                        <Button style={{marginBottom: "15px"}}>Участвовать</Button>
+                                    </Accordion.Body>
+                                </Accordion.Item>
+                        </ListGroup.Item>
+                    ))} 
+                </Accordion>
+                
             </ListGroup>
         </Container>
     )
