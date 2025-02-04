@@ -3,18 +3,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Form, Link } from 'react-router-dom';
 
-import { useState } from 'react';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-
-import Button from 'react-bootstrap/Button';
-import PForm from './PForm';
-
 function Header() {
 
-  const [show, setShow] = useState(false);
-
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
 
   return (
     <>
@@ -24,7 +14,7 @@ function Header() {
           <Nav className="me-auto">
           </Nav>
           <Nav>
-            <Nav.Link onClick={handleShow}>Войти</Nav.Link>
+            <Nav.Link as={Link} to="/login">Войти</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -35,21 +25,12 @@ function Header() {
             <Nav>
               <Nav.Link as={Link} to="/article">Статьи</Nav.Link>
               <Nav.Link as={Link} to="/maps">Карта активностей</Nav.Link>
-              <Nav.Link as={Link} to="/rank">Команды</Nav.Link>
+              <Nav.Link as={Link} to="/rank">Рейтинг играков</Nav.Link>
             </Nav>
           </Container>
         </Navbar.Collapse>
       </Navbar>
-      <Offcanvas show={show} onHide={handleClose} placement='end'>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Вход и регистрация</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <PForm/>
-        </Offcanvas.Body>
-      </Offcanvas>
     </>
-    
   );
 }
 

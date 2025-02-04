@@ -9,6 +9,8 @@ import ArticlesPage from './screens/ArticlesPage';
 import ArticleDetailPage from './screens/ArticleDetailPage';
 import Maps from './screens/Map';
 import Rank from './screens/Rank';
+import LogPage from './screens/LogPage';
+import RegPage from './screens/RegPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,6 +24,8 @@ root.render(
         </Route>
         <Route path='/maps' element={<Maps/>}/>
         <Route path='/rank' element={<Rank/>}/>
+        <Route path='/login' element={<LogPage/>}/>
+        <Route path='/reg' element={<RegPage/>}/>
       </Routes>
     </Router>
   </React.StrictMode>
