@@ -13,16 +13,18 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/image")
 @RequiredArgsConstructor
+//@CrossOrigin(origins = "http://localhost:3000")
 public class ImageController {
 
     private final ImageService imageService;
 
+    @CrossOrigin("*")
     @PostMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<FileSystemResource> save(@PathVariable long id,
                                                    @RequestPart MultipartFile multipartFile) throws IOException {
         return imageService.save(id, multipartFile);
     }
-
+    @CrossOrigin("*")
     @GetMapping("/{photoId}")
     public ResponseEntity<?> getPhoto(@PathVariable Long photoId) {
         return imageService.get(photoId);

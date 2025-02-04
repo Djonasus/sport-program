@@ -26,7 +26,6 @@ public class ImageServiceImpl implements ImageService {
         Path filePath = Path.of(imageDir, photoId + ".jpg");
         Files.createDirectories(filePath.getParent());
         Files.deleteIfExists(filePath);
-
         try
                 (InputStream is = multipartFile.getInputStream();
                  OutputStream os = Files.newOutputStream(filePath, CREATE_NEW);
@@ -36,8 +35,6 @@ public class ImageServiceImpl implements ImageService {
             bis.transferTo(bos);
         }
         return get(photoId);
-
-
     }
 
     @Override
