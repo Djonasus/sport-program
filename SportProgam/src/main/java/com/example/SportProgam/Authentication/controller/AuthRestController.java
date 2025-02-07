@@ -4,7 +4,6 @@ package com.example.SportProgam.Authentication.controller;
 import com.example.SportProgam.Authentication.dto.UserDetailInformationResponseDto;
 import com.example.SportProgam.Authentication.dto.UserSingInRequestDto;
 import com.example.SportProgam.Authentication.dto.UserSingUpRequestDto;
-import com.example.SportProgam.Authentication.security.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

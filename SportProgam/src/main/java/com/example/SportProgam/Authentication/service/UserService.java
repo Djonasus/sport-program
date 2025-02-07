@@ -2,18 +2,18 @@ package com.example.SportProgam.Authentication.service;
 
 import com.example.SportProgam.Authentication.dto.UserDetailInformationResponseDto;
 import com.example.SportProgam.Authentication.dto.UserSingUpRequestDto;
-import com.example.SportProgam.Authentication.model.User;
-
-import java.util.List;
+import com.example.SportProgam.Authentication.model.UserModel;
 
 public interface UserService {
 
-    User save(UserSingUpRequestDto userSingUpRequestDto);
+    UserModel save(UserSingUpRequestDto userSingUpRequestDto);
 
-    User findUserByEmail(String email);
+    UserModel findUserByEmail(String email);
     UserDetailInformationResponseDto findUserInfByEmail(String email);
 
-    User findUserById(Long id);
+    UserModel findUserByLogin(String login);
+
+    UserModel findUserById(Long id);
 
 
 

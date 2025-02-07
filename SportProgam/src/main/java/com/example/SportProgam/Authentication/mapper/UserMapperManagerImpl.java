@@ -2,7 +2,7 @@ package com.example.SportProgam.Authentication.mapper;
 
 import com.example.SportProgam.Authentication.dto.UserDetailInformationResponseDto;
 import com.example.SportProgam.Authentication.dto.UserSingUpRequestDto;
-import com.example.SportProgam.Authentication.model.User;
+import com.example.SportProgam.Authentication.model.UserModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,12 +15,12 @@ public class UserMapperManagerImpl implements UserMapperManager {
 
 
     @Override
-    public UserDetailInformationResponseDto toDtoUserInfo(User model) {
+    public UserDetailInformationResponseDto toDtoUserInfo(UserModel model) {
         return userMapper.toDtoUserInfo(model);
     }
 
     @Override
-    public User toDModel(UserSingUpRequestDto dto) {
+    public UserModel toDModel(UserSingUpRequestDto dto) {
         return userMapper.toDtoUser(dto);
     }
 }
