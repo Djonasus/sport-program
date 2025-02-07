@@ -11,6 +11,7 @@ import Maps from './screens/Map';
 import Rank from './screens/Rank';
 import LogPage from './screens/LogPage';
 import RegPage from './screens/RegPage';
+import EventPage from './screens/EventPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -26,6 +27,7 @@ root.render(
         <Route path='/rank' element={<Rank/>}/>
         <Route path='/login' element={<LogPage/>}/>
         <Route path='/reg' element={<RegPage/>}/>
+        <Route path='/event/:id' element={<EventPage/>}/>
       </Routes>
     </Router>
   </React.StrictMode>

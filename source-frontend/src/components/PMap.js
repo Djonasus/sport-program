@@ -4,6 +4,7 @@ import { Accordion } from 'react-bootstrap';
 import { useEffect, useRef, useState } from 'react';
 
 import "./PMap.css"
+import { Link } from 'react-router-dom';
 
 const points = [
     { id: 1, coords: [55.7515, 37.5738], name: "Москва", description: "город", event: [{dataTime: "27/01/2025 17:00", name: "футбольный матч", type: "футбол"}, {dataTime: "27/01/2025 17:00", name: "футбольный матч", type: "футбол"}, {dataTime: "27/01/2025 17:00", name: "футбольный матч", type: "футбол"}]},
@@ -125,7 +126,7 @@ const PMap = () => {
                                                                 {evets.dataTime}
                                                             </td>
                                                             <td>
-                                                                <Button id={key}>
+                                                                <Button as={Link} to={`/event/${key}`} id={key}>
                                                                     Посмотреть
                                                                 </Button>
                                                             </td>
