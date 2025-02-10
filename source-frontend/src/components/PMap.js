@@ -20,8 +20,12 @@ const points = [
 ];
 
 
-const PMap = () => {
+const PMap = (props) => {
+
+    const coord = props.cor != null ? props.cor.split(',').map(Number) : null
     
+    console.info(coord)
+
     const mapRef = useRef(null); // Создаем реф для карты
     const [balloonData, setBalloonData] = useState(null); // Состояние для хранения данных о баллоне
 
@@ -61,7 +65,7 @@ const PMap = () => {
     return (
         <Container style={{display: "grid", gridTemplateColumns: "60% 40%", marginTop:"50px"}}>   
             <YMaps>
-                <Map instanceRef={mapRef} style={{width: "100%", height: "500px"}} defaultState={{ center: [55.751574, 37.573856], zoom: 11, controls: ["zoomControl", "fullscreenControl"],}} modules={["control.ZoomControl", "control.FullscreenControl"]}>
+                <Map instanceRef={mapRef} style={{width: "100%", height: "500px"}} defaultState={{ center: coord != null ? coord : [55.7515, 37.5738], zoom: 13, controls: ["zoomControl", "fullscreenControl"],}} modules={["control.ZoomControl", "control.FullscreenControl"]}>
                     <Clusterer  options={{preset: "islands#invertedVioletClusterIcons",groupByCoordinates: false,}}>
                     {points.map((point) => (
                             <Placemark key={point.id} geometry={point.coords} onClick={() => handlePlacemarkClick(point)}/>
@@ -126,7 +130,7 @@ const PMap = () => {
                                                                 {evets.dataTime}
                                                             </td>
                                                             <td>
-                                                                <Button as={Link} to={`/event/${key}`} id={key}>
+                                                                <Button as={Link} to={`/event/${key}?coords=${point.coords}`} id={key}>
                                                                     Посмотреть
                                                                 </Button>
                                                             </td>
