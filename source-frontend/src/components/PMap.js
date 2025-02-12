@@ -7,15 +7,15 @@ import "./PMap.css"
 import { Link } from 'react-router-dom';
 
 const points = [
-    { id: 1, coords: [55.7515, 37.5738], name: "Москва", description: "город", event: [{dataTime: "27/01/2025 17:00", name: "футбольный матч", type: "футбол"}, {dataTime: "27/01/2025 17:00", name: "футбольный матч", type: "футбол"}, {dataTime: "27/01/2025 17:00", name: "футбольный матч", type: "футбол"}]},
-    { id: 2, coords: [55.762200, 37.617300], name: "Краснопресненская", description: "район", event: [{dataTime: "27/01/2025 17:00", name: "футбольный матч", type: "футбол"}] },
+    { id: 1, coords: [55.7515, 37.5738], name: "Москва", description: "город", event: [{dataTime: "27/01/2025 17:00", name: "футбольный матч", type: "футбол", eventsId: 1}, {dataTime: "27/01/2025 17:00", name: "футбольный матч", type: "футбол", eventsId: 2}, {dataTime: "27/01/2025 17:00", name: "футбольный матч", type: "футбол", eventsId: 3}]},
+    { id: 2, coords: [55.762200, 37.617300], name: "Краснопресненская", description: "район", event: [{dataTime: "27/01/2025 17:00", name: "футбольный матч", type: "футбол", eventsId: 14}] },
     { id: 3, coords: [55.754814, 37.628369], name: "Тверская", description: "улица", event: []  },
     { id: 4, coords: [55.758651, 37.617085], name: "Площадь Революции", description: "площадь", event: []  },
-    { id: 5, coords: [55.745884, 37.565125], name: "Кремль", description: "исторический", event: [{dataTime: "27/01/2025 17:00", name: "футбольный матч", type: "футбол"}]  },
+    { id: 5, coords: [55.745884, 37.565125], name: "Кремль", description: "исторический", event: [{dataTime: "27/01/2025 17:00", name: "футбольный матч", type: "футбол", eventsId: 14}]  },
     { id: 6, coords: [55.758472, 37.602304], name: "ГУМ", description: "торговый центр", event: []  },
     { id: 7, coords: [55.769126, 37.635222], name: "Цветной бульвар", description: "бульвар", event: []  },
     { id: 8, coords: [55.750446, 37.618738], name: "Петровка", description: "улица", event: []  },
-    { id: 9, coords: [55.775115, 37.631886], name: "Синдикат", description: "жилой район", event: [{dataTime: "27/01/2025 17:00", name: "футбольный матч", type: "футбол"}]  },
+    { id: 9, coords: [55.775115, 37.631886], name: "Синдикат", description: "жилой район", event: [{dataTime: "27/01/2025 17:00", name: "футбольный матч", type: "футбол", eventsId: 14}]  },
     { id: 10, coords: [55.747990, 37.501149], name: "Варшавское шоссе", description: "шоссе", event: []  }
 ];
 
@@ -118,19 +118,19 @@ const PMap = (props) => {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {point.event.map((evets, key) => (
+                                                    {point.event.map((events, key) => (
                                                         <tr key={key}>
                                                             <td>
-                                                                {evets.name}
+                                                                {events.name}
                                                             </td>
                                                             <td>
-                                                                {evets.type}
+                                                                {events.type}
                                                             </td>
                                                             <td>
-                                                                {evets.dataTime}
+                                                                {events.dataTime}
                                                             </td>
                                                             <td>
-                                                                <Button as={Link} to={`/event/${key}?coords=${point.coords}`} id={key}>
+                                                                <Button as={Link} to={`/event/${events.eventsId}?coords=${point.coords}`} id={key}>
                                                                     Посмотреть
                                                                 </Button>
                                                             </td>

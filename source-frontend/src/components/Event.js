@@ -7,71 +7,54 @@ import axios from "axios";
 
 const Event = (props) => {
 
-    const [ event, setEvent ] = useState()
+    // const event = {
+    //                 title: 'Футбол', 
+    //                 description: 'Описание', 
+    //                 referee: 'Вася Пупкин', 
+    //                 date: '24.11.2025', 
+    //                 time: '17:00', 
+    //                 team1: [{name: 'sdd', lastname: 'sada', image_api: 'https://avatars.mds.yandex.net/i?id=2a00000194f627b4a614c1d7a8fe4b4c25f2-1648411-fast-images&n=13'}], 
+    //                 team2: [{name: 'sdd', lastname: 'sada', image_api: 'https://avatars.mds.yandex.net/i?id=2a00000194f627b4a614c1d7a8fe4b4c25f2-1648411-fast-images&n=13'}]
+    //                 }
 
-    useEffect(
-        () => {
-          axios.get(ApiConfig.remoteAddress+ApiConfig.getEvent+"?eventId="+props.eventId).then(response => {
-              setEvent(response.data.children);
-              console.log(response);
-          }).catch(error => {
-              console.log(error);
-          });
-        }  
-      ,[]);
-
+    
     return (
         <>
-            <div className="mt-5 mb-5">
-                <h1 className="text-center mb-3">
-                    Футбольный матч
-                </h1>
-                <p>
-                    Команды встретятся на поле, чтобы показать свои навыки и страсть к игре. "Зеленые Драконы", обладая мощным атакующим стилем, стремятся продемонстрировать свою скорость и ловкость. В то время как "Синие Молнии" полагаются на слаженную командную работу и стратегию защиты.
-                    Обсуждения, эмоции и поддержка болельщиков создадут атмосферу настоящего спортивного праздника. Не упустите возможность увидеть захватывающие моменты, красивые голы и неожиданные повороты игры.
-
-                </p>
-            </div>
-            <div className="mt-5 mb-5">
-                <h1 className="text-center">
-                    Валантер: Вася пупкин
-                </h1>
-            </div>
             <Card className="p-3">
+                <div className="mt-5 mb-5">
+                    <h1 className="text-center mb-3">
+                        {props.title}
+                    </h1>
+                    <p>
+                        {props.description}
+                    </p>
+                </div>
+                <div className="mt-5 mb-5">
+                    <h1 className="text-center">
+                        Валантер: {props.referee}
+                    </h1>
+                </div>
                 <div className="row">
                     <div className="col">
                         <h1 className="text-center mb-3">Команда №1</h1>
                         <Table>
-                            <tr>
-                                <td> 
-                                    <Image src="/assets/T1.jpg" style={{width: '8em', height: '8em', borderRadius: '100px'}}/>
-                                </td>
-                                <td>
-                                    <h3>
-                                        Фамилия
-                                    </h3>
-                                </td>
-                                <td>
-                                    <h3>
-                                        Фамилия
-                                    </h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> 
-                                    <Image src="/assets/T1.jpg" style={{width: '8em', height: '8em', borderRadius: '100px'}}/>
-                                </td>
-                                <td>
-                                    <h3>
-                                        -
-                                    </h3>
-                                </td>
-                                <td>
-                                    <h3>
-                                        -
-                                    </h3>
-                                </td>
-                            </tr>
+                            {props.team1.map((events) => (
+                                <tr>
+                                    <td> 
+                                        <Image src={events.image_api} style={{width: '8em', height: '8em', borderRadius: '100px'}}/>
+                                    </td>
+                                    <td>
+                                        <h3>
+                                            {events.name}
+                                        </h3>
+                                    </td>
+                                    <td>
+                                        <h3>
+                                            {events.lastname}
+                                        </h3>
+                                    </td>
+                                </tr>
+                            ))}
                         </Table>
                         <div className="text-center mt-4">
                             <Button>
@@ -81,48 +64,35 @@ const Event = (props) => {
                     </div>
                     <div className="col text-center">
                         <h1>
-                            27.01.2025
+                            {props.date}
                         </h1>
                         <h1>
                             VS
                         </h1>
                         <h1>
-                            17:00
+                            {props.time}
                         </h1>
                     </div>
                     <div className="col text-end">
                         <h1 className="text-center mb-3">Команда №2</h1>
                         <Table>
-                            <tr>
-                                <td>
-                                    <h3>
-                                        Фамилия
-                                    </h3>
-                                </td>
-                                <td>
-                                    <h3>
-                                        Фамилия
-                                    </h3>
-                                </td>
-                                <td>
-                                    <Image src="/assets/T1.jpg" style={{width: '8em', height: '8em', borderRadius: '100px'}}/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h3>
-                                        -
-                                    </h3>
-                                </td>
-                                <td>
-                                    <h3>
-                                        -
-                                    </h3>
-                                </td>
-                                <td>
-                                    <Image src="/assets/T1.jpg" style={{width: '8em', height: '8em', borderRadius: '100px'}}/>
-                                </td>
-                            </tr>
+                            {props.team2.map((events) => (
+                                <tr>
+                                    <td> 
+                                        <h3>
+                                            {events.lastname}
+                                        </h3>
+                                    </td>
+                                    <td>
+                                        <h3>
+                                            {events.name}
+                                        </h3>
+                                    </td>
+                                    <td> 
+                                        <Image src={events.image_api} style={{width: '8em', height: '8em', borderRadius: '100px'}}/>
+                                    </td>
+                                </tr>
+                            ))}
                         </Table>
                         <div className="text-center mt-4">
                             <Button>
@@ -132,7 +102,6 @@ const Event = (props) => {
                     </div>
                 </div>
             </Card>
-            
             <PMap cor={props.coord}/>
         </>
         
