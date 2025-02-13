@@ -7,6 +7,7 @@ public record CoordinateResponseDto(
         List<Double> coords,
         String name,
         String description,
+        List<String> field_types,
         List<EventLittleInfo> events
 ) {
 }

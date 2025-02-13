@@ -4,6 +4,7 @@ import com.example.SportProgam.Coordinates.dto.CoordinateRequestDto;
 import com.example.SportProgam.Coordinates.dto.CoordinateResponseDto;
 import com.example.SportProgam.Coordinates.dto.EventLittleInfo;
 import com.example.SportProgam.Coordinates.model.CoordinateModel;
+import com.example.SportProgam.Coordinates.model.TypeOfEventModel;
 import com.example.SportProgam.event_package.model.EventModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -33,18 +34,29 @@ public class CoordinateMapperManagerImpl implements CoordinateMapperManager {
     @Override
     public List<CoordinateResponseDto> toDto(List<CoordinateModel> model) {
         List<CoordinateResponseDto> result = new ArrayList<>();
+
         for (CoordinateModel coordinateModel : model) {
+            List<String> types = findTypes(coordinateModel.getTypeOfEventModels());
             result.add(
                     new CoordinateResponseDto(
                             coordinateModel.getCoordinateid(),
                             List.of(coordinateModel.getX(), coordinateModel.getY()),
                             coordinateModel.getName(),
                             coordinateModel.getDescription(),
+                            types,
                             getEventsInfoDto(coordinateModel.getEvents())
                     )
             );
         }
 
+        return result;
+    }
+
+    private List<String> findTypes(List<TypeOfEventModel> typeOfEventModels) {
+        List<String> result = new ArrayList<>();
+        for (TypeOfEventModel typeOfEventModel : typeOfEventModels) {
+            result.add(typeOfEventModel.getType());
+        }
         return result;
     }
 

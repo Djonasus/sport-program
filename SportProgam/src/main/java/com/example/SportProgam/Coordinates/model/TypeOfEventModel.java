@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TypeOfEventModel {
+public class    TypeOfEventModel {
 
     @Id
     private Long type_id;

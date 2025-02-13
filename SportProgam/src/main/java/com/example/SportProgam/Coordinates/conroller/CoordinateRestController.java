@@ -17,11 +17,12 @@ public class CoordinateRestController {
 
     private final CoordinateService coordinateService;
 
-
+    @CrossOrigin("*")
     @GetMapping("/all")
     public ResponseEntity<List<CoordinateResponseDto>> getAllCoordinate(){
         return ResponseEntity.ok(coordinateService.findAllCoordinates());
     }
+    @CrossOrigin("*")
     @PostMapping()
     public ResponseEntity<Void> addCoordinate(@RequestBody CoordinateRequestDto dto){
         coordinateService.create(dto);

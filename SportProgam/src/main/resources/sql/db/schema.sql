@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS public.users (
     "last_name" varchar(255),
     role varchar(30),
     activated boolean
+--    avatar_id serial
 );
 
 -- Создание таблицы news

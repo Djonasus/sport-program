@@ -48,6 +48,8 @@ public class UserModel{
     @OneToMany(mappedBy = "referee")
     private List<EventModel> eventsAsReferee;
 
+//    private ImageM avatar;
+
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
 //        return role == null ? List.of() : Collections.singleton(new SimpleGrantedAuthority(role.getRoleName()));
