@@ -41,7 +41,7 @@ const Event = (props) => {
                             {props.team1.map((events) => (
                                 <tr>
                                     <td> 
-                                        <Image src={events.image_api} style={{width: '8em', height: '8em', borderRadius: '100px'}}/>
+                                        <Image src={events.imageApi} style={{width: '8em', height: '8em', borderRadius: '100px'}}/>
                                     </td>
                                     <td>
                                         <h3>
@@ -66,7 +66,7 @@ const Event = (props) => {
                         <h1>
                             {props.date}
                         </h1>
-                        <h1>
+                        <h1 id="pageEve">
                             VS
                         </h1>
                         <h1>
@@ -89,7 +89,7 @@ const Event = (props) => {
                                         </h3>
                                     </td>
                                     <td> 
-                                        <Image src={events.image_api} style={{width: '8em', height: '8em', borderRadius: '100px'}}/>
+                                        <Image src={events.imageApi} style={{width: '8em', height: '8em', borderRadius: '100px'}}/>
                                     </td>
                                 </tr>
                             ))}
