@@ -1,4 +1,4 @@
-package com.example.SportProgam.dto;
+package com.example.SportProgam.news_package.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,7 +1,3 @@
-
-INSERT INTO public.role(role_name) VALUES ('USER') ON CONFLICT (role_name) DO NOTHING;
-INSERT INTO public.role(role_name) VALUES ('ADMIN') ON CONFLICT (role_name) DO NOTHING;
-
 INSERT INTO public.news (id, title, date, url, body, author)
 VALUES
     (1, 'Заголовок новости 1', '2023-10-26', '/api/image/2', 'Текст новости 1', 'Автор 1'),
@@ -26,18 +22,56 @@ VALUES
     (20, 'Заголовок новости 20', '2023-10-07', '/api/image/10', 'Текст новости 20', 'Автор 20')
 ON CONFLICT (id) DO NOTHING;
 
-
-
-
-INSERT INTO public.coordinate(coordinate_id, x, y, description, type) VALUES
-(1, 55.7515, 37.5738, 'Москва', 'город'),
-(2, 55.762200, 37.617300, 'Краснопресненская', 'район'),
-(3, 55.754814, 37.628369, 'Тверская', 'улица'),
-(4, 55.758651, 37.617085, 'Площадь Революции', 'площадь'),
-(5, 55.745884, 37.565125, 'Кремль', 'исторический'),
-(6, 55.758472, 37.602304, 'ГУМ', 'торговый центр'),
-(7, 55.769126, 37.635222, 'Цветной бульвар', 'бульвар'),
-(8, 55.750446, 37.618738, 'Петровка', 'улица'),
-(9, 55.775115, 37.631886, 'Синдикат', 'жилой район'),
-(10, 55.747990, 37.501149, 'Варшавское шоссе', 'шоссе')
+INSERT INTO public.coordinates (coordinate_id, x, y, "name", description) VALUES
+(1, 55.7515, 37.5738, 'Футбольное поле', 'Поле с искусственным покрытием, в парке, в 7 микрорайоне, имеется кольцо'),
+(2, 55.7550, 37.5800, 'Баскетбольная площадка', 'Открытая площадка с резиновым покрытием, рядом с парком'),
+(3, 55.7600, 37.5700, 'Теннисный корт', 'Крытый теннисный корт с профессиональным покрытием'),
+(4, 55.7500, 37.5750, 'Волейбольная площадка', 'Песчаная площадка для пляжного волейбола'),
+(5, 55.7530, 37.5780, 'Спортивный зал', 'Зал для занятий фитнесом и единоборствами'),
+(6, 55.7570, 37.5820, 'Беговая дорожка', 'Асфальтированная дорожка для бега, длина 1 км'),
+(7, 55.7590, 37.5850, 'Скейт-парк', 'Площадка для экстремальных видов спорта'),
+(8, 55.7610, 37.5900, 'Хоккейная коробка', 'Открытая ледовая площадка для хоккея'),
+(9, 55.7630, 37.5950, 'Тренажерный зал под открытым небом', 'Уличные тренажеры для занятий спортом'),
+(10, 55.7650, 37.6000, 'Площадка для йоги', 'Тихая зеленая зона для занятий йогой')
 ON CONFLICT (coordinate_id) DO NOTHING;
+
+INSERT INTO public.users (user_id, email, password, name, last_name, role, activated) VALUES
+(251652, 'admin@example.com', 'admin', 'Admin', 'User', 'ADMIN', false),
+(251653, 'volunteer1@example.com', 'password', 'Volunteer1', 'User', 'VOLUNTEER', false),
+(251654, 'user1@example.com', 'password', 'User1', 'User', 'USER', false),
+(251655, 'user2@example.com', 'password', 'User2', 'User', 'USER', false),
+(251656, 'user3@example.com', 'password', 'User3', 'User', 'USER', false),
+(251657, 'volunteer2@example.com', 'password', 'Volunteer2', 'User', 'VOLUNTEER', false),
+(251658, 'user4@example.com', 'password', 'User4', 'User', 'USER', false),
+(251659, 'user5@example.com', 'password', 'User5', 'User', 'USER', false),
+(251660, 'volunteer3@example.com', 'password', 'Volunteer3', 'User', 'VOLUNTEER', false),
+(251661, 'user6@example.com', 'password', 'User6', 'User', 'USER', false)
+ON CONFLICT (user_id) DO NOTHING;
+
+
+INSERT INTO public.events (event_id, title, description, type, date, time, referee_volunteer_id, max_count_in_one_team, coordinates_id) VALUES
+(1, 'Chess Tournament', 'Annual chess competition', 'footboll', '2025-03-15', '10:00', 251653, 4, 3),
+(2, 'Football Match', 'Friendly football game', 'volleyboll', '2025-04-01', '14:00', 251653, 11, 5),
+(3, 'Marathon Race', 'City marathon event', 'ping pong', '2025-05-20', '08:00', 251653, 1, 1)
+ON CONFLICT (event_id) DO NOTHING;
+
+INSERT INTO public.teams (team_id, event_id, user_id, team_num) VALUES
+(1, 1, 251654, 1),  -- event_id=1, user_id=3, team_num=1
+(2, 1, 251655, 1),  -- event_id=1, user_id=4, team_num=1
+(3, 1, 251656, 2),  -- event_id=1, user_id=5, team_num=2
+(4, 2, 251659, 2),  -- event_id=2, user_id=3, team_num=1
+(5, 2, 251661, 1)   -- event_id=2, user_id=4, team_num=1
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.type_of_event (type_id, type, coordinate_id) VALUES
+(1, 'Футбол', 1),  -- Футбольное поле
+(2, 'Баскетбол', 2),  -- Баскетбольная площадка
+(3, 'Теннис', 3),  -- Теннисный корт
+(4, 'Волейбол', 4),  -- Волейбольная площадка
+(5, 'Фитнес', 5),  -- Спортивный зал
+(6, 'Бег', 6),  -- Беговая дорожка
+(7, 'Скейтбординг', 7),  -- Скейт-парк
+(8, 'Хоккей', 8),  -- Хоккейная коробка
+(9, 'Уличные тренировки', 9),  -- Тренажерный зал под открытым небом
+(10, 'Йога', 10)  -- Площадка для йоги
+ON CONFLICT (type_id) DO NOTHING;

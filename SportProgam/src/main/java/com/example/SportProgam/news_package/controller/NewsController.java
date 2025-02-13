@@ -1,10 +1,9 @@
-package com.example.SportProgam.controller;
+package com.example.SportProgam.news_package.controller;
 
-import com.example.SportProgam.dto.AllArticlesResponseDto;
-import com.example.SportProgam.dto.ArticleDetailDto;
-import com.example.SportProgam.service.NewsService;
+import com.example.SportProgam.news_package.dto.AllArticlesResponseDto;
+import com.example.SportProgam.news_package.dto.ArticleDetailDto;
+import com.example.SportProgam.news_package.servise.NewsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

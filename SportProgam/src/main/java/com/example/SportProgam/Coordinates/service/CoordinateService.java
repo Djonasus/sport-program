@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface CoordinateService {
 
-    List<CoordinateResponseDto> finaAllCoordinate();
+    List<CoordinateResponseDto> findAllCoordinates();
     void create(CoordinateRequestDto dto);
 }

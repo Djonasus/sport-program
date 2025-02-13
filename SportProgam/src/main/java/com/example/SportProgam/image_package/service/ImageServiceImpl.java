@@ -1,4 +1,4 @@
-package com.example.SportProgam.service;
+package com.example.SportProgam.image_package.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;

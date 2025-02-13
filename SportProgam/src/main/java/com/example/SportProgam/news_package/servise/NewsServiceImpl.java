@@ -1,11 +1,11 @@
-package com.example.SportProgam.service;
+package com.example.SportProgam.news_package.servise;
 
-import com.example.SportProgam.convert.ProductConverter;
-import com.example.SportProgam.dto.AllArticlesResponseDto;
-import com.example.SportProgam.dto.ArticleDetailDto;
-import com.example.SportProgam.dto.ChildrenResponseDto;
-import com.example.SportProgam.model.NewsModel;
-import com.example.SportProgam.repository.NewsRepository;
+import com.example.SportProgam.news_package.convert.ProductConverter;
+import com.example.SportProgam.news_package.dto.AllArticlesResponseDto;
+import com.example.SportProgam.news_package.dto.ArticleDetailDto;
+import com.example.SportProgam.news_package.dto.ChildrenResponseDto;
+import com.example.SportProgam.news_package.model.NewsModel;
+import com.example.SportProgam.news_package.repository.NewsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

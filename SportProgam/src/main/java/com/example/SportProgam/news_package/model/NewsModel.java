@@ -1,4 +1,4 @@
-package com.example.SportProgam.model;
+package com.example.SportProgam.news_package.model;
 
 import jakarta.persistence.*;
 import lombok.*;

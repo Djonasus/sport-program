@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    @Mapping(target = "role", expression = "java(RoleSetting.getRoleHowString(model.getRole()))")
+//    @Mapping(target = "role", expression = "java(RoleSetting.getRoleHowString(model.getRole()))")
     UserDetailInformationResponseDto toDtoUserInfo(UserModel model);
 
     UserModel toDtoUser(UserSingUpRequestDto dto);

@@ -1,4 +1,4 @@
-package com.example.SportProgam.service;
+package com.example.SportProgam.image_package.service;
 
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.ResponseEntity;

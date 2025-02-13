@@ -1,14 +1,16 @@
 package com.example.SportProgam.Authentication.model;
 
 
+import com.example.SportProgam.event_package.model.EventModel;
+import com.example.SportProgam.event_package.model.TeamModel;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Collections;
+//import java.util.Collection;
+//import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -20,22 +22,31 @@ import java.util.List;
 public class UserModel{
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id;
-
-    @Column(name = "login", unique = true)
-    private String login;
+    private Long user_id;
 
     @Column(name = "email", unique = true)
     private String email;
 
-
     @Column(name = "password")
     private String password;
 
-    private String role;
+    private String name;
+    @Column(name = "last_name")
+    private String lastName;
+
+
+    @Column(name = "activated")
     private boolean activated;
+
+    @Column(name = "role")
+    private String role;
+
+    @OneToMany(mappedBy = "user")
+    private List<TeamModel> teams;
+
+    @OneToMany(mappedBy = "referee")
+    private List<EventModel> eventsAsReferee;
 
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,6 +1,6 @@
-package com.example.SportProgam.controller;
+package com.example.SportProgam.image_package.controller;
 
-import com.example.SportProgam.service.ImageService;
+import com.example.SportProgam.image_package.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;

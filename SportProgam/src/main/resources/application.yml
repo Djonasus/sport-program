@@ -15,10 +15,24 @@ spring:
       data-locations: classpath:sql/db/data.sql
       mode: always
 
+  jpa:
+    hibernate:
+      ddl-auto: update
+
 server:
   port: 8082
 
 path:
   image: SportProgam/src/main/resources/static/assets
+
+#security:
+#  basic:
+#    enable: false
+#  ignored: /**
+#
+#management:
+#  security:
+#    enabled: false
+
 
 

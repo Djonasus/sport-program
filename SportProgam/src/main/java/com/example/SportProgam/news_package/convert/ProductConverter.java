@@ -1,8 +1,8 @@
-package com.example.SportProgam.convert;
+package com.example.SportProgam.news_package.convert;
 
-import com.example.SportProgam.dto.ArticleDetailDto;
-import com.example.SportProgam.dto.ChildrenResponseDto;
-import com.example.SportProgam.model.NewsModel;
+import com.example.SportProgam.news_package.dto.ArticleDetailDto;
+import com.example.SportProgam.news_package.dto.ChildrenResponseDto;
+import com.example.SportProgam.news_package.model.NewsModel;
 import org.springframework.stereotype.Service;
 
 @Service

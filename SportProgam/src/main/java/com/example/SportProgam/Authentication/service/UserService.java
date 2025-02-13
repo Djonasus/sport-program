@@ -11,7 +11,7 @@ public interface UserService {
     UserModel findUserByEmail(String email);
     UserDetailInformationResponseDto findUserInfByEmail(String email);
 
-    UserModel findUserByLogin(String login);
+//    UserModel findUserByLogin(String login);
 
     UserModel findUserById(Long id);
 
