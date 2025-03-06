@@ -39,12 +39,12 @@ public class AuthRestController {
 //            } else throw new BindException(bindingResult);
 //        } else {
         long userId = userService.save(singUpGuestUserDto).getUser_id();
-        log.info("аккаунт зарегестрирован");
+//        log.info("аккаунт зарегестрирован");
         Authentication authentication1 = new UsernamePasswordAuthenticationToken(singUpGuestUserDto.email(), singUpGuestUserDto.password());
         Authentication authentication = authenticationManager.authenticate(
                 authentication1
         );
-        log.info("authentication: {}", authentication);
+//        log.info("authentication: {}", authentication);
 
         // Генерация JWT токена
         String token = jwtTokenProvider.generateToken(authentication);
@@ -63,7 +63,7 @@ public class AuthRestController {
         Authentication authentication = authenticationManager.authenticate(
                 authentication1
         );
-        log.info("authentication: {}", authentication);
+//        log.info("authentication: {}", authentication);
 
         // Генерация JWT токена
         String token = jwtTokenProvider.generateToken(authentication);

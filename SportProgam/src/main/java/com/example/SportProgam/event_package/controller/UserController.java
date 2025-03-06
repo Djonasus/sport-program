@@ -25,7 +25,7 @@ public class UserController {
 //    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", allowedHeaders = "true")
     @PostMapping("/event/{eventId}")
     public EventForUserResponseDto getEventInfo(@PathVariable long eventId) {
-        log.info("4353event");
+//        log.info("4353event");
 //        return ResponseEntity.ok(service.getEventInfo(eventId));
         return service.getEventInfo(eventId);
     }

@@ -22,22 +22,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // Извлекаем токен из заголовков запроса
         String token = jwtTokenProvider.resolveToken(request);
-        log.info("token is: {}", token);
-//        try {
-//            System.out.println("request.getAuthType() = " + request.getAuthType());
-//        } catch (Exception e) {
-//            log.info("sjlfdfl");
-//        }
-//        try {
-//            System.out.println("request.getHeaderNames() = " + request.getHeaderNames());
-//        } catch (Exception e) {
-//            log.info("8sldsfk");
-//        }
-//        try {
-//            System.out.println("request.getUserPrincipal() = " + request.getUserPrincipal());
-//        } catch (Exception e) {
-//            log.info("23jlkj");
-//        }
+        log.info("api is: [{}], token is: [{}]",
+                request.getServletPath(), token);
 
 
         // Если токен валиден, аутентифицируем пользователя

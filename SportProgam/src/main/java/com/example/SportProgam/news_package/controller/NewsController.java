@@ -22,7 +22,7 @@ public class NewsController {
     @GetMapping("/all")
     public ResponseEntity<AllArticlesResponseDto> getAllWithLimit(@RequestParam(required = false) Long  limit,
                                                                   @RequestParam(required = true) Boolean shuffle) {
-        log.info("news");
+//        log.info("news");
         return ResponseEntity.ok(newsService.getAllWithLimit(limit, shuffle));
     }
 

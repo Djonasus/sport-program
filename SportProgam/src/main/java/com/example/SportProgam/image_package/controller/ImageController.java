@@ -31,7 +31,7 @@ public class ImageController {
 //    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     @GetMapping("/{photoId}")
     public ResponseEntity<?> getPhoto(@PathVariable Long photoId) {
-        log.info("dlfjs image");
+//        log.info("dlfjs image");
         return imageService.get(photoId);
     }
 

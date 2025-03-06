@@ -24,14 +24,14 @@ public class CoordinateRestController {
 //    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     @GetMapping("/all")
     public ResponseEntity<List<CoordinateResponseDto>> getAllCoordinate(){
-        log.info("coord");
+//        log.info("coord");
         return ResponseEntity.ok(coordinateService.findAllCoordinates());
     }
     @CrossOrigin("*")
 //    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     @PostMapping()
     public ResponseEntity<Void> addCoordinate(@RequestBody CoordinateRequestDto dto){
-        log.info("coord3");
+//        log.info("coord3");
         coordinateService.create(dto);
         return ResponseEntity.noContent().build();
     }
