@@ -47,13 +47,13 @@ public class EventService {
         List<UserDto> team1 = new ArrayList<>(List.copyOf(teamDtoList.getFirst()));
         if (team1.size() < max) {
             while (team1.size() < max) {
-                team1.add(new UserDto(0L, "-", "-", url +"/api/image/1"));
+                team1.add(new UserDto(0L, "-", "-", url +"/api/image/11111"));
             }
         }
         List<UserDto> team2 = new ArrayList<>(List.copyOf(teamDtoList.getLast()));
         if (team2.size() < max) {
             while (team2.size() < max) {
-                team2.add(new UserDto(0L, "-", "-", url +"/api/image/1"));
+                team2.add(new UserDto(0L, "-", "-", url +"/api/image/11111"));
             }
         }
 
@@ -63,6 +63,7 @@ public class EventService {
     }
 
     private List<List<UserDto>> getListTwoTeamsDto(List<TeamModel> teams) {
+        String url = "http://" + ApiConfig.IP + ":" + ApiConfig.PORT;
         List<UserDto> userDtoList1 = new ArrayList<>();
         List<UserDto> userDtoList2 = new ArrayList<>();
         for (TeamModel team : teams) {
@@ -71,14 +72,14 @@ public class EventService {
                         team.getUser().getUser_id(),
                         team.getUser().getName(),
                         team.getUser().getLastName(),
-                        "/api/image/1"
+                        url +"/api/image/22222"
                 ));
             } else {
                 userDtoList2.add(new UserDto(
                         team.getUser().getUser_id(),
                         team.getUser().getName(),
                         team.getUser().getLastName(),
-                        "/api/image/1"
+                        url +"/api/image/22222"
                 ));
             }
         }

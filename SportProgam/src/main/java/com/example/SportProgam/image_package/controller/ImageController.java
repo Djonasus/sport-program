@@ -2,6 +2,8 @@ package com.example.SportProgam.image_package.controller;
 
 import com.example.SportProgam.image_package.service.ImageService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import java.io.IOException;
 //@CrossOrigin(origins = "http://localhost:3000")
 public class ImageController {
 
+    private static final Logger log = LoggerFactory.getLogger(ImageController.class);
     private final ImageService imageService;
 
     @CrossOrigin("*")
@@ -25,8 +28,10 @@ public class ImageController {
         return imageService.save(id, multipartFile);
     }
     @CrossOrigin("*")
+//    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     @GetMapping("/{photoId}")
     public ResponseEntity<?> getPhoto(@PathVariable Long photoId) {
+        log.info("dlfjs image");
         return imageService.get(photoId);
     }
 
