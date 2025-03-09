@@ -43,7 +43,7 @@ public class EventService {
     }
 
     private List<List<UserDto>> addMinuses(List<List<UserDto>> teamDtoList, int max) {
-        String url = "http://" + ApiConfig.IP + ":" + ApiConfig.PORT;
+        String url = "http://" + ApiConfig.SERVER_IP + ":" + ApiConfig.SERVER_PORT;
         List<UserDto> team1 = new ArrayList<>(List.copyOf(teamDtoList.getFirst()));
         if (team1.size() < max) {
             while (team1.size() < max) {
@@ -63,7 +63,7 @@ public class EventService {
     }
 
     private List<List<UserDto>> getListTwoTeamsDto(List<TeamModel> teams) {
-        String url = "http://" + ApiConfig.IP + ":" + ApiConfig.PORT;
+        String url = "http://" + ApiConfig.SERVER_IP + ":" + ApiConfig.SERVER_PORT;
         List<UserDto> userDtoList1 = new ArrayList<>();
         List<UserDto> userDtoList2 = new ArrayList<>();
         for (TeamModel team : teams) {

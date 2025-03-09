@@ -1,4 +1,5 @@
 package com.example.SportProgam.Authentication.security;
+import com.example.SportProgam.ApiConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,8 +15,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
@@ -23,6 +22,10 @@ import java.util.List;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+
+    private static final String FRONT_IP = ApiConfig.FRONT_IP;
+    private static final String FRONT_PORT = ApiConfig.FRONT_PORT;
+
 
     private static final String[] AUTH_WHITELIST = {
             "/api/authentication/**",
@@ -42,7 +45,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
+//                .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorization -> authorization
                                 .requestMatchers(AUTH_WHITELIST).permitAll() // Открытые эндпоинты
                                 .requestMatchers("/api/user/**").hasAnyRole("USER", "VOLUNTEER", "ADMIN")  // Для пользователей с ролью USER
@@ -59,28 +62,16 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(List.of("http://localhost:3000/**"/*, "http://26.78.251.27:3000/**", "http://localhost:3000"*/));
+        configuration.setAllowCredentials(true);    // Разрешить отправку куки/авторизации
+        configuration.setAllowedOrigins(List.of(
+                "http://localhost:3000/**", "http://"+FRONT_IP+":"+FRONT_PORT+"/**",
+                "http://localhost:3000", "http://" + FRONT_IP + ":" + FRONT_PORT));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration("/**", configuration);  // данная конфигурация для всех эндпоинтов
         return source;
     }
-
-//    @Bean
-//    public WebMvcConfigurer corsConfigurer() {
-//        return new WebMvcConfigurer() {
-//            @Override
-//            public void addCorsMappings(CorsRegistry registry) {
-//                registry.addMapping("/api/**")
-//                        .allowedOrigins("http://localhost:3000")
-//                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-//                        .allowedHeaders("*")
-//                        .allowCredentials(true);
-//            }
-//        };
-//    }
 
     @Bean(name = "BCryptPasswordEncoder")
     public PasswordEncoder passwordEncoder() {
