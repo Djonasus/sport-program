@@ -24,7 +24,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = jwtTokenProvider.resolveToken(request);
         log.info("api is: [{}], token is: [{}]",
                 request.getServletPath(), token);
-
+        token = tokenBearerDelete(token);
 
         // Если токен валиден, аутентифицируем пользователя
         if (token != null && jwtTokenProvider.validateToken(token)) {
@@ -35,6 +35,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         // Продолжаем выполнение цепочки фильтров
         filterChain.doFilter(request, response);
+    }
+
+    private String tokenBearerDelete(String token) {
+        if (token == null) {
+            return null; // Или выбросить исключение, если null недопустим
+        }
+
+        String bearerPrefix = "Bearer ";
+        if (token.startsWith(bearerPrefix)) {
+            return token.substring(bearerPrefix.length());
+        }
+
+        return token;
     }
 }
 
