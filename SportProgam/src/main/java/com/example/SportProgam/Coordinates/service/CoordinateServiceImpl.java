@@ -3,6 +3,7 @@ package com.example.SportProgam.Coordinates.service;
 import com.example.SportProgam.Coordinates.convert.CoordinateMapperManager;
 import com.example.SportProgam.Coordinates.dto.CoordinateRequestDto;
 import com.example.SportProgam.Coordinates.dto.CoordinateResponseDto;
+import com.example.SportProgam.Coordinates.model.CoordinateModel;
 import com.example.SportProgam.Coordinates.repository.CoordinateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,8 @@ public class CoordinateServiceImpl implements CoordinateService {
     private final CoordinateMapperManager mapperManager;
 
     @Override
-    public List<CoordinateResponseDto> finaAllCoordinate() {
+    public List<CoordinateResponseDto> findAllCoordinates() {
+
         return mapperManager.toDto(
                 coordinateRepository.findAll()
         );
@@ -26,8 +28,8 @@ public class CoordinateServiceImpl implements CoordinateService {
 
     @Override
     public void create(CoordinateRequestDto dto) {
-        coordinateRepository.save(
-                mapperManager.toModel(dto)
-        );
+        CoordinateModel model = mapperManager.toModel(dto);
+        model.setCoordinateid(coordinateRepository.count()+1);
+        coordinateRepository.save(model);
     }
 }

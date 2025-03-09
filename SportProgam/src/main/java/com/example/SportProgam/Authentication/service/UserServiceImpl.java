@@ -5,16 +5,15 @@ package com.example.SportProgam.Authentication.service;
 import com.example.SportProgam.Authentication.dto.UserDetailInformationResponseDto;
 import com.example.SportProgam.Authentication.dto.UserSingUpRequestDto;
 import com.example.SportProgam.Authentication.exception.UsernameAlreadyExistsException;
+import com.example.SportProgam.Authentication.exception.UsernameNotFoundException;
 import com.example.SportProgam.Authentication.exception.Validate;
 import com.example.SportProgam.Authentication.mapper.UserMapperManager;
-import com.example.SportProgam.Authentication.model.User;
+import com.example.SportProgam.Authentication.model.UserModel;
 import com.example.SportProgam.Authentication.repostiroy.UserRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -25,26 +24,28 @@ import java.util.NoSuchElementException;
 @Slf4j
 public class UserServiceImpl implements UserService {
 
-
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+//    private final PasswordEncoder passwordEncoder;
     private final UserMapperManager userMapper;
 
     @Override
-    @Transactional
-    public User save(UserSingUpRequestDto dto) {
-        User user = userMapper.toDModel(dto);
+    public UserModel save(UserSingUpRequestDto dto) {
+        UserModel userModel = userMapper.toDModel(dto);
         try {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            return userRepository.save(user);
+            userModel.setActivated(false);
+            userModel.setUser_id(userRepository.count() + 251_652);
+            userModel.setRole("USER");
+            userModel.setActivated(false);
+            return userRepository.save(userModel);
+//            userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
+//            return userRepository.save(userModel);
         } catch (DataIntegrityViolationException exception) {
             throw new UsernameAlreadyExistsException(new Validate("Аккаунт с таким email уже зарегистрирован"));
         }
     }
 
-
     @Override
-    public User findUserByEmail(String email) {
+    public UserModel findUserByEmail(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Пользователь с почтой::%s не найден".formatted(email)));
 
@@ -55,18 +56,23 @@ public class UserServiceImpl implements UserService {
         return userMapper.toDtoUserInfo(userRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("Пользователь с почтой::%s не наaйден".formatted(email))));
     }
 
+//    @Override
+//    public UserModel findUserByLogin(String login) {
+//        return userRepository.findByLogin(login).orElseThrow(
+//                () -> new UsernameNotFoundException("Пользователь с login::%s не найден".formatted(login)));
+//    }
+
     @Override
-    public User findUserById(Long id) {
+    public UserModel findUserById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new UsernameNotFoundException("Пользователь с ID::%d не найден".formatted(id)));
     }
-
-
 
     @Override
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
+
 //
 //    @Override
 //    @Transactional

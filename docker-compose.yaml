@@ -1,0 +1,35 @@
+services:
+
+  database:
+    image: postgres
+    ports:
+      - "5443:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: sport_tech
+
+  spring-boot-server:
+    build:
+      context: ./SportProgam
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5442/sport_tech
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1234
+    ports:
+      - "8082:8082"
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
+
+  react:
+    build:
+      context: ./source-frontend
+    ports:
+      - "3000:3000"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M

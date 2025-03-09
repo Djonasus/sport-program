@@ -1,9 +1,13 @@
 package com.example.SportProgam.Coordinates.dto;
 
+import java.util.List;
+
 public record CoordinateResponseDto(
-        Double x,
-        Double y,
+        Long coordinateId,
+        List<Double> coords,
+        String name,
         String description,
-        String type
+        List<String> field_types,
+        List<EventLittleInfo> events
 ) {
 }

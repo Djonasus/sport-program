@@ -1,0 +1,60 @@
+package com.example.SportProgam.news_package.servise;
+
+import com.example.SportProgam.news_package.convert.ProductConverter;
+import com.example.SportProgam.news_package.dto.AllArticlesResponseDto;
+import com.example.SportProgam.news_package.dto.ArticleDetailDto;
+import com.example.SportProgam.news_package.dto.ChildrenResponseDto;
+import com.example.SportProgam.news_package.model.NewsModel;
+import com.example.SportProgam.news_package.repository.NewsRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
+public class NewsServiceImpl implements NewsService {
+
+    private final NewsRepository newsRepository;
+    private final ProductConverter converter;
+
+    @Override
+    public AllArticlesResponseDto getAllWithLimit(Long limit, Boolean shuffle) {
+        List<NewsModel> newsModelList;
+        if (limit != null) {
+            if (shuffle) {
+                newsModelList = newsRepository.findAllWithLimitAndNoSorted(limit);
+            } else {
+                newsModelList = newsRepository.findAllWithLimitAndSorted(limit);
+            }
+        } else {
+            if (shuffle) {
+                newsModelList = newsRepository.findAllWithoutLimitAndNoSorted();
+            } else {
+                newsModelList = newsRepository.findAll();
+            }
+        }
+        List<ChildrenResponseDto> childrenResponseDtoList = new ArrayList<>();
+        for (NewsModel newsModel : newsModelList) {
+            childrenResponseDtoList.add(converter.convertToChildren(newsModel));
+        }
+        return new AllArticlesResponseDto(
+                childrenResponseDtoList
+        );
+    }
+
+    @Override
+    public ArticleDetailDto getById(Long id) {
+
+        if (newsRepository.findById(id).isPresent()) {
+            NewsModel newsModel = newsRepository.findById(id).get();
+            return converter.converterToDetailDto(newsModel);
+        } else {
+            log.info("optional error");
+        }
+        return null;
+    }
+}
