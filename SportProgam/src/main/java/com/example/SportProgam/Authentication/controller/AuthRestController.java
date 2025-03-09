@@ -54,8 +54,8 @@ public class AuthRestController {
     }
 
     @PostMapping("/SingIn")
-//    @CrossOrigin("*")
-    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+    @CrossOrigin("*")
+//    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public ResponseEntity<?> singIn(@RequestBody UserSingInRequestDto singInDot) {
         //не хватает проверки на присутствие пользователя при входе, проверить данную способность в крестики нолики, возмножно можно войти любым
 

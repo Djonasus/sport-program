@@ -21,8 +21,10 @@ public class UserController {
     public String userTest() {
         return "successfull";
     }
-    @CrossOrigin("*")
+
+//    @CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
 //    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", allowedHeaders = "true")
+    @CrossOrigin("*")
     @PostMapping("/event/{eventId}")
     public EventForUserResponseDto getEventInfo(@PathVariable long eventId) {
 //        log.info("4353event");
