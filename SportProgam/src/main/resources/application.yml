@@ -25,6 +25,10 @@ server:
 path:
   image: SportProgam/src/main/resources/static/assets
 
+
+front:
+    ip: ${FRONT_IP}
+    port: ${FRONT_PORT}
 #security:
 #  basic:
 #    enable: false

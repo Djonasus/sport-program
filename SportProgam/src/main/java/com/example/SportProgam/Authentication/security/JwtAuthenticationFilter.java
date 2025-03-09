@@ -28,10 +28,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         // Если токен валиден, аутентифицируем пользователя
         if (token != null && jwtTokenProvider.validateToken(token)) {
-            log.info("token is validated");
+
             Authentication authentication = jwtTokenProvider.getAuthentication(token);
             // Устанавливаем аутентификацию в SecurityContext
             SecurityContextHolder.getContext().setAuthentication(authentication);
+        } else {
+            log.info("token isn't validated");
         }
         // Продолжаем выполнение цепочки фильтров
         filterChain.doFilter(request, response);

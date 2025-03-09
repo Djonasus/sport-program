@@ -5,6 +5,7 @@ import com.example.SportProgam.Authentication.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,13 +26,15 @@ import java.util.List;
 @Slf4j
 public class JwtTokenProvider {
     private final long JWT_EXPIRATION = 604800000L; // Время жизни токена - 7 дней
-    private final SecretKey secretKey = Jwts.SIG.HS256.key().build();
 //    private final SecretKey secretKey = Jwts.SIG.HS256.key().build();
+
+    private final String JWT_SECRET = "yoursdfpauhg;lsdhghasidfhghpash[dfoahwedfskjajdsfnv;akldfhjadshfkjj";
+    private final SecretKey secretKey = Keys.hmacShaKeyFor(JWT_SECRET.getBytes());
+
     private final UserService userService;
 
     public String generateToken(Authentication authentication) {
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-
         return Jwts.builder()
                 .subject(userPrincipal.getUsername())
                 .issuedAt(new Date())
@@ -69,7 +72,7 @@ public class JwtTokenProvider {
         String login = claims.getSubject(); //извлечение ключегого поля элемента
         // поиск user and his password
         UserModel userModel = userService.findUserByEmail(login);
-        log.info("username in getAuthentication is {}", login);
+//        log.info("username in getAuthentication is {}", login);
 
         String currentPassword = userModel.getPassword();
 

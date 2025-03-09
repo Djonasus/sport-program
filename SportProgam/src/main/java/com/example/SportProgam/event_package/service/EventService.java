@@ -3,6 +3,7 @@ package com.example.SportProgam.event_package.service;
 import com.example.SportProgam.ApiConfig;
 import com.example.SportProgam.event_package.dto.EventForUserResponseDto;
 //import com.example.SportProgam.event_package.dto.TeamDto;
+import com.example.SportProgam.event_package.dto.RequestToEventDto;
 import com.example.SportProgam.event_package.dto.UserDto;
 import com.example.SportProgam.event_package.model.EventModel;
 import com.example.SportProgam.event_package.model.TeamModel;
@@ -20,6 +21,7 @@ import java.util.List;
 public class EventService {
 
     private final EventRepository repository;
+    private final TeamService teamService;
 
     public EventForUserResponseDto getEventInfo(long eventId) {
         EventModel eventModel = repository.findById(eventId).get();
@@ -38,8 +40,6 @@ public class EventService {
                 eventModel.getReferee().getEmail(),
                 eventModel.getMaxCountInOneTeam()
         );
-
-//        return new EventForUserResponseDto();
     }
 
     private List<List<UserDto>> addMinuses(List<List<UserDto>> teamDtoList, int max) {
@@ -88,5 +88,9 @@ public class EventService {
                 userDtoList2
         );
 
+    }
+
+    public void requestToEvent(RequestToEventDto dto) {
+        teamService.save(dto, repository.findById(dto.eventId()).get());
     }
 }

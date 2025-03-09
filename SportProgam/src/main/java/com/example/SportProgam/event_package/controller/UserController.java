@@ -1,6 +1,7 @@
 package com.example.SportProgam.event_package.controller;
 
 import com.example.SportProgam.event_package.dto.EventForUserResponseDto;
+import com.example.SportProgam.event_package.dto.RequestToEventDto;
 import com.example.SportProgam.event_package.service.EventService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -22,16 +23,17 @@ public class UserController {
         return "successfull";
     }
 
-//    @CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
-//    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", allowedHeaders = "true")
     @CrossOrigin("*")
-    @PostMapping("/event/{eventId}")
+    @GetMapping("/event/{eventId}")
     public EventForUserResponseDto getEventInfo(@PathVariable long eventId) {
-//        log.info("4353event");
-//        return ResponseEntity.ok(service.getEventInfo(eventId));
         return service.getEventInfo(eventId);
     }
 
-
+    @CrossOrigin("*")
+    @PostMapping("/request/event")
+    public ResponseEntity<Void> requestToEvent(@RequestBody RequestToEventDto dto) {
+        service.requestToEvent(dto);
+        return ResponseEntity.ok().build();
+    }
 
 }
