@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,16 +24,20 @@ public class ImageController {
 
     @CrossOrigin("*")
     @PostMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<FileSystemResource> save(@PathVariable long id,
+    public ResponseEntity<?> save(@PathVariable long id,
                                                    @RequestPart MultipartFile multipartFile) throws IOException {
-        return imageService.save(id, multipartFile);
+        return new ResponseEntity<>(imageService.save(id, multipartFile),
+                imageService.getContentTypeImage(),
+                HttpStatus.OK);
     }
     @CrossOrigin("*")
-//    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     @GetMapping("/{photoId}")
-    public ResponseEntity<?> getPhoto(@PathVariable Long photoId) {
-//        log.info("dlfjs image");
-        return imageService.get(photoId);
+    public ResponseEntity<?> getPhoto(@PathVariable Long photoId) throws IOException {
+        return new ResponseEntity<>(
+                imageService.get(photoId),
+                imageService.getContentTypeImage(),
+                HttpStatus.OK);
+//        return imageService.get(photoId);
     }
 
 }

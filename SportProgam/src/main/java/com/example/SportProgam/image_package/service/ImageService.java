@@ -1,17 +1,17 @@
 package com.example.SportProgam.image_package.service;
 
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
 public interface ImageService {
 
-    ResponseEntity<FileSystemResource> save(Long photoId, MultipartFile multipartFile) throws IOException;
+    byte[] save(Long photoId, MultipartFile multipartFile) throws IOException;
 
-    ResponseEntity<FileSystemResource> get(Long photoId);
+    byte[] get(Long photoId) throws IOException;
 
     Object delete(Long photoId);
 
+    MultiValueMap<String, String> getContentTypeImage();
 }
