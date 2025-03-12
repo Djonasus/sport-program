@@ -12,6 +12,8 @@ import Rank from './screens/Rank';
 import LogPage from './screens/LogPage';
 import RegPage from './screens/RegPage';
 import EventPage from './screens/EventPage';
+import Profile from './screens/Profile';
+import NewEventPage from './screens/NewEventPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -28,6 +30,8 @@ root.render(
         <Route path='/login' element={<LogPage/>}/>
         <Route path='/reg' element={<RegPage/>}/>
         <Route path='/event/:id' element={<EventPage/>}/>
+        <Route path='/profile/:id' element={<Profile/>}/>
+        <Route path='/event/new/:id' element={<NewEventPage/>}/>
       </Routes>
     </Router>
   </React.StrictMode>

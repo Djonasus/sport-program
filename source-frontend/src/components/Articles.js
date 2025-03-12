@@ -18,7 +18,7 @@ const Articles = (props) => {
 
     const shuffle_postfix = "shuffle="+props.shuffle;
     const limit_postfix = "limit="+props.limit;
-
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
     useEffect(
       () => {
         axios.get(ApiConfig.remoteAddress+ApiConfig.getArticles+"?"+limit_postfix+"&"+shuffle_postfix).then(response => {

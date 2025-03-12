@@ -15,7 +15,7 @@ import PFooter from "../components/PFooter";
 const ArticleDetailPage = () => {
     const params = useParams();
     const id = params.id
-
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
     useEffect(
         () => {
           axios.get(ApiConfig.remoteAddress+ApiConfig.getArticleDetail+id).then(response => {

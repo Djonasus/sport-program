@@ -5,6 +5,7 @@ import { Form, Link } from 'react-router-dom';
 
 function Header() {
 
+  var user_id = localStorage.getItem('user_id') 
 
   return (
     <>
@@ -14,7 +15,7 @@ function Header() {
           <Nav className="me-auto">
           </Nav>
           <Nav>
-            <Nav.Link as={Link} to="/login">Войти</Nav.Link>
+            {user_id ? <Nav.Link as={Link} to={`/profile/${user_id}`}>Личный кабинет</Nav.Link> : <Nav.Link as={Link} to="/login">Войти</Nav.Link>}
           </Nav>
         </Container>
       </Navbar>

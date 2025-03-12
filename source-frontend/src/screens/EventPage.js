@@ -6,8 +6,11 @@ import Event from "../components/Event";
 import ApiConfig from "../ApiConfig";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import PMap from "../components/PMap";
 
 const EventPage = () => {
+    
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
 
     const location = useLocation();
     const params = useParams();
@@ -20,7 +23,7 @@ const EventPage = () => {
 
     const [ event, setEvent ] = useState();
 
-    
+    const token = localStorage.getItem('token')
 
     useEffect(() => {
           axios.get(ApiConfig.remoteAddress+ApiConfig.getEvent+id).then(response => {
@@ -37,20 +40,20 @@ const EventPage = () => {
             <Header/>
             <Container>
                 {event ? (<Event  
-                    coord={coords}
                     title={event.title}
                     description={event.description}
-                    referee={event.referee}
                     team1={event.team1}
                     team2={event.team2}
                     date={event.date}
                     time={event.time}
+                    eventId={id}
                 />) : (
                     <div className="d-flex flex-wrap justify-content-center" style={{gap:"15px", margin:"20px auto"}}>
                         <Spinner animation="border"/>
                     </div>
                     
                 ) }
+                <PMap cor={coords}/>
             </Container>
             <PFooter/>
         </>

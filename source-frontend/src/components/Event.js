@@ -1,23 +1,42 @@
-import { Button, Card, Image, Table } from "react-bootstrap";
+import { Button, Card, Image, Modal, Table } from "react-bootstrap";
 import PMap from "./PMap";
-import { useEffect, useState } from "react";
-import ApiConfig from "../ApiConfig";
 import axios from "axios";
+import ApiConfig from "../ApiConfig";
+import { useState } from "react";
 
 
-const Event = (props) => {
+const Event = (props) => {  
 
-    // const event = {
-    //                 title: 'Футбол', 
-    //                 description: 'Описание', 
-    //                 referee: 'Вася Пупкин', 
-    //                 date: '24.11.2025', 
-    //                 time: '17:00', 
-    //                 team1: [{name: 'sdd', lastname: 'sada', image_api: 'https://avatars.mds.yandex.net/i?id=2a00000194f627b4a614c1d7a8fe4b4c25f2-1648411-fast-images&n=13'}], 
-    //                 team2: [{name: 'sdd', lastname: 'sada', image_api: 'https://avatars.mds.yandex.net/i?id=2a00000194f627b4a614c1d7a8fe4b4c25f2-1648411-fast-images&n=13'}]
-    //                 }
+    const userId = localStorage.getItem('user_id')
+    const [showModal, setShowModal] = useState(false); 
+    const [modalMessage, setModalMessage] = useState(""); 
 
-    
+    const handleJoin = async (num) => {
+        try {
+            const response = await axios.post(ApiConfig.remoteAddress+ApiConfig.joinEvent, {
+                eventId: props.eventId,
+                team: num,
+                userId: userId,
+            });
+
+            if (response.status === 200) {
+                setModalMessage(`Вы успешно присоединились к команде №${num}!`);
+                setShowModal(true);
+            } else if (response.status === 441) {
+                setModalMessage(`Команда переполнина`);
+                setShowModal(true);
+            }
+        } catch (error) {
+            console.error('Ошибка при присоединении:', error);
+            setModalMessage("Произошла ошибка при присоединении. Попробуйте снова.");
+            setShowModal(true);
+        }
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false); 
+    };
+
     return (
         <>
             <Card className="p-3">
@@ -28,11 +47,6 @@ const Event = (props) => {
                     <p>
                         {props.description}
                     </p>
-                </div>
-                <div className="mt-5 mb-5">
-                    <h1 className="text-center">
-                        Валантер: {props.referee}
-                    </h1>
                 </div>
                 <div className="row">
                     <div className="col">
@@ -57,7 +71,7 @@ const Event = (props) => {
                             ))}
                         </Table>
                         <div className="text-center mt-4">
-                            <Button>
+                            <Button onClick={() => handleJoin(1)}>
                                 Присоединиться
                             </Button>
                         </div>
@@ -95,14 +109,25 @@ const Event = (props) => {
                             ))}
                         </Table>
                         <div className="text-center mt-4">
-                            <Button>
+                            <Button onClick={() => handleJoin(2)}>
                                 Присоединиться
                             </Button>
                         </div>
                     </div>
                 </div>
             </Card>
-            <PMap cor={props.coord}/>
+
+            <Modal show={showModal} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Статус присоединения</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{modalMessage}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseModal}>
+                        Закрыть
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
         
     );

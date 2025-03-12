@@ -25,7 +25,7 @@ import axios from 'axios';
 const PMap = (props) => {
     const [ points, setPoints ] = useState();
     const coord = props.cor != null ? props.cor.split(',').map(Number) : null
-
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
     console.info(coord)
 
     const mapRef = useRef(null); // Создаем реф для карты
@@ -147,7 +147,7 @@ const PMap = (props) => {
                                                                 {events.dataTime}
                                                             </td>
                                                             <td>
-                                                                <Button as={Link} to={`/event/${events.eventId}?coords=${point.coords}#pageEve`} id={key}>
+                                                                <Button as={Link} to={`/event/${events.eventId}?coords=${point.coords}`} id={key}>
                                                                     Посмотреть
                                                                 </Button>
                                                             </td>
@@ -156,6 +156,9 @@ const PMap = (props) => {
                                                 </tbody>
                                             </Table>
                                         ) : null}
+                                        <Button as={Link} to={`/event/new/${point.coordinateId}`} >
+                                            Создать событие
+                                        </Button>
                                     </Accordion.Body>
                                 </Accordion.Item>
                         </ListGroup.Item>
