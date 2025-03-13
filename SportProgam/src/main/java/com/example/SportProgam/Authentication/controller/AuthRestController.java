@@ -9,6 +9,7 @@ import com.example.SportProgam.Authentication.security.JwtTokenProvider;
 import com.example.SportProgam.Authentication.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,44 +31,38 @@ public class AuthRestController {
 
     @PostMapping("/SingUp")
     @CrossOrigin("*")
-//    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public ResponseEntity<?> singUp(@RequestBody UserSingUpRequestDto singUpGuestUserDto){
         log.info("данные для регестрации: {}", singUpGuestUserDto);
-//        if (bindingResult.hasErrors()) {
-//            if (bindingResult instanceof BindException exception) {
-//                throw exception;
-//            } else throw new BindException(bindingResult);
-//        } else {
         long userId = userService.save(singUpGuestUserDto).getUser_id();
-//        log.info("аккаунт зарегестрирован");
         Authentication authentication1 = new UsernamePasswordAuthenticationToken(singUpGuestUserDto.email(), singUpGuestUserDto.password());
         Authentication authentication = authenticationManager.authenticate(
                 authentication1
         );
-//        log.info("authentication: {}", authentication);
 
-        // Генерация JWT токена
         String token = jwtTokenProvider.generateToken(authentication);
         return ResponseEntity.ok(new TokenAndUserIdDto(token, userId, "User"));
-//            return ResponseEntity.noContent().build();
-//        }
     }
 
     @PostMapping("/SingIn")
     @CrossOrigin("*")
 //    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
-    public ResponseEntity<?> singIn(@RequestBody UserSingInRequestDto singInDot) {
+    public ResponseEntity<?> singIn(@RequestBody UserSingInRequestDto singInDto) {
         //не хватает проверки на присутствие пользователя при входе, проверить данную способность в крестики нолики, возмножно можно войти любым
+        log.info("data for login is {}", singInDto);
+        Long userId = null;
+        try {
+            userId = userService.findUserByEmail(singInDto.email()).getUser_id();
+            if (userId == null) {
+                throw new RuntimeException();
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        Authentication authentication1 = new UsernamePasswordAuthenticationToken(singInDto.email(), singInDto.password());
+        Authentication authentication = authenticationManager.authenticate(authentication1);
 
-        Authentication authentication1 = new UsernamePasswordAuthenticationToken(singInDot.email(), singInDot.password());
-        Authentication authentication = authenticationManager.authenticate(
-                authentication1
-        );
-//        log.info("authentication: {}", authentication);
-
-        // Генерация JWT токена
         String token = jwtTokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new TokenAndUserIdDto(token, 1L, "User"));
+        return ResponseEntity.ok(new TokenAndUserIdDto(token, userId, "User"));
 //        return token;
     }
 }

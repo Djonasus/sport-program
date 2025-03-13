@@ -18,7 +18,13 @@ public class TeamService {
     private final UserRepository userRepository;
 
     public void save(RequestToEventDto dto, EventModel eventModel) {
+//        log.debug("dto is {}", dto.toString());
+//        log.debug("eventmodel is {}",eventModel.toString());
         try {
+            if (eventModel == null) {
+                log.warn("error at event null");
+                throw new RuntimeException();
+            }
             teamRepository.save(
                     new TeamModel(
                             teamRepository.count()+1,

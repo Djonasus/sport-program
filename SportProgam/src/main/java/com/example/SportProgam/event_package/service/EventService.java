@@ -1,6 +1,10 @@
 package com.example.SportProgam.event_package.service;
 
 import com.example.SportProgam.ApiConfig;
+import com.example.SportProgam.Authentication.repostiroy.UserRepository;
+import com.example.SportProgam.Coordinates.model.CoordinateModel;
+import com.example.SportProgam.Coordinates.repository.CoordinateRepository;
+import com.example.SportProgam.event_package.dto.CreateEventRequestDto;
 import com.example.SportProgam.event_package.dto.EventForUserResponseDto;
 //import com.example.SportProgam.event_package.dto.TeamDto;
 import com.example.SportProgam.event_package.dto.RequestToEventDto;
@@ -10,11 +14,13 @@ import com.example.SportProgam.event_package.model.TeamModel;
 import com.example.SportProgam.event_package.repository.EventRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Data
 @Service
 @RequiredArgsConstructor
@@ -22,24 +28,31 @@ public class EventService {
 
     private final EventRepository repository;
     private final TeamService teamService;
+    private final UserRepository userRepository;
+    private final CoordinateRepository coordinateRepository;
 
     public EventForUserResponseDto getEventInfo(long eventId) {
         EventModel eventModel = repository.findById(eventId).get();
-        List<TeamModel> teams = eventModel.getTeams();
-        List<List<UserDto>> teamDtoList = getListTwoTeamsDto(teams);
-        teamDtoList = addMinuses(teamDtoList, eventModel.getMaxCountInOneTeam());
-        List<UserDto> team1 = teamDtoList.getFirst();
-        List<UserDto> team2 = teamDtoList.getLast();
-
+//        List<TeamModel> teams = eventModel.getTeams();
+//        List<List<UserDto>> teamDtoList = getListTwoTeamsDto(teams);
+//        teamDtoList = addMinuses(teamDtoList, eventModel.getMaxCountInOneTeam());
+        List<List<UserDto>> teamDtoList = createTeamDtoListByEventModel(eventModel);
         return new EventForUserResponseDto(
                 eventModel.getTitle(),
                 eventModel.getDescription(),
-                team1, team2,
+                teamDtoList.getFirst(),
+                teamDtoList.getLast(),
                 eventModel.getDate(),
                 eventModel.getTime(),
                 eventModel.getReferee().getEmail(),
                 eventModel.getMaxCountInOneTeam()
         );
+    }
+
+    private List<List<UserDto>> createTeamDtoListByEventModel(EventModel eventModel) {
+        List<TeamModel> teams = eventModel.getTeams();
+        List<List<UserDto>> teamDtoList = getListTwoTeamsDto(teams);
+        return addMinuses(teamDtoList, eventModel.getMaxCountInOneTeam());
     }
 
     private List<List<UserDto>> addMinuses(List<List<UserDto>> teamDtoList, int max) {
@@ -92,5 +105,25 @@ public class EventService {
 
     public void requestToEvent(RequestToEventDto dto) {
         teamService.save(dto, repository.findById(dto.eventId()).get());
+    }
+
+    public void createEventByDto(CreateEventRequestDto requestDto) {
+        log.info("request dto is: {}", requestDto.toString());
+        repository.save(mapperEventDtoToEventModel(requestDto));
+    }
+
+    private EventModel mapperEventDtoToEventModel(CreateEventRequestDto requestDto) {
+        return new EventModel(
+                repository.count()+1,
+                requestDto.title(),
+                requestDto.description(),
+                null,
+                requestDto.date(),
+                requestDto.time(),
+                requestDto.sport(),
+                userRepository.findById(requestDto.userId()).get(),
+                requestDto.maxCount(),
+                coordinateRepository.findById(requestDto.coordId()).get()
+        );
     }
 }

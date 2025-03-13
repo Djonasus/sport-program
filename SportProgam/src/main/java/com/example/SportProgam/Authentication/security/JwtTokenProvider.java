@@ -37,8 +37,8 @@ public class JwtTokenProvider {
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         return Jwts.builder()
                 .subject(userPrincipal.getUsername())
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION))
+//                .issuedAt(new Date())
+//                .expiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION))
                 .signWith(secretKey)
                 .compact();
     }

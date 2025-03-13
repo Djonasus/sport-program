@@ -4,6 +4,7 @@ import com.example.SportProgam.Authentication.model.UserModel;
 import com.example.SportProgam.Coordinates.model.CoordinateModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Table(name = "events")
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class EventModel {
@@ -26,6 +28,7 @@ public class EventModel {
 
     private String date;
     private String time;
+    private String type;
 
     @ManyToOne
     @JoinColumn(name = "referee_volunteer_id")

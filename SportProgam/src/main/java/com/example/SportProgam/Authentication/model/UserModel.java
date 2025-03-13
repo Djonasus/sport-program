@@ -35,7 +35,6 @@ public class UserModel{
     @Column(name = "last_name")
     private String lastName;
 
-
     @Column(name = "activated")
     private boolean activated;
 

@@ -55,13 +55,13 @@ INSERT INTO public.events (event_id, title, description, type, date, time, refer
 (3, 'Marathon Race', 'City marathon event', 'ping pong', '2025-05-20', '08:00', 251653, 1, 1)
 ON CONFLICT (event_id) DO NOTHING;
 
-INSERT INTO public.teams (team_id, event_id, user_id, team_num) VALUES
-(1, 1, 251654, 1),  -- event_id=1, user_id=3, team_num=1
-(2, 1, 251655, 1),  -- event_id=1, user_id=4, team_num=1
-(3, 1, 251656, 2),  -- event_id=1, user_id=5, team_num=2
-(4, 2, 251659, 2),  -- event_id=2, user_id=3, team_num=1
-(5, 2, 251661, 1)   -- event_id=2, user_id=4, team_num=1
-ON CONFLICT DO NOTHING;
+--INSERT INTO public.teams (team_id, event_id, user_id, team_num) VALUES
+--(1, 1, 251654, 1),  -- event_id=1, user_id=3, team_num=1
+--(2, 1, 251655, 1),  -- event_id=1, user_id=4, team_num=1
+--(3, 1, 251656, 2),  -- event_id=1, user_id=5, team_num=2
+--(4, 2, 251659, 2),  -- event_id=2, user_id=3, team_num=1
+--(5, 2, 251661, 1)   -- event_id=2, user_id=4, team_num=1
+--ON CONFLICT DO NOTHING;
 
 INSERT INTO public.type_of_event (type_id, type, coordinate_id) VALUES
 (1, 'Футбол', 1),  -- Футбольное поле
