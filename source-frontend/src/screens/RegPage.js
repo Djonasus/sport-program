@@ -8,13 +8,13 @@ const RegPage = () => {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ name, setName ] = useState('');
-    const [ lastname, setLastname ] = useState('');
+    const [ last_name, setLastname ] = useState('');
 
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        AuthService.register(email, password, name, lastname)
+        AuthService.register(email, password, name, last_name)
             .then(data => {
                 navigate('/');
             })

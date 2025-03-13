@@ -11,7 +11,8 @@ const ApiConfig = {
     singUp : "/api/authentication/SingUp",
     singIn : "/api/authentication/SingIn",
     joinEvent : "/api/user/request/event",
-    createEvent : "/api/user/event"
+    createEvent : "/api/user/event",
+    getProfile : "/api/user/info/"
 }
 
 export default ApiConfig;

@@ -11,7 +11,7 @@ function Header() {
     <>
       <Navbar bg="primary" data-bs-theme="dark" className='justify-content-between'>
         <Container>
-          <Navbar.Brand as={Link} to="/">РосСпортКомпет</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">SportTech</Navbar.Brand>
           <Nav className="me-auto">
           </Nav>
           <Nav>

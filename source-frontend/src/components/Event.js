@@ -22,6 +22,7 @@ const Event = (props) => {
             if (response.status === 200) {
                 setModalMessage(`Вы успешно присоединились к команде №${num}!`);
                 setShowModal(true);
+                props.onUpdate();
             } else if (response.status === 441) {
                 setModalMessage(`Команда переполнина`);
                 setShowModal(true);
@@ -52,8 +53,8 @@ const Event = (props) => {
                     <div className="col">
                         <h1 className="text-center mb-3">Команда №1</h1>
                         <Table>
-                            {props.team1.map((events) => (
-                                <tr>
+                            {props.team1.map((events, key) => (
+                                <tr id={key}>
                                     <td> 
                                         <Image src={events.imageApi} style={{width: '8em', height: '8em', borderRadius: '100px'}}/>
                                     </td>
@@ -90,8 +91,8 @@ const Event = (props) => {
                     <div className="col text-end">
                         <h1 className="text-center mb-3">Команда №2</h1>
                         <Table>
-                            {props.team2.map((events) => (
-                                <tr>
+                            {props.team2.map((events, key) => (
+                                <tr id={key}>
                                     <td> 
                                         <h3>
                                             {events.lastname}

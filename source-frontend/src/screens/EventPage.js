@@ -25,14 +25,18 @@ const EventPage = () => {
 
     const token = localStorage.getItem('token')
 
+    const fetchEvent = async () => {
+        try {
+            const response = await axios.get(ApiConfig.remoteAddress + ApiConfig.getEvent + id);
+            setEvent(response.data);
+        } catch (error) {
+            console.error("Ошибка при загрузке события:", error);
+        }
+    };
+
     useEffect(() => {
-          axios.get(ApiConfig.remoteAddress+ApiConfig.getEvent+id).then(response => {
-              setEvent(response.data);
-              console.log(response);
-          }).catch(error => {
-              console.log(error);
-          });
-        },[id]);
+        fetchEvent();
+    }, [id]);
 
 
     return (
@@ -47,6 +51,7 @@ const EventPage = () => {
                     date={event.date}
                     time={event.time}
                     eventId={id}
+                    onUpdate={fetchEvent}
                 />) : (
                     <div className="d-flex flex-wrap justify-content-center" style={{gap:"15px", margin:"20px auto"}}>
                         <Spinner animation="border"/>

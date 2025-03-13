@@ -14,8 +14,8 @@ const login = (email, password) => {
         });
 };
 
-const register = (email, password, name, lastname) => {
-    return axios.post(ApiConfig.remoteAddress + ApiConfig.singUp, { email, password, name, lastname }).then(response => {
+const register = (email, password, name, lastName) => {
+    return axios.post(ApiConfig.remoteAddress + ApiConfig.singUp, { email, password, name, lastName }).then(response => {
         if (response.data) {
             localStorage.setItem('token', response.data.token)
             localStorage.setItem('user_id', JSON.stringify(response.data.user_id));

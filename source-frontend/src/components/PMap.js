@@ -31,7 +31,7 @@ const PMap = (props) => {
     const mapRef = useRef(null); // Создаем реф для карты
     const [balloonData, setBalloonData] = useState(null); // Состояние для хранения данных о баллоне
     
-
+    const verf = localStorage.getItem("user_id")
 
     // Функция для перемещения карты к точке
     const moveToPoint = (coords) => {
@@ -129,9 +129,15 @@ const PMap = (props) => {
                                                         <td>
                                                             Дата
                                                         </td>
-                                                        <td>
-                                                            Узнать
-                                                        </td>
+                                                        {verf ? 
+                                                            <td>
+                                                                Узнать
+                                                            </td>
+                                                            :
+                                                            null
+                                                        }
+                                                            
+                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -146,19 +152,29 @@ const PMap = (props) => {
                                                             <td>
                                                                 {events.dataTime}
                                                             </td>
-                                                            <td>
-                                                                <Button as={Link} to={`/event/${events.eventId}?coords=${point.coords}`} id={key}>
-                                                                    Посмотреть
-                                                                </Button>
-                                                            </td>
+                                                            {verf ? 
+                                                                <td>
+                                                                    <Button as={Link} to={`/event/${events.eventId}?coords=${point.coords}`} id={key}>
+                                                                        Посмотреть
+                                                                    </Button>
+                                                                </td> 
+                                                                :
+                                                                null
+                                                            }
+                                                            
                                                         </tr>
                                                     ))}
                                                 </tbody>
                                             </Table>
                                         ) : null}
-                                        <Button as={Link} to={`/event/new/${point.coordinateId}`} >
-                                            Создать событие
-                                        </Button>
+                                        {verf ? 
+                                            <Button as={Link} to={`/event/new/${point.coordinateId}`} className='mb-3'>
+                                                Создать событие
+                                            </Button> 
+                                            :
+                                            null
+                                        }
+                                        
                                     </Accordion.Body>
                                 </Accordion.Item>
                         </ListGroup.Item>
