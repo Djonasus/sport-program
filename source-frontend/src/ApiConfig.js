@@ -12,7 +12,8 @@ const ApiConfig = {
     singIn : "/api/authentication/SingIn",
     joinEvent : "/api/user/request/event",
     createEvent : "/api/user/event",
-    getProfile : "/api/user/info/"
+    getProfile : "/api/user/info/",
+    newPhoto : "/api/user/image/"
 }
 
 export default ApiConfig;
