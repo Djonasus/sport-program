@@ -1,5 +1,7 @@
 package com.example.SportProgam.image_package.service;
 
+import com.example.SportProgam.Authentication.model.UserModel;
+import com.example.SportProgam.image_package.model.ImageModel;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,4 +16,6 @@ public interface ImageService {
     Object delete(Long photoId);
 
     MultiValueMap<String, String> getContentTypeImage();
+
+    ImageModel saveUserAvatar(UserModel userId, MultipartFile multipartFile) throws IOException;
 }

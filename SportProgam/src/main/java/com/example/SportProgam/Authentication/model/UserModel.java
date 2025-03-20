@@ -3,6 +3,7 @@ package com.example.SportProgam.Authentication.model;
 
 import com.example.SportProgam.event_package.model.EventModel;
 import com.example.SportProgam.event_package.model.TeamModel;
+import com.example.SportProgam.image_package.model.ImageModel;
 import jakarta.persistence.*;
 import lombok.*;
 //import org.springframework.security.core.GrantedAuthority;
@@ -46,6 +47,10 @@ public class UserModel{
 
     @OneToMany(mappedBy = "referee")
     private List<EventModel> eventsAsReferee;
+
+    @OneToOne(mappedBy = "userModel")
+//    @Column(name = "image_id")
+    private ImageModel imageModel;
 
 //    private ImageM avatar;
 

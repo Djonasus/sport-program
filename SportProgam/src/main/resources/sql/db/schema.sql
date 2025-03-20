@@ -7,8 +7,8 @@ CREATE TABLE IF NOT EXISTS public.users (
     "last_name" varchar(255),
     role varchar(30),
     activated boolean
---    avatar_id serial
 );
+
 
 -- Создание таблицы news
 CREATE TABLE IF NOT EXISTS public.news (
@@ -43,6 +43,18 @@ CREATE TABLE IF NOT EXISTS public.events (
     CONSTRAINT fk_coordinates FOREIGN KEY (coordinates_id) REFERENCES coordinates(coordinate_id)
 );
 
+CREATE TABLE IF NOT EXISTS public.event_requests (
+    event_request_id BIGINT PRIMARY KEY,
+    title VARCHAR(255),
+    description TEXT,
+    "date" VARCHAR(50),
+    "time" VARCHAR(50),
+    type VARCHAR(255),
+    max_count_in_one_team INT,
+    coordinates_id BIGINT,
+    CONSTRAINT fk_coordinates FOREIGN KEY (coordinates_id) REFERENCES coordinates(coordinate_id)
+);
+
 CREATE TABLE IF NOT EXISTS public.teams (
     team_id BIGSERIAL PRIMARY KEY,
     event_id BIGINT NOT NULL,
@@ -59,6 +71,11 @@ CREATE TABLE IF NOT EXISTS public.type_of_event (
     CONSTRAINT fk_coordinate FOREIGN KEY (coordinate_id) REFERENCES coordinates(coordinate_id)  -- Внешний ключ
 );
 
+CREATE TABLE IF NOT EXISTS public.images (
+    image_id bigserial PRIMARY KEY,          -- Соответствует @Id и Long imageId
+    user_id bigserial UNIQUE,                -- Для @OneToOne связи с UserModel
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(user_id)  -- Внешний ключ на таблицу users
+);
 
 
 

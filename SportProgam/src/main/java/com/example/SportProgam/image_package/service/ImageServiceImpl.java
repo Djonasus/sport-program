@@ -1,5 +1,9 @@
 package com.example.SportProgam.image_package.service;
 
+import com.example.SportProgam.Authentication.model.UserModel;
+import com.example.SportProgam.image_package.model.ImageModel;
+import com.example.SportProgam.image_package.repository.ImageRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -17,10 +21,14 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class ImageServiceImpl implements ImageService {
 
     @Value("${path.image}")
     private String imageDir;
+    private final ImageRepository imageRepository;
+
+
 
     @Override
     public byte[] save(Long photoId, MultipartFile multipartFile) throws IOException {
@@ -67,5 +75,39 @@ public class ImageServiceImpl implements ImageService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);
         return headers;
+    }
+
+    @Override
+    public ImageModel saveUserAvatar(UserModel userModel, MultipartFile multipartFile) throws IOException {
+        Long imageId = null;
+        imageId = findImageIdByUserId(userModel.getUser_id());
+        if (imageId == null) {
+            imageId = imageRepository.count() + 11112;
+        }
+        UserModel detachedUser = new UserModel();
+        detachedUser.setUser_id(userModel.getUser_id());
+        ImageModel imageModel = imageRepository.save(
+                new ImageModel(
+                        imageId,
+                        detachedUser
+                )
+        );
+        save(imageId, multipartFile);
+        return imageModel;
+
+    }
+
+    private Long findImageIdByUserId(Long userId) {
+        try {
+            ImageModel imageModel = imageRepository.findByUserModel(userId);
+
+            imageRepository.delete(imageModel);
+            return imageModel.getImageId();
+
+        } catch (Exception e) {
+            log.info("фото не было");
+
+        }
+        return null;
     }
 }

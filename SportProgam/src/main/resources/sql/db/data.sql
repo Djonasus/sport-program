@@ -48,6 +48,15 @@ INSERT INTO public.users (user_id, email, password, name, last_name, role, activ
 (251661, 'user6@example.com', 'password', 'User6', 'User', 'USER', false)
 ON CONFLICT (user_id) DO NOTHING;
 
+--insert into public.images(image_id, user_id) values
+--(11112, 251652),
+--(11113, 251653),
+--(11114, 251654),
+--(11115, 251655),
+--(11116, 251656)
+--on conflict (image_id) do nothing;
+
+
 
 INSERT INTO public.events (event_id, title, description, type, date, time, referee_volunteer_id, max_count_in_one_team, coordinates_id) VALUES
 (1, 'Chess Tournament', 'Annual chess competition', 'footboll', '2025-03-15', '10:00', 251653, 4, 3),

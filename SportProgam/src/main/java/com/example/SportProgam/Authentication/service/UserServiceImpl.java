@@ -2,20 +2,25 @@ package com.example.SportProgam.Authentication.service;
 
 
 
+import com.example.SportProgam.ApiConfig;
 import com.example.SportProgam.Authentication.dto.UserDetailInformationResponseDto;
 import com.example.SportProgam.Authentication.dto.UserSingUpRequestDto;
-import com.example.SportProgam.Authentication.exception.UsernameAlreadyExistsException;
 import com.example.SportProgam.Authentication.exception.UsernameNotFoundException;
-import com.example.SportProgam.Authentication.exception.Validate;
 import com.example.SportProgam.Authentication.mapper.UserMapperManager;
 import com.example.SportProgam.Authentication.model.UserModel;
 import com.example.SportProgam.Authentication.repostiroy.UserRepository;
+import com.example.SportProgam.image_package.model.ImageModel;
+import com.example.SportProgam.image_package.service.ImageService;
+import com.example.SportProgam.user_package.dto.UserEventsDto;
+import com.example.SportProgam.user_package.dto.UserInfoResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataIntegrityViolationException;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 
@@ -27,6 +32,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 //    private final PasswordEncoder passwordEncoder;
     private final UserMapperManager userMapper;
+    private final ImageService imageService;
 
     @Override
     public UserModel save(UserSingUpRequestDto dto) {
@@ -36,11 +42,14 @@ public class UserServiceImpl implements UserService {
             userModel.setUser_id(userRepository.count() + 251_652);
             userModel.setRole("USER");
             userModel.setActivated(false);
+//            userModel.setImageId(11111L);
             return userRepository.save(userModel);
 //            userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
 //            return userRepository.save(userModel);
-        } catch (DataIntegrityViolationException exception) {
-            throw new UsernameAlreadyExistsException(new Validate("Аккаунт с таким email уже зарегистрирован"));
+        } catch (Exception exception) {
+            log.info("user already have");
+            return null;
+            //            throw new UsernameAlreadyExistsException(new Validate("Аккаунт с таким email уже зарегистрирован"));
         }
     }
 
@@ -71,6 +80,51 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public UserInfoResponseDto findInfoByUserId(long userId) {
+        return mapperToUserInfoDto(findUserById(userId));
+
+    }
+
+    @Override
+    public void savePhoto(long userId, MultipartFile multipartFile) throws IOException {
+        UserModel userModel = findUserById(userId);
+        userModel.setImageModel(imageService.saveUserAvatar(userModel, multipartFile));
+    }
+
+    @Override
+    public List<UserEventsDto> findUserEvents(Long userid) {
+        return List.of(new UserEventsDto(
+                2L,
+                "name",
+                "type",
+                "date"
+        ));
+
+    }
+
+    private UserInfoResponseDto mapperToUserInfoDto(UserModel userModel) {
+        long userImageId = checkUserImageId(userModel);
+        log.info("userImageId is {}",userImageId);
+        return new UserInfoResponseDto(
+                userModel.getUser_id(),
+                userModel.getEmail(),
+                userModel.getPassword(),
+                userModel.getName(),
+                userModel.getLastName(),
+                userModel.getRole(),
+                "http://"+ ApiConfig.SERVER_IP + ":"+ApiConfig.SERVER_PORT+"/api/image/"+userImageId
+        );
+    }
+
+    private long checkUserImageId(UserModel userModel) {
+        if (userModel.getImageModel() == null) {
+            log.info("if was be");
+            return 11111L;
+        }
+        return userModel.getImageModel().getImageId();
     }
 
 //
