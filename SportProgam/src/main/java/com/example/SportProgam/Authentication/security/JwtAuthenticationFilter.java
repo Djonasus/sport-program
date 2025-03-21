@@ -22,8 +22,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // Извлекаем токен из заголовков запроса
         String token = jwtTokenProvider.resolveToken(request);
-        log.info("api is: [{}], token is: [{}]",
-                request.getServletPath(), token);
+//        log.info("api is: [{}], token is: [{}]",
+//                request.getServletPath(), token);
         token = tokenBearerDelete(token);
 
         // Если токен валиден, аутентифицируем пользователя
@@ -33,7 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // Устанавливаем аутентификацию в SecurityContext
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } else {
-            log.info("token isn't validated");
+//            log.info("token isn't validated");
         }
         // Продолжаем выполнение цепочки фильтров
         filterChain.doFilter(request, response);

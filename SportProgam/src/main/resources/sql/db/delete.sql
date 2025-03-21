@@ -16,3 +16,5 @@ DROP TABLE public.type_of_event;
 DROP TABLE public.coordinates;
 
 drop table public.images;
+
+drop table public.event_requests;

@@ -2,7 +2,6 @@ package com.example.SportProgam.event_package.service;
 
 import com.example.SportProgam.ApiConfig;
 import com.example.SportProgam.Authentication.repostiroy.UserRepository;
-import com.example.SportProgam.Coordinates.model.CoordinateModel;
 import com.example.SportProgam.Coordinates.repository.CoordinateRepository;
 import com.example.SportProgam.event_package.dto.CreateEventRequestDto;
 import com.example.SportProgam.event_package.dto.EventForUserResponseDto;
@@ -26,13 +25,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EventService {
 
-    private final EventRepository repository;
+    private final EventRepository eventRepository;
     private final TeamService teamService;
     private final UserRepository userRepository;
     private final CoordinateRepository coordinateRepository;
+    private final EventRequestService eventRequestService;
 
     public EventForUserResponseDto getEventInfo(long eventId) {
-        EventModel eventModel = repository.findById(eventId).get();
+        EventModel eventModel = eventRepository.findById(eventId).get();
 //        List<TeamModel> teams = eventModel.getTeams();
 //        List<List<UserDto>> teamDtoList = getListTwoTeamsDto(teams);
 //        teamDtoList = addMinuses(teamDtoList, eventModel.getMaxCountInOneTeam());
@@ -104,17 +104,22 @@ public class EventService {
     }
 
     public void requestToEvent(RequestToEventDto dto) {
-        teamService.save(dto, repository.findById(dto.eventId()).get());
+        teamService.save(dto, eventRepository.findById(dto.eventId()).get());
     }
 
-    public void createEventByDto(CreateEventRequestDto requestDto) {
+    public void createEventByDto(CreateEventRequestDto requestDto, String username) {
         log.info("request dto is: {}", requestDto.toString());
-        repository.save(mapperEventDtoToEventModel(requestDto));
+        if (userRepository.findByEmail(username).get().getRole().equals("ADMIN")) {
+            eventRepository.save(mapperEventDtoToEventModel(requestDto));
+            return;
+        }
+        eventRequestService.save(requestDto);
+
     }
 
     private EventModel mapperEventDtoToEventModel(CreateEventRequestDto requestDto) {
         return new EventModel(
-                repository.count()+1,
+                eventRepository.count()+1,
                 requestDto.title(),
                 requestDto.description(),
                 null,

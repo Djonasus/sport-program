@@ -4,6 +4,7 @@ import com.example.SportProgam.event_package.dto.CreateEventRequestDto;
 import com.example.SportProgam.event_package.dto.EventForUserResponseDto;
 import com.example.SportProgam.event_package.dto.RequestToEventDto;
 import com.example.SportProgam.event_package.service.EventService;
+import io.jsonwebtoken.Jwt;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.connector.Response;
 import org.slf4j.Logger;
@@ -11,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -45,9 +48,11 @@ public class EventController {
     // 200 suc
     @CrossOrigin("*")
     @PostMapping("/event")
-    public ResponseEntity<Void> createEvent(@RequestBody CreateEventRequestDto requestDto) {
+    public ResponseEntity<Void> createEvent(@RequestBody CreateEventRequestDto requestDto,
+                                            @AuthenticationPrincipal UserDetails userDetails) {
         try {
-            service.createEventByDto(requestDto);
+            String username = userDetails.getUsername();
+            service.createEventByDto(requestDto, username);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatusCode.valueOf(441));

@@ -50,6 +50,7 @@ public class SecurityConfig {
                                 .requestMatchers(AUTH_WHITELIST).permitAll() // Открытые эндпоинты
                                 .requestMatchers("/api/user/**").hasAnyRole("USER", "VOLUNTEER", "ADMIN")  // Для пользователей с ролью USER
                                 .requestMatchers("/volunteer/**").hasAnyRole("VOLUNTEER", "ADMIN") // Для администраторов
+                                .requestMatchers("/api/admin/**").hasAnyRole("ADMIN") // Для администраторов
                                 .requestMatchers("/admin/**").authenticated() // Любой аутентифицированный пользователь
 //                        .anyRequest().denyAll() // Запрещаем все остальное
                 )

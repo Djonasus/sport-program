@@ -42,14 +42,11 @@ public class UserServiceImpl implements UserService {
             userModel.setUser_id(userRepository.count() + 251_652);
             userModel.setRole("USER");
             userModel.setActivated(false);
-//            userModel.setImageId(11111L);
-            return userRepository.save(userModel);
 //            userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
-//            return userRepository.save(userModel);
+            return userRepository.save(userModel);
         } catch (Exception exception) {
             log.info("user already have");
             return null;
-            //            throw new UsernameAlreadyExistsException(new Validate("Аккаунт с таким email уже зарегистрирован"));
         }
     }
 

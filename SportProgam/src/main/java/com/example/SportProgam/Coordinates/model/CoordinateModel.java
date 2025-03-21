@@ -2,7 +2,7 @@ package com.example.SportProgam.Coordinates.model;
 
 
 import com.example.SportProgam.event_package.model.EventModel;
-import com.example.SportProgam.event_package.model.EventRequest;
+import com.example.SportProgam.event_package.model.EventRequestModel;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,7 +34,7 @@ public class CoordinateModel {
     private List<EventModel> events;
 
     @OneToMany(mappedBy = "coordList")
-    private List<EventRequest> eventRequests;
+    private List<EventRequestModel> eventRequestModels;
 
     @OneToMany(mappedBy = "coordinate")
     private List<TypeOfEventModel> typeOfEventModels;

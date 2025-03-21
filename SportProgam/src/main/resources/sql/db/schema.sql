@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS public.event_requests (
     "date" VARCHAR(50),
     "time" VARCHAR(50),
     type VARCHAR(255),
+    creator_id bigserial,
     max_count_in_one_team INT,
     coordinates_id BIGINT,
     CONSTRAINT fk_coordinates FOREIGN KEY (coordinates_id) REFERENCES coordinates(coordinate_id)
