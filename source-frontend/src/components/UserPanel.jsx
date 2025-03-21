@@ -47,6 +47,7 @@ const UserPanel = (props) => {
 
             if (response.status === 200) {
                 props.profile.image_path = response.data.image_path;
+                navigate(`/`);
                 handleClose();
             }
         } catch (error) {

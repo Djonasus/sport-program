@@ -6,9 +6,11 @@ import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import ApiConfig from "../ApiConfig";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const NewEventPage = () => {
+
+    const navigate = useNavigate()
 
     const params = useParams();
     
@@ -48,7 +50,7 @@ const NewEventPage = () => {
 
             if (response.status === 200) {
                 console.log("Событие успешно создано!");
-                
+                navigate("/")
             }
         } catch (error) {
             console.error("Ошибка при создании события:", error);
