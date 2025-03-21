@@ -12,6 +12,9 @@ import com.example.SportProgam.Authentication.mapper.UserMapperManager;
 import com.example.SportProgam.Authentication.model.UserModel;
 import com.example.SportProgam.Authentication.repostiroy.UserRepository;
 import com.example.SportProgam.Authentication.security.JwtTokenProvider;
+import com.example.SportProgam.event_package.model.EventModel;
+import com.example.SportProgam.event_package.model.TeamModel;
+import com.example.SportProgam.event_package.service.TeamService;
 import com.example.SportProgam.image_package.model.ImageModel;
 import com.example.SportProgam.image_package.service.ImageService;
 import com.example.SportProgam.user_package.dto.UserEventsDto;
@@ -26,6 +29,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -41,6 +45,7 @@ public class UserServiceImpl implements UserService {
     private final ImageService imageService;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
+    private final TeamService teamService;
 
     @Override
     public UserModel save(UserSingUpRequestDto dto) {
@@ -100,14 +105,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserEventsDto> findUserEvents(Long userid) {
-        return List.of(new UserEventsDto(
-                2L,
-                "name",
-                "type",
-                "date"
-        ));
+    public List<UserEventsDto> findUserEvents(Long userId) {
+        return convertTeamsToEventsDto(
+                teamService.fingTeamListByUserId(userId)
+        );
+    }
 
+    private UserEventsDto mapperEventToUserEventDto(EventModel eventModel) {
+        return new UserEventsDto(
+                eventModel.getEvent_id(),
+                eventModel.getTitle(),
+                eventModel.getType(),
+                eventModel.getDate()
+        );
+    }
+
+    private List<UserEventsDto> convertTeamsToEventsDto(List<TeamModel> teamModels) {
+        List<UserEventsDto> result = new ArrayList<>();
+        for (TeamModel teamModel : teamModels) {
+            result.add(
+                    mapperEventToUserEventDto(teamModel.getEvent())
+            );
+        }
+        return result;
     }
 
     @Override
@@ -160,32 +180,6 @@ public class UserServiceImpl implements UserService {
         }
         return userModel.getImageModel().getImageId();
     }
-
-//
-//    @Override
-//    @Transactional
-//    public void update(User updateUser, Long id) {
-//        try {
-//
-//            userRepository.findById(id).ifPresentOrElse(
-//
-//                    user -> {
-//                        if (updateUser.getUsername() != null) user.setUsername(updateUser.getUsername());
-//                        if (updateUser.getLastName() != null) user.setLastName(updateUser.getLastName());
-//                        if (updateUser.getFirstName() != null) user.setFirstName(updateUser.getFirstName());
-//                        if (updateUser.getPassword() != null)
-//                            user.setPassword(passwordEncoder.encode(updateUser.getPassword()));
-//                        if (updateUser.getRoles() != null && !updateUser.getRoles().isEmpty()) {
-//                            userRepository.deleteAllRolesForUser(id);
-//                            user.setRoles(updateUser.getRoles());
-//                        }
-//                    }, () -> {
-//                        throw new UsernameNotFoundException(ConstantResponseExceptionText.NOT_FOUND_USER_BY_ID.formatted(id));
-//                    }
-//            );
-//        } catch (DataIntegrityViolationException exception) {
-//            throw new UsernameAlreadyExistsException(new Validate(ConstantResponseExceptionText.USERNAME_ALREADY_EXISTS));
-//        }
     }
 
 

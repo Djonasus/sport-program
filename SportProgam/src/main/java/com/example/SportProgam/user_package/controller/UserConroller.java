@@ -42,9 +42,13 @@ public class UserConroller {
     }
 
     @CrossOrigin("*")
-    @GetMapping("event?user_id={:id} ")
-    public ResponseEntity<?> getUserEvents(@RequestParam(name = "user_id") Long userid) {
-        return ResponseEntity.ok(userService.findUserEvents(userid));
+    @GetMapping("event")
+    public ResponseEntity<?> getUserEvents(@RequestParam(name = "user_id") Long userId) {
+        try {
+            return ResponseEntity.ok(userService.findUserEvents(userId));
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatusCode.valueOf(441));
+        }
     }
 
 }
