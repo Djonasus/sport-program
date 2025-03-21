@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainPage from './screens/MainPage';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './global.css';
 
 import ArticlesPage from './screens/ArticlesPage';
 import ArticleDetailPage from './screens/ArticleDetailPage';

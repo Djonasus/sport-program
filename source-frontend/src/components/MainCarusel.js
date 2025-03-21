@@ -20,7 +20,7 @@ const MCarousel = () => {
                     <Image className="MainCarousel__Picture" src={ApiConfig.remoteAddress + newsEl.preview} />
                     <Carousel.Caption>
                         <h3>{newsEl.title}</h3>
-                        <p>{newsEl.create_at}</p>
+                        <p>{newsEl.date}</p>
                     </Carousel.Caption>
                 </Carousel.Item>
             ))}

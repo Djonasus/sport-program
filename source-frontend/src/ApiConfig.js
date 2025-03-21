@@ -13,7 +13,8 @@ const ApiConfig = {
     joinEvent : "/api/user/request/event",
     createEvent : "/api/user/event",
     getProfile : "/api/user/info/",
-    newPhoto : "/api/user/image/"
+    newPhoto : "/api/user/image/",
+    getEventsUser : "api/user/event?user_id="
 }
 
 export default ApiConfig;

@@ -43,7 +43,7 @@ const ArticlesPage = () => {
                                 key={key}
                                 title={article.title}
                                 preview_image={article.preview}
-                                create_at={article.create}
+                                date={article.date}
                             />
                         ))
                     )}

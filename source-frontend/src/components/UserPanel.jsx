@@ -1,7 +1,7 @@
 import { Button, Card, Row, Col, Container, Modal, Form, Spinner } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import AuthService from "../helper/AuthService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import ApiConfig from "../ApiConfig";
 import "./UserPanel.css";
@@ -15,8 +15,20 @@ const UserPanel = (props) => {
         navigate('/');
     };
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+        axios.get(ApiConfig.remoteAddress + ApiConfig.getEventsUser + `${id}`)
+            .then(response => {
+                setEvents(response.data.children);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error("Ошибка при загрузке статей:", error);
+                setLoading(false);
+            });
+    }, []);
 
     const [showModal, setShowModal] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
@@ -112,7 +124,7 @@ const UserPanel = (props) => {
                             </div>
                         : events.length !== 0 ? 
                             events.map((event) => (
-                                <Col key={event.id} md={4} className="mb-3">
+                                <Col key={event.eventId} md={4} className="mb-3">
                                     <Card className="event-card">
                                         <Card.Body>
                                             <Card.Title>{event.name}</Card.Title>
@@ -122,7 +134,7 @@ const UserPanel = (props) => {
                                             <Card.Text>
                                                 {event.date}
                                             </Card.Text>
-                                            <Button variant="outline-primary" size="sm" as={Link} to={`/event/${event.id}`}>
+                                            <Button variant="outline-primary" size="sm" as={Link} to={`/event/${event.eventId}`}>
                                                 Подробнее
                                             </Button>
                                         </Card.Body>

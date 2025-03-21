@@ -11,7 +11,14 @@ function Header() {
         <>
             <Navbar bg="primary" data-bs-theme="dark" className="navbar-primary justify-content-between">
                 <Container>
-                    <Navbar.Brand as={Link} to="/">Спорт Пульс</Navbar.Brand>
+                    <Navbar.Brand as={Link} to="/" className="logo">
+                        <div className="logo-pulse">
+                            <div className="pulse-wave"></div>
+                            <div className="pulse-wave"></div>
+                            <div className="pulse-wave"></div>
+                        </div>
+                        <span className="logo-text">Спорт-Пульс</span>
+                    </Navbar.Brand>
                     <Nav className="me-auto">
                     </Nav>
                     <Nav>
