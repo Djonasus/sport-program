@@ -1,6 +1,8 @@
 package com.example.SportProgam.Authentication.service;
 
+import com.example.SportProgam.Authentication.dto.TokenAndUserIdDto;
 import com.example.SportProgam.Authentication.dto.UserDetailInformationResponseDto;
+import com.example.SportProgam.Authentication.dto.UserSingInRequestDto;
 import com.example.SportProgam.Authentication.dto.UserSingUpRequestDto;
 import com.example.SportProgam.Authentication.model.UserModel;
 import com.example.SportProgam.user_package.dto.UserEventsDto;
@@ -32,4 +34,10 @@ public interface UserService {
     void savePhoto(long userId, MultipartFile multipartFile) throws IOException;
 
     List<UserEventsDto> findUserEvents(Long userid);
+
+    String getRoleAsTittleCaseFromUser(UserModel userModel);
+
+    TokenAndUserIdDto singUp(UserSingUpRequestDto singUpGuestUserDto);
+
+    TokenAndUserIdDto loginIn(UserSingInRequestDto singInDto);
 }

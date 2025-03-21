@@ -3,12 +3,15 @@ package com.example.SportProgam.Authentication.service;
 
 
 import com.example.SportProgam.ApiConfig;
+import com.example.SportProgam.Authentication.dto.TokenAndUserIdDto;
 import com.example.SportProgam.Authentication.dto.UserDetailInformationResponseDto;
+import com.example.SportProgam.Authentication.dto.UserSingInRequestDto;
 import com.example.SportProgam.Authentication.dto.UserSingUpRequestDto;
 import com.example.SportProgam.Authentication.exception.UsernameNotFoundException;
 import com.example.SportProgam.Authentication.mapper.UserMapperManager;
 import com.example.SportProgam.Authentication.model.UserModel;
 import com.example.SportProgam.Authentication.repostiroy.UserRepository;
+import com.example.SportProgam.Authentication.security.JwtTokenProvider;
 import com.example.SportProgam.image_package.model.ImageModel;
 import com.example.SportProgam.image_package.service.ImageService;
 import com.example.SportProgam.user_package.dto.UserEventsDto;
@@ -16,6 +19,9 @@ import com.example.SportProgam.user_package.dto.UserInfoResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,6 +39,8 @@ public class UserServiceImpl implements UserService {
 //    private final PasswordEncoder passwordEncoder;
     private final UserMapperManager userMapper;
     private final ImageService imageService;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final AuthenticationManager authenticationManager;
 
     @Override
     public UserModel save(UserSingUpRequestDto dto) {
@@ -100,6 +108,35 @@ public class UserServiceImpl implements UserService {
                 "date"
         ));
 
+    }
+
+    @Override
+    public String getRoleAsTittleCaseFromUser(UserModel userModel) {
+        String role = userModel.getRole();
+        return role.charAt(0) + role.substring(1).toLowerCase();
+    }
+
+    @Override
+    public TokenAndUserIdDto singUp(UserSingUpRequestDto singUpGuestUserDto) {
+        UserModel userModel = save(singUpGuestUserDto);
+        String token = jwtTokenProvider.generateToken(
+                authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(singUpGuestUserDto.email(), singUpGuestUserDto.password())
+                )
+        );
+        return new TokenAndUserIdDto(
+                token, userModel.getUser_id(), getRoleAsTittleCaseFromUser(userModel));
+    }
+
+    @Override
+    public TokenAndUserIdDto loginIn(UserSingInRequestDto singInDto) {
+        UserModel userModel = findUserByEmail(singInDto.email());
+        String token = jwtTokenProvider.generateToken(
+                authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(singInDto.email(), singInDto.password())
+                ));
+        return new TokenAndUserIdDto(
+                token, userModel.getUser_id(), getRoleAsTittleCaseFromUser(userModel));
     }
 
     private UserInfoResponseDto mapperToUserInfoDto(UserModel userModel) {
