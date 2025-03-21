@@ -7,23 +7,18 @@ import ApiConfig from "../ApiConfig";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PMap from "../components/PMap";
+import "./EventPage.css";
 
 const EventPage = () => {
-    
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
 
     const location = useLocation();
     const params = useParams();
-
-    const id = params.id
-
+    const id = params.id;
     const param = new URLSearchParams(location.search);
-
     const coords = param.get('coords');
 
-    const [ event, setEvent ] = useState();
-
-    const token = localStorage.getItem('token')
+    const [event, setEvent] = useState();
 
     const fetchEvent = async () => {
         try {
@@ -38,31 +33,40 @@ const EventPage = () => {
         fetchEvent();
     }, [id]);
 
-
     return (
         <>
-            <Header/>
+        <Header />
+        <div className="event-page-container">
+            
             <Container>
-                {event ? (<Event  
-                    title={event.title}
-                    description={event.description}
-                    team1={event.team1}
-                    team2={event.team2}
-                    date={event.date}
-                    time={event.time}
-                    eventId={id}
-                    onUpdate={fetchEvent}
-                />) : (
-                    <div className="d-flex flex-wrap justify-content-center" style={{gap:"15px", margin:"20px auto"}}>
-                        <Spinner animation="border"/>
+                {event ? (
+                    <div className="event-section">
+                        <Event
+                            title={event.title}
+                            description={event.description}
+                            team1={event.team1}
+                            team2={event.team2}
+                            date={event.date}
+                            time={event.time}
+                            eventId={id}
+                            onUpdate={fetchEvent}
+                        />
                     </div>
-                    
-                ) }
-                <PMap cor={coords}/>
+                ) : (
+                    <div className="event-page-loading">
+                        <Spinner animation="border" className="spinner" />
+                    </div>
+                )}
+                <div className="map-section">
+                    <PMap cor={coords} />
+                </div>
             </Container>
-            <PFooter/>
+            
+        </div>
+        <PFooter />
         </>
-    )
-}
+        
+    );
+};
 
 export default EventPage;

@@ -1,0 +1,72 @@
+.admin-panel-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.admin-panel-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.admin-panel-subtitle {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.event-card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.event-card .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333333;
+}
+
+.event-card .card-text {
+    font-size: 1.1rem;
+    color: #555555;
+}
+
+.event-card .card-text strong {
+    color: #333333;
+}
+
+.event-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.event-actions .btn {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-actions .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.alert-container {
+    margin-top: 20px;
+}

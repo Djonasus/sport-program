@@ -1,149 +1,82 @@
-import { AccordionBody, AccordionHeader, AccordionItem, Container } from "react-bootstrap";
-import Accordion from "react-bootstrap/Accordion";
-
-import { FaTelegram } from "react-icons/fa";
-import {RiVkFill} from "react-icons/ri"
+import { Container } from "react-bootstrap";
+import { FaTelegram, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
+import { RiVkFill } from "react-icons/ri";
 import { AiFillTikTok } from "react-icons/ai";
-
-import "./PFooter.css"
-
-const isMobile = window.matchMedia("(max-width: 768px)").matches
+import "./PFooter.css";
 
 function PFooter() {
-    if (!isMobile) {
-        return (
-            <div className="PFooter">
-                <Container style={{display: "grid", gridTemplateColumns: "25% 25% 25% 25%"}}>
-                <div className="PFooter__contact contact">
-                        <h1 className="contact__head">
-                            Контакты
-                        </h1>
-                        <p className="contact__text">
-                           Телефон: +7 (962) 005 93-13
-                        </p>
-                        <p className="contact__text">
-                           Телеграм: @da1ryman
-                        </p>
-                        <p className="contact__text">
-                           Почта: example123@gmail.com
-                        </p>
+    return (
+        <div className="PFooter">
+            <Container>
+                <div className="row">
+                    <div className="col-md-3 col-12">
+                        <div className="PFooter__contact contact">
+                            <h1 className="contact__head">
+                                Контакты
+                            </h1>
+                            <p className="contact__text">
+                                <FaPhoneAlt /> +7 (962) 005 93-13
+                            </p>
+                            <p className="contact__text">
+                                <FaTelegram /> @da1ryman
+                            </p>
+                            <p className="contact__text">
+                                <FaEnvelope /> example123@gmail.com
+                            </p>
+                        </div>
                     </div>
-                    
-                    <div className="PFooter__about about">
-                        <h1 className="about__head">
-                            О компании
-                        </h1>
-                        <p className="about__text">
-                            О нас
-                        </p>
-                        <p className="about__text">
-                            Команда
-                        </p>
-                        <p className="about__text">
-                            Карьера
-                        </p>
+                    <div className="col-md-3 col-12">
+                        <div className="PFooter__about about">
+                            <h1 className="about__head">
+                                О компании
+                            </h1>
+                            <p className="about__text">
+                                О нас
+                            </p>
+                            <p className="about__text">
+                                Команда
+                            </p>
+                            <p className="about__text">
+                                Карьера
+                            </p>
+                        </div>
                     </div>
-                    <div className="PFooter__link link">
-                        <h1 className="link__head">
-                            Соцсети
-                        </h1>
-                        <p className="link__text">
-                            <a href="https://telegram.org">Telegram <FaTelegram /></a>
-                        </p>
-                        <p className="link__text">
-                            <a href="https://vk.com/">VK  <RiVkFill /></a>
-                        </p>
-                        <p className="link__text">
-                            <a href="https://www.tiktok.com">Tik Tok <AiFillTikTok /></a>
-                        </p>
+                    <div className="col-md-3 col-12">
+                        <div className="PFooter__link link">
+                            <h1 className="link__head">
+                                Соцсети
+                            </h1>
+                            <p className="link__text">
+                                <a href="https://telegram.org"><FaTelegram /> Telegram</a>
+                            </p>
+                            <p className="link__text">
+                                <a href="https://vk.com/"><RiVkFill /> VK</a>
+                            </p>
+                            <p className="link__text">
+                                <a href="https://www.tiktok.com"><AiFillTikTok /> Tik Tok</a>
+                            </p>
+                        </div>
                     </div>
-                    <div className="PFooter__support support">
-                        <h1>
-                            Поддержка
-                        </h1>
-                        <p className="support__text">
-                            Часто задаваемые вопросы (FAQ)  
-                        </p>
-                        <p className="support__text">
-                            Контактная информация  
-                        </p>
-                        <p className="support__text">
-                            Техническая поддержка   
-                        </p>
+                    <div className="col-md-3 col-12">
+                        <div className="PFooter__support support">
+                            <h1>
+                                Поддержка
+                            </h1>
+                            <p className="support__text">
+                                Часто задаваемые вопросы (FAQ)
+                            </p>
+                            <p className="support__text">
+                                Контактная информация
+                            </p>
+                            <p className="support__text">
+                                Техническая поддержка
+                            </p>
+                        </div>
                     </div>
-                </Container>
-            </div>
-        )
-    }   else {
-        return (
-        <Accordion className="accordions">
-            <AccordionItem eventKey="0">
-                <AccordionHeader>
-                    О компании
-                </AccordionHeader>
-                <AccordionBody style={{textAlign: "justify"}}>
-                    <p className="about__text">
-                        О нас
-                    </p>
-                    <p className="about__text">
-                        Команда
-                    </p>
-                    <p className="about__text">
-                        Карьера
-                    </p>
-                </AccordionBody>
-            </AccordionItem>
-            <Accordion.Item eventKey="1">
-                <Accordion.Header>
-                    Соцсети
-                </Accordion.Header>
-                <Accordion.Body>
-                    <p className="link__text">
-                    <   a href="https://telegram.org">Telegram <FaTelegram /></a>
-                    </p>
-                    <p className="link__text">
-                        <a href="https://vk.com/">VK  <RiVkFill /></a>
-                    </p>
-                    <p className="link__text">
-                        <a href="https://www.tiktok.com">Tik Tok <AiFillTikTok /></a>
-                    </p>
-                </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="2">
-                <Accordion.Header>
-                    Поддержка
-                </Accordion.Header>
-                <Accordion.Body>
-                    <p className="support__text">
-                        Часто задаваемые вопросы (FAQ)  
-                    </p>
-                    <p className="support__text">
-                        Контактная информация  
-                    </p>
-                    <p className="support__text">
-                        Техническая поддержка   
-                    </p>
-                </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="3">
-                <Accordion.Header>
-                    Контакты
-                </Accordion.Header>
-                <Accordion.Body>
-                    <p className="contact__text">
-                        Телефон: +7 (962) 005 93-13
-                    </p>
-                    <p className="contact__text">
-                        Телеграм: @da1ryman
-                    </p>
-                    <p className="contact__text">
-                        Почта: example123@gmail.com
-                    </p>
-                </Accordion.Body>
-            </Accordion.Item>
-        </Accordion>
-        )
-    }
+                </div>
+            </Container>
+        </div>
+    );
 }
 
 export default PFooter;

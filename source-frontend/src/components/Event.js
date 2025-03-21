@@ -1,19 +1,17 @@
 import { Button, Card, Image, Modal, Table } from "react-bootstrap";
-import PMap from "./PMap";
 import axios from "axios";
 import ApiConfig from "../ApiConfig";
 import { useState } from "react";
+import "./Event.css";
 
-
-const Event = (props) => {  
-
-    const userId = localStorage.getItem('user_id')
-    const [showModal, setShowModal] = useState(false); 
-    const [modalMessage, setModalMessage] = useState(""); 
+const Event = (props) => {
+    const userId = localStorage.getItem('user_id');
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
 
     const handleJoin = async (num) => {
         try {
-            const response = await axios.post(ApiConfig.remoteAddress+ApiConfig.joinEvent, {
+            const response = await axios.post(ApiConfig.remoteAddress + ApiConfig.joinEvent, {
                 eventId: props.eventId,
                 team: num,
                 userId: userId,
@@ -24,7 +22,7 @@ const Event = (props) => {
                 setShowModal(true);
                 props.onUpdate();
             } else if (response.status === 441) {
-                setModalMessage(`Команда переполнина`);
+                setModalMessage(`Команда переполнена`);
                 setShowModal(true);
             }
         } catch (error) {
@@ -35,44 +33,46 @@ const Event = (props) => {
     };
 
     const handleCloseModal = () => {
-        setShowModal(false); 
+        setShowModal(false);
     };
 
     return (
         <>
-            <Card className="p-3">
+            <Card className="event-card">
                 <div className="mt-5 mb-5">
-                    <h1 className="text-center mb-3">
+                    <h1 className="event-title">
                         {props.title}
                     </h1>
-                    <p>
+                    <p className="event-description">
                         {props.description}
                     </p>
                 </div>
                 <div className="row">
                     <div className="col">
-                        <h1 className="text-center mb-3">Команда №1</h1>
-                        <Table>
-                            {props.team1.map((events, key) => (
-                                <tr id={key}>
-                                    <td> 
-                                        <Image src={events.imageApi} style={{width: '8em', height: '8em', borderRadius: '100px'}}/>
-                                    </td>
-                                    <td>
-                                        <h3>
-                                            {events.name}
-                                        </h3>
-                                    </td>
-                                    <td>
-                                        <h3>
-                                            {events.lastname}
-                                        </h3>
-                                    </td>
-                                </tr>
-                            ))}
+                        <h1 className="team-title">Команда №1</h1>
+                        <Table className="team-table">
+                            <tbody>
+                                {props.team1.map((events, key) => (
+                                    <tr key={key}>
+                                        <td>
+                                            <Image src={events.imageApi} className="team-image" />
+                                        </td>
+                                        <td>
+                                            <h3>
+                                                {events.name}
+                                            </h3>
+                                        </td>
+                                        <td>
+                                            <h3>
+                                                {events.lastname}
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
                         </Table>
                         <div className="text-center mt-4">
-                            <Button onClick={() => handleJoin(1)}>
+                            <Button className="join-button" onClick={() => handleJoin(1)}>
                                 Присоединиться
                             </Button>
                         </div>
@@ -81,7 +81,7 @@ const Event = (props) => {
                         <h1>
                             {props.date}
                         </h1>
-                        <h1 id="pageEve">
+                        <h1 className="vs-section">
                             VS
                         </h1>
                         <h1>
@@ -89,28 +89,30 @@ const Event = (props) => {
                         </h1>
                     </div>
                     <div className="col text-end">
-                        <h1 className="text-center mb-3">Команда №2</h1>
-                        <Table>
-                            {props.team2.map((events, key) => (
-                                <tr id={key}>
-                                    <td> 
-                                        <h3>
-                                            {events.lastname}
-                                        </h3>
-                                    </td>
-                                    <td>
-                                        <h3>
-                                            {events.name}
-                                        </h3>
-                                    </td>
-                                    <td> 
-                                        <Image src={events.imageApi} style={{width: '8em', height: '8em', borderRadius: '100px'}}/>
-                                    </td>
-                                </tr>
-                            ))}
+                        <h1 className="team-title">Команда №2</h1>
+                        <Table className="team-table">
+                            <tbody>
+                                {props.team2.map((events, key) => (
+                                    <tr key={key}>
+                                        <td>
+                                            <h3>
+                                                {events.lastname}
+                                            </h3>
+                                        </td>
+                                        <td>
+                                            <h3>
+                                                {events.name}
+                                            </h3>
+                                        </td>
+                                        <td>
+                                            <Image src={events.imageApi} className="team-image" />
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
                         </Table>
                         <div className="text-center mt-4">
-                            <Button onClick={() => handleJoin(2)}>
+                            <Button className="join-button" onClick={() => handleJoin(2)}>
                                 Присоединиться
                             </Button>
                         </div>
@@ -130,7 +132,6 @@ const Event = (props) => {
                 </Modal.Footer>
             </Modal>
         </>
-        
     );
 };
 

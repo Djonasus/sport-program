@@ -1,0 +1,38 @@
+.main-page-container {
+    background-color: #f8f9fa;
+}
+
+.main-page-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333333;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.map-button {
+    margin: 25px;
+    margin-bottom: 0;
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.map-button:hover {
+    background-color: #0056b3;
+}
+
+.articles-section {
+    margin-top: 50px;
+}
+
+.articles-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 20px;
+}

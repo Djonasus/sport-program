@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import AuthService from "../helper/AuthService";
+import "./LogPage.css";
 
 const LogPage = () => {
-
-    const [ email, setEmail ] = useState('');
-    const [ password, setPassword ] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const navigate = useNavigate();
 
@@ -17,38 +17,41 @@ const LogPage = () => {
                 navigate('/');
             })
             .catch(error => {
-                
+                console.error("Ошибка при входе:", error);
             });
     };
- 
-    return (
-        <>
-            <Card className="w-25 text-center m-auto position-absolute top-50 start-50 translate-middle">
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group className="m-3" controlId="formBasicEmail">
-                        <Form.Label>Mail</Form.Label>
-                        <Form.Control type="email" placeholder="Почта" onChange={(e) => setEmail(e.target.value)}/>
-                    </Form.Group>
-                    <Form.Group className="m-3" controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Пароль" onChange={(e) => setPassword(e.target.value)}/>
-                    </Form.Group>
-                    <Form.Group className="m-3" controlId="formBasicPassword">
-                        <Form.Label>Введите почту и пароль чтобы войти в аккаунт.</Form.Label>
-                        
-                    </Form.Group>
 
-                    <Button variant="primary" type="submit" className="mb-3">
+    return (
+        <div className="login-container">
+            <Card className="login-card">
+                <h1 className="login-title">Вход</h1>
+                <Form onSubmit={handleSubmit} className="login-form">
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Почта</Form.Label>
+                        <Form.Control type="email" placeholder="Введите почту" onChange={(e) => setEmail(e.target.value)} />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Пароль</Form.Label>
+                        <Form.Control type="password" placeholder="Введите пароль" onChange={(e) => setPassword(e.target.value)} />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Text className="text-muted">
+                            Введите почту и пароль чтобы войти в аккаунт.
+                        </Form.Text>
+                    </Form.Group>
+                    <Button variant="primary" type="submit" className="login-button">
                         Войти
                     </Button>
-                    <Button variant="primary" as={Link} to="/reg" className="mb-3 ms-3">
+                    <Button variant="success" as={Link} to="/reg" className="register-button">
                         Регистрация
                     </Button>
                 </Form>
             </Card>
-            <Button as={Link} to="/" variant="light" className="position-fixed bottom-0 end-0">Вернуться на главную страницу</Button>
-        </> 
-    )
+            <Button as={Link} to="/" variant="secondary" className="home-button">
+                Вернуться на главную страницу
+            </Button>
+        </div>
+    );
 };
 
 export default LogPage;

@@ -4,15 +4,16 @@ import AuthService from "../helper/AuthService";
 import { useState } from "react";
 import axios from "axios";
 import ApiConfig from "../ApiConfig";
+import "./UserPanel.css";
 
 const UserPanel = (props) => {
     const navigate = useNavigate();
-    const id = localStorage.getItem('user_id')
+    const id = localStorage.getItem('user_id');
 
     const navig = () => {
-        AuthService.logout()
+        AuthService.logout();
         navigate('/');
-    }
+    };
 
     const [loading, setLoading] = useState(false);
     const [events, setEvents] = useState([]);
@@ -21,7 +22,6 @@ const UserPanel = (props) => {
     const [selectedFile, setSelectedFile] = useState(null);
 
     const handleShow = () => setShowModal(true);
-    
     const handleClose = () => setShowModal(false);
 
     const handleFileChange = (event) => {
@@ -56,7 +56,7 @@ const UserPanel = (props) => {
     };
 
     return (
-        <Container className="my-5">
+        <Container className="user-panel-container">
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Изменить фото</Modal.Title>
@@ -75,46 +75,45 @@ const UserPanel = (props) => {
                     </Form>
                 </Modal.Body>
             </Modal>
-       
 
             <Card className="shadow-sm">
                 <Card.Body>
                     <Row className="align-items-center">
                         <Col md={4} className="text-center">
                             <img
-                                className="rounded-circle img-thumbnail"
+                                className="user-avatar"
                                 src={props.profile.image_path}
                                 alt="User Avatar"
-                                width="200px"
-                                height="300px"
                             />
                         </Col>
-                        <Col md={8}>
-                            <h1 className="display-4">{props.profile.name} {props.profile.last_name}</h1>
-                            <p className="text-muted">Добро пожаловать в ваш профиль!</p>
-                            <Button variant="primary" className="me-2" onClick={handleShow}>
-                                Изменить фото
-                            </Button>
-                            <Button variant="danger" onClick={navig}>
-                                Выйти из аккаунта
-                            </Button>
+                        <Col md={8} className="user-info">
+                            <h1>{props.profile.name} {props.profile.last_name}</h1>
+                            <p>Добро пожаловать в ваш профиль!</p>
+                            <div className="user-actions">
+                                <Button variant="primary" className="me-2" onClick={handleShow}>
+                                    Изменить фото
+                                </Button>
+                                <Button variant="danger" onClick={navig}>
+                                    Выйти из аккаунта
+                                </Button>
+                            </div>
                         </Col>
                     </Row>
                 </Card.Body>
             </Card>
 
-            <Card className="mt-4 shadow-sm">
+            <Card className="events-card mt-4 shadow-sm">
                 <Card.Body>
-                    <h3 className="mb-4">Мои события:</h3>
+                    <h3>Мои события:</h3>
                     <Row>
                         {loading ? 
-                            <div className="d-flex flex-wrap justify-content-center" style={{gap:"15px", margin:"20px auto"}}>
-                                <Spinner animation="border"/>
+                            <div className="spinner-container">
+                                <Spinner animation="border" />
                             </div>
-                        : events.length != 0 ? 
+                        : events.length !== 0 ? 
                             events.map((event) => (
-                                <Col key={event.id} md={4} className="m-3">
-                                    <Card>
+                                <Col key={event.id} md={4} className="mb-3">
+                                    <Card className="event-card">
                                         <Card.Body>
                                             <Card.Title>{event.name}</Card.Title>
                                             <Card.Text>

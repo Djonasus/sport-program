@@ -3,6 +3,7 @@ import { Button, Card, Container, Row, Col, Spinner, Alert } from "react-bootstr
 import axios from "axios";
 import ApiConfig from "../ApiConfig";
 import { useNavigate } from "react-router-dom";
+import "./AdminPanel.css";
 
 const AdminPanel = () => {
     const [events, setEvents] = useState([]); // Список событий
@@ -10,6 +11,7 @@ const AdminPanel = () => {
     const [error, setError] = useState(null); // Ошибка
 
     const navigate = useNavigate();
+
     // Получение списка событий
     const fetchEvents = async () => {
         try {
@@ -28,7 +30,7 @@ const AdminPanel = () => {
             await axios.put(`${ApiConfig.remoteAddress}/api/admin/wait-event/${id}?trueOrFalse=${decision}`);
             // Обновляем список событий после изменения
             fetchEvents();
-            navigate("/")
+            navigate("/");
         } catch (err) {
             setError("Ошибка при обработке события");
         }
@@ -40,25 +42,25 @@ const AdminPanel = () => {
     }, []);
 
     return (
-        <Container className="my-5">
-            <h1 className="text-center mb-4">Админ-панель</h1>
-            <h2 className="mb-3">События, ожидающие подтверждения</h2>
+        <Container className="admin-panel-container">
+            <h1 className="admin-panel-title">Админ-панель</h1>
+            <h2 className="admin-panel-subtitle">События, ожидающие подтверждения</h2>
 
             {loading ? (
-                <div className="text-center">
+                <div className="spinner-container">
                     <Spinner animation="border" role="status">
                         <span className="visually-hidden">Загрузка...</span>
                     </Spinner>
                 </div>
             ) : error ? (
-                <Alert variant="danger">{error}</Alert>
+                <Alert variant="danger" className="alert-container">{error}</Alert>
             ) : events.length === 0 ? (
-                <Alert variant="info">Нет событий, ожидающих подтверждения.</Alert>
+                <Alert variant="info" className="alert-container">Нет событий, ожидающих подтверждения.</Alert>
             ) : (
                 <Row>
                     {events.map((event) => (
                         <Col key={event.event_request_id} md={4} className="mb-4">
-                            <Card>
+                            <Card className="event-card">
                                 <Card.Body>
                                     <Card.Title>{event.title}</Card.Title>
                                     <Card.Text>{event.description}</Card.Text>
@@ -75,9 +77,9 @@ const AdminPanel = () => {
                                         <strong>Создатель:</strong> {event.name}
                                     </Card.Text>
                                     <Card.Text>
-                                        <strong>Количество играков:</strong> {event.maxCountInOneTeam}
+                                        <strong>Количество игроков:</strong> {event.maxCountInOneTeam}
                                     </Card.Text>
-                                    <div className="d-flex justify-content-between">
+                                    <div className="event-actions">
                                         <Button
                                             variant="primary"
                                             onClick={() => handleEventDecision(event.event_request_id, true)}
