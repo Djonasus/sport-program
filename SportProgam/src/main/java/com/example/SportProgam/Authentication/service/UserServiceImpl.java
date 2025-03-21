@@ -139,6 +139,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public TokenAndUserIdDto singUp(UserSingUpRequestDto singUpGuestUserDto) {
         UserModel userModel = save(singUpGuestUserDto);
+
         String token = jwtTokenProvider.generateToken(
                 authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(singUpGuestUserDto.email(), singUpGuestUserDto.password())

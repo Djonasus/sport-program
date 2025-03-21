@@ -1,6 +1,7 @@
 package com.example.SportProgam.Authentication.security;
 
 import com.example.SportProgam.Authentication.model.UserModel;
+import com.example.SportProgam.Authentication.repostiroy.UserRepository;
 import com.example.SportProgam.Authentication.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -31,7 +32,7 @@ public class JwtTokenProvider {
     private final String JWT_SECRET = "yoursdfpauhg;lsdhghasidfhghpash[dfoahwedfskjajdsfnv;akldfhjadshfkjj";
     private final SecretKey secretKey = Keys.hmacShaKeyFor(JWT_SECRET.getBytes());
 
-    private final UserService userService;
+    private final UserRepository userService;
 
     public String generateToken(Authentication authentication) {
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
@@ -71,7 +72,7 @@ public class JwtTokenProvider {
                 .getPayload();
         String login = claims.getSubject(); //извлечение ключегого поля элемента
         // поиск user and his password
-        UserModel userModel = userService.findUserByEmail(login);
+        UserModel userModel = userService.findByEmail(login).get();
 //        log.info("username in getAuthentication is {}", login);
 
         String currentPassword = userModel.getPassword();

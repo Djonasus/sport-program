@@ -3,6 +3,7 @@ package com.example.SportProgam.Authentication.security;
 //import com.example.Java_Server_Part.model.UserModel;
 //import com.example.Java_Server_Part.service.UserService;
 import com.example.SportProgam.Authentication.model.UserModel;
+import com.example.SportProgam.Authentication.repostiroy.UserRepository;
 import com.example.SportProgam.Authentication.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,12 +23,17 @@ import java.util.List;
 @Slf4j
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserService userService;
+    private final UserRepository userService;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        UserModel userModel = userService.findUserByEmail(login);
+        UserModel userModel = null;
+        try {
+            userModel = userService.findByEmail(login).get();
+        } catch (Exception e) {
+            log.warn("error in load user by email");
+        }
         String currentPassword = userModel.getPassword();
         log.info("find by user name : {}, : password {}, role : {}", login, currentPassword, userModel.getRole());
         String encodedPassword = passwordEncoder.encode(currentPassword);

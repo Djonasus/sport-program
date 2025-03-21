@@ -26,6 +26,7 @@ public class AdminController {
     public ResponseEntity<?> getAccessForEventRequest(@PathVariable Long eventId,
                                                      @RequestParam boolean trueOrFalse) {
         log.info("eventid: {}, trueOfFalse: {}", eventId, trueOrFalse);
+        eventRequestService.getAccessToEvent(eventId, trueOrFalse);
         return ResponseEntity.ok().build();
     }
 }
