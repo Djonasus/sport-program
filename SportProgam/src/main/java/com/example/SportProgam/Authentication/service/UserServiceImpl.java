@@ -1,7 +1,6 @@
 package com.example.SportProgam.Authentication.service;
 
 
-
 import com.example.SportProgam.ApiConfig;
 import com.example.SportProgam.Authentication.dto.TokenAndUserIdDto;
 import com.example.SportProgam.Authentication.dto.UserDetailInformationResponseDto;
@@ -15,14 +14,12 @@ import com.example.SportProgam.Authentication.security.JwtTokenProvider;
 import com.example.SportProgam.event_package.model.EventModel;
 import com.example.SportProgam.event_package.model.TeamModel;
 import com.example.SportProgam.event_package.service.TeamService;
-import com.example.SportProgam.image_package.model.ImageModel;
 import com.example.SportProgam.image_package.service.ImageService;
 import com.example.SportProgam.user_package.dto.UserEventsDto;
 import com.example.SportProgam.user_package.dto.UserInfoResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -40,7 +37,7 @@ import java.util.NoSuchElementException;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-//    private final PasswordEncoder passwordEncoder;
+    //    private final PasswordEncoder passwordEncoder;
     private final UserMapperManager userMapper;
     private final ImageService imageService;
     private final JwtTokenProvider jwtTokenProvider;
@@ -107,7 +104,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserEventsDto> findUserEvents(Long userId) {
         return convertTeamsToEventsDto(
-                teamService.fingTeamListByUserId(userId)
+                teamService.findTeamListByUserId(userId)
         );
     }
 
@@ -162,7 +159,7 @@ public class UserServiceImpl implements UserService {
 
     private UserInfoResponseDto mapperToUserInfoDto(UserModel userModel) {
         long userImageId = checkUserImageId(userModel);
-        log.info("userImageId is {}",userImageId);
+        log.info("userImageId is {}", userImageId);
         return new UserInfoResponseDto(
                 userModel.getUser_id(),
                 userModel.getEmail(),
@@ -170,7 +167,7 @@ public class UserServiceImpl implements UserService {
                 userModel.getName(),
                 userModel.getLastName(),
                 userModel.getRole(),
-                "http://"+ ApiConfig.SERVER_IP + ":"+ApiConfig.SERVER_PORT+"/api/image/"+userImageId
+                "http://" + ApiConfig.SERVER_IP + ":" + ApiConfig.SERVER_PORT + "/api/image/" + userImageId
         );
     }
 
@@ -181,6 +178,6 @@ public class UserServiceImpl implements UserService {
         }
         return userModel.getImageModel().getImageId();
     }
-    }
+}
 
 

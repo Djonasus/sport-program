@@ -19,7 +19,7 @@ import java.util.List;
 public class EventModel {
 
     @Id
-    private long event_id;
+    private Long event_id;
     private String title;
     private String description;
 

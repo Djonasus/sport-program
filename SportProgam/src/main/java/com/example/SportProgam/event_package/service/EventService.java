@@ -1,6 +1,7 @@
 package com.example.SportProgam.event_package.service;
 
 import com.example.SportProgam.ApiConfig;
+import com.example.SportProgam.Authentication.model.UserModel;
 import com.example.SportProgam.Authentication.repostiroy.UserRepository;
 import com.example.SportProgam.Coordinates.repository.CoordinateRepository;
 import com.example.SportProgam.event_package.dto.CreateEventRequestDto;
@@ -30,6 +31,7 @@ public class EventService {
     private final UserRepository userRepository;
     private final CoordinateRepository coordinateRepository;
     private final EventRequestService eventRequestService;
+    private final String IMAGE_URL = "http://" + ApiConfig.SERVER_IP + ":" + ApiConfig.SERVER_PORT + "/api/image/";
 
     public EventForUserResponseDto getEventInfo(long eventId) {
         EventModel eventModel = eventRepository.findById(eventId).get();
@@ -76,24 +78,13 @@ public class EventService {
     }
 
     private List<List<UserDto>> getListTwoTeamsDto(List<TeamModel> teams) {
-        String url = "http://" + ApiConfig.SERVER_IP + ":" + ApiConfig.SERVER_PORT;
         List<UserDto> userDtoList1 = new ArrayList<>();
         List<UserDto> userDtoList2 = new ArrayList<>();
         for (TeamModel team : teams) {
             if (team.getTeamNum().equals(1)) {
-                userDtoList1.add(new UserDto(
-                        team.getUser().getUser_id(),
-                        team.getUser().getName(),
-                        team.getUser().getLastName(),
-                        url +"/api/image/22222"
-                ));
+                userDtoList1.add(createUserDtoByTeam(team));
             } else {
-                userDtoList2.add(new UserDto(
-                        team.getUser().getUser_id(),
-                        team.getUser().getName(),
-                        team.getUser().getLastName(),
-                        url +"/api/image/22222"
-                ));
+                userDtoList2.add(createUserDtoByTeam(team));
             }
         }
         return List.of(
@@ -103,8 +94,33 @@ public class EventService {
 
     }
 
+    private UserDto createUserDtoByTeam(TeamModel team) {
+        UserModel user = team.getUser();
+        return new UserDto(
+                user.getUser_id(),
+                user.getName(),
+                user.getLastName(),
+                IMAGE_URL + checkUserImageId(user)
+        );
+    }
+    private long checkUserImageId(UserModel userModel) {
+        if (userModel.getImageModel() == null) {
+            return 11111L;
+        }
+        return userModel.getImageModel().getImageId();
+    }
+
     public void requestToEvent(RequestToEventDto dto) {
-        teamService.save(dto, eventRepository.findById(dto.eventId()).get());
+        if (!checkByAlreadyExist(dto.eventId(), dto.userId())) {
+            teamService.save(dto, eventRepository.findById(dto.eventId()).get());
+            return;
+        }
+        throw new RuntimeException();
+    }
+
+    private boolean checkByAlreadyExist(Long eventId, Long userId) {
+        TeamModel teamModel = teamService.findTeamListByUserIdAndEventId(userId, eventId);
+        return teamModel != null;
     }
 
     public void createEventByDto(CreateEventRequestDto requestDto, String username) {

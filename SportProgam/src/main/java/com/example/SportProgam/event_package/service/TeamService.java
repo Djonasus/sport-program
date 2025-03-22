@@ -38,8 +38,17 @@ public class TeamService {
         }
     }
 
-    public List<TeamModel> fingTeamListByUserId(Long userId) {
+    public List<TeamModel> findTeamListByUserId(Long userId) {
         return teamRepository.findAllTeamsByUserId(userId);
     }
 
+    public TeamModel findTeamListByUserIdAndEventId(Long userId, Long eventId) {
+        for (TeamModel teamModel : findTeamListByUserId(userId)) {
+            if (teamModel.getEvent().getEvent_id().equals(eventId)) {
+                return teamModel;
+            }
+        }
+        return null;
+
+    }
 }
