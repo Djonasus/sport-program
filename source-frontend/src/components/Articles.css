@@ -1,0 +1,38 @@
+.articles-container {
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.articles-button {
+    margin: 20px;
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.articles-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.articles-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px auto;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}

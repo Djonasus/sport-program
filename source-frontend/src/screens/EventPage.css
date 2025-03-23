@@ -1,0 +1,44 @@
+.event-page-container {
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.event-page-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.event-page-loading .spinner {
+    width: 3rem;
+    height: 3rem;
+}
+
+.event-section {
+    margin-bottom: 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+.map-section {
+    margin-top: 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .event-page-container {
+        padding: 10px;
+    }
+
+    .event-section,
+    .map-section {
+        margin-top: 20px;
+        padding: 10px;
+    }
+}

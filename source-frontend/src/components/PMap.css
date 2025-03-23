@@ -1,9 +1,90 @@
-.listIteam:hover {
-    background-color: #0d6efd;
-    color: white;
+.map-container {
+    width: 100%;
+    height: 500px; /* Высота карты */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.listIteam:active {
-    background-color: #063275;
-    color: white;
+.points-list {
+    width: 100%;
+    height: 500px; /* Высота списка */
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.point-card {
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.point-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.point-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.point-card-body {
+    padding: 15px;
+}
+
+.point-card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+.point-card-description {
+    font-size: 1rem;
+    color: #555555;
+    margin-bottom: 15px;
+}
+
+.event-card {
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.event-card h4 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+.event-card p {
+    font-size: 1rem;
+    color: #555555;
+    margin-bottom: 5px;
+}
+
+.event-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .map-container {
+        height: 300px; /* Высота карты для мобильных устройств */
+    }
+
+    .points-list {
+        height: 300px; /* Высота списка для мобильных устройств */
+    }
 }

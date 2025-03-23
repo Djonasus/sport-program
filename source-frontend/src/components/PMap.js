@@ -1,27 +1,21 @@
-import { YMaps, Map, Placemark, Clusterer} from '@pbe/react-yandex-maps';
-import { Button, Container, Image, ListGroup } from 'react-bootstrap';
-import { Accordion } from 'react-bootstrap';
-import { useRef, useState } from 'react';
+import { YMaps, Map, Placemark, Clusterer } from '@pbe/react-yandex-maps';
+import { Button, Carousel, Container, Image, Spinner } from 'react-bootstrap';
+import { useEffect, useRef, useState } from 'react';
+import "./PMap.css";
+import { Link } from 'react-router-dom';
+import ApiConfig from '../ApiConfig';
+import axios from 'axios';
 
-import "./PMap.css"
+const PMap = (props) => {
+    const [points, setPoints] = useState();
+    const coord = props.cor != null ? props.cor.split(',').map(Number) : null;
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+    console.info(coord);
 
-const points = [
-    { id: 1, coords: [55.7515, 37.5738], name: "Москва", description: "город" },
-    { id: 2, coords: [55.762200, 37.617300], name: "Краснопресненская", description: "район" },
-    { id: 3, coords: [55.754814, 37.628369], name: "Тверская", description: "улица" },
-    { id: 4, coords: [55.758651, 37.617085], name: "Площадь Революции", description: "площадь" },
-    { id: 5, coords: [55.745884, 37.565125], name: "Кремль", description: "исторический" },
-    { id: 6, coords: [55.758472, 37.602304], name: "ГУМ", description: "торговый центр" },
-    { id: 7, coords: [55.769126, 37.635222], name: "Цветной бульвар", description: "бульвар" },
-    { id: 8, coords: [55.750446, 37.618738], name: "Петровка", description: "улица" },
-    { id: 9, coords: [55.775115, 37.631886], name: "Синдикат", description: "жилой район" },
-    { id: 10, coords: [55.747990, 37.501149], name: "Варшавское шоссе", description: "шоссе" }
-];
-
-const PMap = () => {
-    
     const mapRef = useRef(null); // Создаем реф для карты
     const [balloonData, setBalloonData] = useState(null); // Состояние для хранения данных о баллоне
+
+    const verf = localStorage.getItem("user_id");
 
     // Функция для перемещения карты к точке
     const moveToPoint = (coords) => {
@@ -32,44 +26,103 @@ const PMap = () => {
 
     const handlePlacemarkClick = (point) => {
         setBalloonData(point);
+
         if (mapRef.current) {
             mapRef.current.balloon.open(point.coords, {
                 contentHeader: point.name,
-                contentBody: point.description,
+                contentBody: point.field_types,
             });
         }
     };
 
+    const [userCoords, setUserCoords] = useState(null); // Состояние для хранения координат пользователя
+
+    useEffect(() => {
+        axios.get(ApiConfig.remoteAddress + ApiConfig.getPoints).then(response => {
+            setPoints(response.data);
+            console.log(response);
+        }).catch(error => {
+            console.log(error);
+        });
+    }, []);
+
     return (
-        <Container style={{display: "grid", gridTemplateColumns: "70% 30%", marginTop:"50px"}}>   
-            <YMaps>
-                <Map instanceRef={mapRef} style={{width: "100%", height: "500px"}} defaultState={{ center: [55.751574, 37.573856], zoom: 9, controls: ["zoomControl", "fullscreenControl"],}} modules={["control.ZoomControl", "control.FullscreenControl"]}>
-                    <Clusterer  options={{preset: "islands#invertedVioletClusterIcons",groupByCoordinates: false,}}>
-                    {points.map((point) => (
-                            <Placemark key={point.id} geometry={point.coords} onClick={() => handlePlacemarkClick(point)}/>
-                        ))}
-                    </Clusterer>
-                </Map>
-            </YMaps>
-            <ListGroup style={{width: "100%", height: "500px", overflow: "auto"}}>
-                <Accordion>
-                    {points.map((point, key) => (
-                        <ListGroup.Item key={point.id} onClick={() => moveToPoint(point.coords)} className='listIteam p-0 rounded'> 
-                                <Accordion.Item eventKey={key}>
-                                    <Accordion.Header>{point.name}</Accordion.Header>
-                                    <Accordion.Body className='p-0 text-center'>
-                                        <Image src="/assets/T1.jpg" className="w-100"/>
-                                        <p style={{marginTop: "10px"}}>{point.description}</p>
-                                        <Button style={{marginBottom: "15px"}}>Участвовать</Button>
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                        </ListGroup.Item>
-                    ))} 
-                </Accordion>
-                
-            </ListGroup>
+        <Container fluid className="p-0">
+            {points ? (
+                <div className="d-flex flex-column flex-md-row">
+                    <div className="w-100">
+                        <YMaps>
+                            <Map 
+                                instanceRef={mapRef} 
+                                className="map-container" 
+                                defaultState={{ 
+                                    center: coord != null ? coord : [44.0486, 43.0594], 
+                                    zoom: 13, 
+                                    controls: ["zoomControl", "fullscreenControl"],
+                                }} 
+                                modules={["control.ZoomControl", "control.FullscreenControl"]}
+                            >
+                                {/* <Clusterer options={{ preset: "islands#invertedVioletClusterIcons", groupByCoordinates: false }}> */}
+                                    {points.map((point) => (
+                                        <Placemark key={point.coordinateId} geometry={point.coords} onClick={() => handlePlacemarkClick(point)} />
+                                    ))}
+                                {/* </Clusterer> */}
+                            </Map>
+                        </YMaps>
+                    </div>
+                    <div className="w-100">
+                        <div className="points-list">
+                            {points.map((point) => (
+                                <div key={point.coordinateId} className="point-card" onClick={() => moveToPoint(point.coords)}>
+                                    {/* <Carousel>
+                                        <Carousel.Item>
+                                            <Image className="MainCarousel__Picture" src="/assets/T1.jpg" />
+                                        </Carousel.Item>
+                                        <Carousel.Item>
+                                            <Image className="MainCarousel__Picture" src="/assets/T2.jpg" />
+                                        </Carousel.Item>
+                                    </Carousel> */}
+                                    <div className="point-card-body">
+                                        <h1 className="point-card-title">{point.name}</h1>
+                                        <p className="point-card-description">{point.description}</p>
+                                        {point.events.length > 0 && (
+                                            <div className="point-card-events">
+                                                {point.events.map((event, key) => (
+                                                    <div key={key} className="event-card">
+                                                        <h4>{event.name}</h4>
+                                                        <p><strong>Спорт:</strong> {event.type}</p>
+                                                        <p><strong>Дата:</strong> {event.dataTime}</p>
+                                                        {verf && (
+                                                            <div className="event-card-actions">
+                                                                <Button as={Link} to={`/event/${event.eventId}?coords=${point.coords}`} size="sm">
+                                                                    Подробнее
+                                                                </Button>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                        {verf && (
+                                            <div className="point-card-actions">
+                                                <Button as={Link} to={`/event/new/${point.coordinateId}`} className='mb-3'>
+                                                    Создать событие
+                                                </Button>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                <div className="d-flex flex-wrap justify-content-center" style={{ gap: "15px", margin: "20px auto" }}>
+                    <Spinner animation="border" />
+                </div>
+            )}
         </Container>
-    )
+    );
 }
 
 export default PMap;

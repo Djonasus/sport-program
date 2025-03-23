@@ -1,0 +1,67 @@
+.rank-container {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.rank-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.rank-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.rank-table thead th {
+    background-color: #0d6efd;
+    color: white;
+    padding: 15px;
+    font-size: 1.1rem;
+}
+
+.rank-table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.rank-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.rank-table tbody td {
+    padding: 15px;
+    font-size: 1rem;
+    color: #555555;
+}
+
+.rank-table tbody tr.highlighted td {
+    background-color: #79AFFE;
+    color: white;
+}
+
+.rank-table tbody td:first-child {
+    font-weight: bold;
+}
+
+.rank-table tbody td .cup-icon {
+    margin-right: 10px;
+    color: #ffc107;
+}
+
+@media (max-width: 768px) {
+    .rank-table thead th {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .rank-table tbody td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}

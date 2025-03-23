@@ -1,43 +1,80 @@
 .PFooter {
     width: 100%;
-    display: flex;
-    text-align: justify;
     background-color: #3b3b3b;
     color: white;
-    padding-top: 20px;
+    padding: 20px 0;
     margin-top: 50px;
 }
 
-.link, .support {
+.PFooter__contact,
+.PFooter__about,
+.PFooter__link,
+.PFooter__support {
+    padding: 0 20px;
+}
+
+.PFooter__contact h1,
+.PFooter__about h1,
+.PFooter__link h1,
+.PFooter__support h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.PFooter__contact p,
+.PFooter__about p,
+.PFooter__link p,
+.PFooter__support p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #d1d1d1;
+}
+
+.PFooter__link a,
+.PFooter__support a {
+    color: #d1d1d1;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.PFooter__link a:hover,
+.PFooter__support a:hover {
+    color: #ffffff;
+}
+
+.link,
+.support {
     text-align: right;
 }
-.contact,  .about {
+
+.contact,
+.about {
     text-align: left;
 }
 
+@media (max-width: 768px) {
+    .PFooter {
+        padding: 20px;
+    }
 
-.accordion.accordions {
-    margin-top: 50px;
-    color: white;
-    --bs-accordion-color: white;
-    --bs-accordion-bg: #3b3b3b;
-    --bs-accordion-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
-    --bs-accordion-border-color: #3b3b3b;
-    --bs-accordion-border-width: 0px;
-    --bs-accordion-border-radius: 0px;
-    --bs-accordion-inner-border-radius: calc(var(--bs-border-radius) -(var(--bs-border-width)));
-    --bs-accordion-btn-padding-x: 1.25rem;
-    --bs-accordion-btn-padding-y: 1rem;
-    --bs-accordion-btn-color: white;
-    --bs-accordion-btn-bg: var(--bs-accordion-bg);
-    --bs-accordion-btn-icon: none;
-    --bs-accordion-btn-icon-width: 1.25rem;
-    --bs-accordion-btn-icon-transform: rotate(-180deg);
-    --bs-accordion-btn-icon-transition: transform 0.2s ease-in-out;
-    --bs-accordion-btn-active-icon: none;
-    --bs-accordion-btn-focus-box-shadow: #3b3b3b;
-    --bs-accordion-body-padding-x: 1.25rem;
-    --bs-accordion-body-padding-y: 1rem;
-    --bs-accordion-active-color: white;
-    --bs-accordion-active-bg: #3b3b3b;
+    .PFooter__contact,
+    .PFooter__about,
+    .PFooter__link,
+    .PFooter__support {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .link,
+    .support {
+        text-align: center;
+    }
+
+    .contact,
+    .about {
+        text-align: center;
+    }
 }

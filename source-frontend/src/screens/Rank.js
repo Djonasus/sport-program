@@ -1,11 +1,10 @@
-import { Container, Table } from "react-bootstrap"
-import Header from "../components/Header"
-import PFooter from "../components/PFooter"
+import { Container, Table } from "react-bootstrap";
+import Header from "../components/Header";
+import PFooter from "../components/PFooter";
 import { TfiCup } from "react-icons/tfi";
+import "./Rank.css";
 
 const Rank = () => {
-    
-    // const [ rating, setRating ] = useState([])
     const rating = [
         { user_id: 1, user_name: 'Fortech', rank: 100000 },
         { user_id: 2, user_name: 'GruopSoup', rank: 90000 },
@@ -29,37 +28,38 @@ const Rank = () => {
         { user_id: 20, user_name: 'AppTrekker', rank: 20000 }
     ];
 
-    const highlightedUserId = 3
+    const highlightedUserId = 3;
+
     return (
         <>
-            <Header/>
-            
-            <Container style={{marginTop: '25px', textAlign:'center'}}>
-                <h1 style={{textAlign: 'center'}}>Рейтинг</h1>
-                <Table>
+            <Header />
+            <Container className="rank-container">
+                <h1 className="rank-title">Рейтинг</h1>
+                <Table className="rank-table">
                     <thead>
                         <tr>
-                            <th style={{backgroundColor: '#0d6efd', color:'white'}}>Место</th>
-                            <th  style={{backgroundColor: '#0d6efd', color:'white'}}>Никнейм</th>
-                            <th  style={{backgroundColor: '#0d6efd', color:'white'}}>Рейтинг</th>
+                            <th>Место</th>
+                            <th>Никнейм</th>
+                            <th>Рейтинг</th>
                         </tr>
                     </thead>
-                    {rating.map((user, key) => (
-                        <tbody key={user.user_id} >
-                            <tr>
-                                <td style={user.user_id === highlightedUserId ? { backgroundColor: '#79AFFE' } : {}}>{key < 3 ? <TfiCup /> : ""} {key + 1}</td>
-                                <td style={user.user_id === highlightedUserId ? { backgroundColor: '#79AFFE' } : {}}>{user.user_name}</td>
-                                <td style={user.user_id === highlightedUserId ? { backgroundColor: '#79AFFE' } : {}}>{user.rank}</td>
+                    <tbody>
+                        {rating.map((user, key) => (
+                            <tr key={user.user_id} className={user.user_id === highlightedUserId ? "highlighted" : ""}>
+                                <td>
+                                    {key < 3 && <TfiCup className="cup-icon" />}
+                                    {key + 1}
+                                </td>
+                                <td>{user.user_name}</td>
+                                <td>{user.rank}</td>
                             </tr>
-                        </tbody>
-                    ))}
+                        ))}
+                    </tbody>
                 </Table>
-                
-                
             </Container>
-            <PFooter/>
+            <PFooter />
         </>
-    )
-}
+    );
+};
 
 export default Rank;
