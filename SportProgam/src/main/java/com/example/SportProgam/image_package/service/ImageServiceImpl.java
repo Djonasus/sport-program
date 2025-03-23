@@ -1,6 +1,8 @@
 package com.example.SportProgam.image_package.service;
 
 import com.example.SportProgam.Authentication.model.UserModel;
+import com.example.SportProgam.Authentication.repostiroy.UserRepository;
+import com.example.SportProgam.Authentication.service.UserService;
 import com.example.SportProgam.image_package.model.ImageModel;
 import com.example.SportProgam.image_package.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,7 @@ public class ImageServiceImpl implements ImageService {
     @Value("${path.image}")
     private String imageDir;
     private final ImageRepository imageRepository;
+    private final UserRepository userRepository;
 
 
 
@@ -96,6 +99,17 @@ public class ImageServiceImpl implements ImageService {
         return imageModel;
 
     }
+
+    @Override
+    public long saveNewsImage(MultipartFile multipartFile) throws IOException {
+        long result = imageRepository.count() + 11112;
+        imageRepository.save(
+                new ImageModel(result, userRepository.findById(251653L).get()));
+
+        save(result, multipartFile);
+        return result;
+    }
+
 
     private Long findImageIdByUserId(Long userId) {
         try {

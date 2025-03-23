@@ -13,7 +13,7 @@ DROP TABLE public.users;
 DROP TABLE public.type_of_event;
 
 -- Удаление таблицы coordinates (дочерняя таблица)
-DROP TABLE public.coordinates;
+    DROP TABLE public.coordinates;
 
 drop table public.images;
 

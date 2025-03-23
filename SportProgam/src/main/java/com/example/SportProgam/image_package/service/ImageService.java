@@ -18,4 +18,6 @@ public interface ImageService {
     MultiValueMap<String, String> getContentTypeImage();
 
     ImageModel saveUserAvatar(UserModel userId, MultipartFile multipartFile) throws IOException;
+
+    long saveNewsImage(MultipartFile multipartFile) throws IOException;
 }

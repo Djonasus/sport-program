@@ -9,4 +9,6 @@ import java.util.List;
 public interface TeamRepository extends JpaRepository<TeamModel, Long> {
     @Query(nativeQuery = true, value = "select * from public.teams where user_id = :userId")
     List<TeamModel> findAllTeamsByUserId(Long userId);
+    @Query(nativeQuery = true, value = "select * from public.teams where event_id = :eventId")
+    List<TeamModel> findAllByEvent(Long eventId);
 }

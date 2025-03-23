@@ -31,7 +31,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 Authentication authentication = jwtTokenProvider.getAuthentication(token);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } else {
-    //            log.info("token isn't validated");
+//                log.info("token isn't validated");
             }
         } catch (Exception e) {
             log.warn("error in check token");

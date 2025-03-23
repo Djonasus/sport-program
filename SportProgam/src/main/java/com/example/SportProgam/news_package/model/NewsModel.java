@@ -13,11 +13,12 @@ import lombok.*;
 public class NewsModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String date;
     private String url;
+    @Column(columnDefinition = "varchar(20000)")
     private String body;
     private String author;
 

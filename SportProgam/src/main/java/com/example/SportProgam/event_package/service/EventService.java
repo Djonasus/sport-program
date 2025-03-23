@@ -39,6 +39,7 @@ public class EventService {
 //        List<List<UserDto>> teamDtoList = getListTwoTeamsDto(teams);
 //        teamDtoList = addMinuses(teamDtoList, eventModel.getMaxCountInOneTeam());
         List<List<UserDto>> teamDtoList = createTeamDtoListByEventModel(eventModel);
+//        log.info(teamDtoList.toString());
         return new EventForUserResponseDto(
                 eventModel.getTitle(),
                 eventModel.getDescription(),
@@ -46,7 +47,7 @@ public class EventService {
                 teamDtoList.getLast(),
                 eventModel.getDate(),
                 eventModel.getTime(),
-                eventModel.getReferee().getEmail(),
+                (eventModel.getReferee()!=null)?eventModel.getReferee().getEmail():null,
                 eventModel.getMaxCountInOneTeam()
         );
     }

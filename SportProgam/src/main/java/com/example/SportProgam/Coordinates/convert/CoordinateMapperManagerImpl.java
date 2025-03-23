@@ -67,7 +67,7 @@ public class CoordinateMapperManagerImpl implements CoordinateMapperManager {
                     new EventLittleInfo(
                             event.getDate() + " " + event.getTime(),
                             event.getTitle(),
-                            "type",
+                            event.getType(),
                             event.getEvent_id()
                     )
             );

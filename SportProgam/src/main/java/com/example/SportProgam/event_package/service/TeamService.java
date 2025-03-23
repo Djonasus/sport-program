@@ -21,6 +21,9 @@ public class TeamService {
 
     public void save(RequestToEventDto dto, EventModel eventModel) {
         try {
+            log.info(dto.toString());
+            checkIfEventEnought(eventModel, dto.team());
+
             if (eventModel == null) {
                 log.warn("error at event null");
                 throw new RuntimeException();
@@ -35,7 +38,26 @@ public class TeamService {
             );
         } catch (Exception e) {
             log.warn("error save team model");
+            throw new RuntimeException();
         }
+    }
+
+    private void checkIfEventEnought(EventModel eventModel, Integer team) {
+        List<TeamModel> teamModels = teamRepository.findAllByEvent(eventModel.getEvent_id());
+        int maxCountInOneTeam = eventModel.getMaxCountInOneTeam();
+        int count = 0;
+        for (TeamModel teamModel : teamModels) {
+            log.warn("here");
+            if (teamModel.getTeamNum() == team.longValue()) {
+                count++;
+                log.info("");
+            }
+        }
+        log.info("count{}", count);
+        if (count == maxCountInOneTeam) {
+            throw new RuntimeException();
+        }
+
     }
 
     public List<TeamModel> findTeamListByUserId(Long userId) {

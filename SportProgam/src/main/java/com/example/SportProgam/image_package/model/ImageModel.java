@@ -15,8 +15,7 @@ public class ImageModel {
     @Id
     @Column(name = "image_id")
     private Long imageId;
-//    @OneToOne()
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "user_id")
     private UserModel userModel;
 }

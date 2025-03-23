@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS public.news (
     title VARCHAR(255) NOT NULL,
     "date" VARCHAR(255) NOT NULL,
     url VARCHAR(255) NOT NULL,
-    body VARCHAR(255) NOT NULL,
+    body VARCHAR(20000) NOT NULL,
     author VARCHAR(255) NOT NULL
 );
 
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS public.type_of_event (
 
 CREATE TABLE IF NOT EXISTS public.images (
     image_id bigserial PRIMARY KEY,          -- Соответствует @Id и Long imageId
-    user_id bigserial UNIQUE,                -- Для @OneToOne связи с UserModel
+    user_id bigserial,                -- Для @OneToOne связи с UserModel
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(user_id)  -- Внешний ключ на таблицу users
 );
 
