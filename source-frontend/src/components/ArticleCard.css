@@ -5,6 +5,7 @@
     border: 1px solid #ddd; /* Граница карточки */
     border-radius: 10px; /* Скругление углов */
     overflow: hidden; /* Скрываем выходящее за пределы содержимое */
+    width: 22rem;
 }
 
 .article-card:hover {

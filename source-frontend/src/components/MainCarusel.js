@@ -3,6 +3,7 @@ import "./MainCarusel.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ApiConfig from "../ApiConfig";
+import { useNavigate } from "react-router-dom";
 
 const MCarousel = () => {
     const [news, setNews] = useState([]);
@@ -15,8 +16,8 @@ const MCarousel = () => {
 
     return (
         <Carousel className="main-carousel">
-            {news.map((newsEl, index) => (
-                <Carousel.Item key={index}>
+            {news.map((newsEl) => (
+                <Carousel.Item key={newsEl.id}>
                     <Image className="MainCarousel__Picture" src={newsEl.preview} />
                     <Carousel.Caption>
                         <h3>{newsEl.title}</h3>

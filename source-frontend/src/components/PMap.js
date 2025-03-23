@@ -62,11 +62,11 @@ const PMap = (props) => {
                                 }} 
                                 modules={["control.ZoomControl", "control.FullscreenControl"]}
                             >
-                                <Clusterer options={{ preset: "islands#invertedVioletClusterIcons", groupByCoordinates: false }}>
+                                {/* <Clusterer options={{ preset: "islands#invertedVioletClusterIcons", groupByCoordinates: false }}> */}
                                     {points.map((point) => (
                                         <Placemark key={point.coordinateId} geometry={point.coords} onClick={() => handlePlacemarkClick(point)} />
                                     ))}
-                                </Clusterer>
+                                {/* </Clusterer> */}
                             </Map>
                         </YMaps>
                     </div>
