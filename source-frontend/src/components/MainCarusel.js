@@ -17,7 +17,7 @@ const MCarousel = () => {
         <Carousel className="main-carousel">
             {news.map((newsEl, index) => (
                 <Carousel.Item key={index}>
-                    <Image className="MainCarousel__Picture" src={ApiConfig.remoteAddress + newsEl.preview} />
+                    <Image className="MainCarousel__Picture" src={newsEl.preview} />
                     <Carousel.Caption>
                         <h3>{newsEl.title}</h3>
                         <p>{newsEl.date}</p>

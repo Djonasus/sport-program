@@ -56,7 +56,7 @@ const PMap = (props) => {
                                 instanceRef={mapRef} 
                                 className="map-container" 
                                 defaultState={{ 
-                                    center: coord != null ? coord : [55.7515, 37.5738], 
+                                    center: coord != null ? coord : [44.0486, 43.0594], 
                                     zoom: 13, 
                                     controls: ["zoomControl", "fullscreenControl"],
                                 }} 

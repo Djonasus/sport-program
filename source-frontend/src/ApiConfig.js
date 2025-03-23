@@ -14,7 +14,8 @@ const ApiConfig = {
     createEvent : "/api/user/event",
     getProfile : "/api/user/info/",
     newPhoto : "/api/user/image/",
-    getEventsUser : "api/user/event?user_id="
+    getEventsUser : "/api/user/event?user_id=",
+    postNews : "/api/admin/news",
 }
 
 export default ApiConfig;

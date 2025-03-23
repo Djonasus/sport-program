@@ -14,7 +14,7 @@ const ArticleCard = (props) => {
 
     return (
         <Card className="article-card" onClick={handleCardClick}> {/* Добавляем обработчик клика */}
-            <Card.Img variant="top" src={ApiConfig.remoteAddress + props.preview_image} />
+            <Card.Img variant="top" src={props.preview_image} />
             <Card.Body className="article-card-body">
                 <Card.Title className="article-card-title">{props.title}</Card.Title>
                 <Card.Text className="article-card-text">

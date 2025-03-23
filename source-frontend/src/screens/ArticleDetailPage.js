@@ -46,7 +46,7 @@ const ArticleDetailPage = () => {
                             <Breadcrumb.Item><Link to="/article">Статьи</Link></Breadcrumb.Item>
                             <Breadcrumb.Item active>{article.title}</Breadcrumb.Item>
                         </Breadcrumb>
-                        <Image className="article-detail-image" src={ApiConfig.remoteAddress + article.preview} fluid />
+                        <Image className="article-detail-image" src={article.preview} fluid />
                         <h1 className="article-detail-title">{article.title}</h1>
                         <div className="article-detail-content">
                             <Markdown>

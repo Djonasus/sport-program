@@ -61,21 +61,21 @@ const NewEventPage = () => {
                 <Form onSubmit={handleSubmit} className="new-event-form">
                     <Form.Group className="mb-3">
                         <Form.Label>Название</Form.Label>
-                        <Form.Control type="text" placeholder="Название события" onChange={(e) => setTitle(e.target.value)} />
+                        <Form.Control type="text" placeholder="Название события" onChange={(e) => setTitle(e.target.value)} required />
                         <Form.Text className="text-muted">
                             Введите название события.
                         </Form.Text>
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Описание</Form.Label>
-                        <Form.Control as="textarea" aria-label="Описание" onChange={(e) => setDescription(e.target.value)} />
+                        <Form.Control as="textarea" aria-label="Описание" onChange={(e) => setDescription(e.target.value)} required />
                         <Form.Text className="text-muted">
                             Опишите свое событие
                         </Form.Text>
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Вид спорта</Form.Label>
-                        <Form.Select aria-label="Выберите вид спорта" onChange={(e) => setSport(e.target.value)}>
+                        <Form.Select aria-label="Выберите вид спорта" onChange={(e) => setSport(e.target.value)} required >
                             <option>Выберите вид спорта</option>
                             <option value="Футбол">Футбол</option>
                             <option value="Волейбол">Волейбол</option>
@@ -104,11 +104,12 @@ const NewEventPage = () => {
                             timeCaption="Время"
                             dateFormat="HH:mm"
                             className="form-control"
+                            required 
                         />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Количество игроков в одной команде</Form.Label>
-                        <Form.Select aria-label="Выберите количество игроков в одной команде" onChange={(e) => setMaxCount(parseInt(e.target.value))}>
+                        <Form.Select aria-label="Выберите количество игроков в одной команде" onChange={(e) => setMaxCount(parseInt(e.target.value))} required >
                             <option>Выберите количество игроков в одной команде</option>
                             <option value="3">3 игрока</option>
                             <option value="5">5 игроков</option>

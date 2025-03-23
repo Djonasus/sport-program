@@ -21,7 +21,7 @@ const UserPanel = (props) => {
     useEffect(() => {
         axios.get(ApiConfig.remoteAddress + ApiConfig.getEventsUser + `${id}`)
             .then(response => {
-                setEvents(response.data.children);
+                setEvents(response.data);
                 setLoading(false);
             })
             .catch(error => {
