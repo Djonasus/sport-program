@@ -5,7 +5,7 @@ import { useState } from "react";
 const ApiConfig = {
     getArticles : "/api/article/all",
     getArticleDetail : "/api/article/",
-    remoteAddress : "http://26.34.123.216:8082",
+    remoteAddress : "http://185.121.14.6:8082",
     getEvent : "/api/user/event/",
     getPoints : "/api/coordinates/all", 
     singUp : "/api/authentication/SingUp",
