@@ -66,7 +66,7 @@ public class SecurityConfig {
         configuration.setAllowCredentials(true);    // Разрешить отправку куки/авторизации
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:3000/**", "http://" + FRONT_IP + ":" + FRONT_PORT + "/**",
-                "http://localhost:3000", "http://" + FRONT_IP + ":" + FRONT_PORT));
+                "http://localhost:3000", "http://" + FRONT_IP + ":" + FRONT_PORT, "http://185.121.14.6:3000"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

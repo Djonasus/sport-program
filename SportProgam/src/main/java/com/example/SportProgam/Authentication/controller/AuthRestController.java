@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/authentication")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin(origins = "http://185.121.14.6:3000")
 public class AuthRestController {
 
     private final UserService userService;
@@ -34,7 +35,8 @@ public class AuthRestController {
     }
 
     @PostMapping("/SingIn")
-    @CrossOrigin("*")
+    @CrossOrigin(origins = "http://185.121.14.6:3000")
+//    @CrossOrigin("*")
     public ResponseEntity<?> singIn(@RequestBody UserSingInRequestDto singInDto) {
         try {
             return ResponseEntity.ok(userService.loginIn(singInDto));

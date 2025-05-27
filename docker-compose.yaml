@@ -9,11 +9,11 @@ services:
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: sport_tech
 
-  spring-boot-server:
+  sboot:
     build:
       context: ./SportProgam
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5442/sport_tech
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/sport_tech
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 1234
     ports:
@@ -21,15 +21,10 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2048M
+          memory: 4096M
 
   react:
     build:
       context: ./source-frontend
     ports:
       - "3000:3000"
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 512M
